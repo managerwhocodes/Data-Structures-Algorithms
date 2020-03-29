@@ -19,14 +19,18 @@ public class BFSFindPath{
 
     // Set parent in the original BFS to print the path
     public void bfs(GraphNode node){
+    	
         LinkedList<GraphNode> queue = new LinkedList<GraphNode>();
         queue.add(node);
+        
         while(!queue.isEmpty()){
             GraphNode currentNode = queue.poll();
             currentNode.setVisited(true);
+            
             System.out.print("Path for node "+currentNode.getName()+" :  ");
             printPath(currentNode);
             System.out.println();
+            
             for(GraphNode neighbour : currentNode.getNeighbours()){
                 if(!neighbour.isVisited()){
                     queue.add(neighbour);
