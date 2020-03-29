@@ -5,13 +5,13 @@ import java.util.LinkedList;
 
 public class BFSAdjList {
 
-	ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
+	private ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
 
-	public BFSAdjList(ArrayList<GraphNode> nodeList) {
+	private BFSAdjList(ArrayList<GraphNode> nodeList) {
 		this.nodeList = nodeList;
 	}
 		
-	void bfs(GraphNode node) {
+	private void bfs(GraphNode node) {
 		
 		LinkedList<GraphNode>queue = new LinkedList<GraphNode>();
 		queue.add(node);
@@ -31,7 +31,7 @@ public class BFSAdjList {
 		}
 	}
 	
-	public void addUndirectedEdge(int i, int j) {
+	private void addUndirectedEdge(int i, int j) {
 		GraphNode source = nodeList.get(i);
 		GraphNode destination = nodeList.get(j);
 		source.getNeighbours().add(destination);

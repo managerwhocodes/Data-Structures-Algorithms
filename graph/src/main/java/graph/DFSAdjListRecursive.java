@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class DFSAdjListRecursive {
 	
-	ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
+	private ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
 
-	public DFSAdjListRecursive(ArrayList<GraphNode> nodeList) {		
+	private DFSAdjListRecursive(ArrayList<GraphNode> nodeList) {		
 		this.nodeList = nodeList;
 	}
 	
-	void dfs(GraphNode node) {
+	private void dfs(GraphNode node) {
 
 		node.setVisited(true);
 		System.out.print(node.getName()+" ");
@@ -21,7 +21,7 @@ public class DFSAdjListRecursive {
 		}
 	}
 		
-	public void addUndirectedEdge(int i, int j) {
+	private void addUndirectedEdge(int i, int j) {
 		GraphNode source = nodeList.get(i);
 		GraphNode destination = nodeList.get(j);
 		source.getNeighbours().add(destination);

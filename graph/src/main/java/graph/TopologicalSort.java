@@ -5,13 +5,13 @@ import java.util.Stack;
 
 public class TopologicalSort {
 	
-	ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
+	private ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
 
-	public TopologicalSort(ArrayList<GraphNode> nodeList) {
+	private TopologicalSort(ArrayList<GraphNode> nodeList) {
 		this.nodeList = nodeList;
 	}
 	
-	void topologicalSort() {
+	private void topologicalSort() {
 		Stack<GraphNode>stack = new Stack<GraphNode>();
 		for (GraphNode node : nodeList) {
 			if (!node.isVisited())
@@ -22,7 +22,7 @@ public class TopologicalSort {
 		}
 	}
 	
-	void topologicalVisit(GraphNode node, Stack<GraphNode> stack) {
+	private void topologicalVisit(GraphNode node, Stack<GraphNode> stack) {
 		for (GraphNode neighbor : node.getNeighbours()){
 			if(!neighbor.isVisited()){
 				topologicalVisit(neighbor,stack);
@@ -32,7 +32,7 @@ public class TopologicalSort {
 		stack.push(node);
 	} 
 	
-	public void addDirectedEdge(int i, int j) {
+	private void addDirectedEdge(int i, int j) {
 		GraphNode source = nodeList.get(i);
 		GraphNode destination = nodeList.get(j);
 		source.getNeighbours().add(destination);
