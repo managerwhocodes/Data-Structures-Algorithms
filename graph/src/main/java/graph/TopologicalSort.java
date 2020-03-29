@@ -61,7 +61,8 @@ public class TopologicalSort {
 		graph.addDirectedEdge(7,8);
 		graph.addDirectedEdge(8,9);
 		
-		System.out.println("Printing Topological Sort from source: ");
+		// Add source if required
+		System.out.println("Topological Sort from source: ");
 		graph.topologicalSort();
 	}
 }
