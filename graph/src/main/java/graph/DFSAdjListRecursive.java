@@ -6,7 +6,7 @@ public class DFSAdjListRecursive {
 	
 	private ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
 
-	private DFSAdjListRecursive(ArrayList<GraphNode> nodeList) {		
+	public DFSAdjListRecursive(ArrayList<GraphNode> nodeList) {		
 		this.nodeList = nodeList;
 	}
 	

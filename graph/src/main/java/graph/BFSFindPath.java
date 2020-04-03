@@ -7,7 +7,7 @@ public class BFSFindPath{
 
     private ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
 
-    private BFSFindPath(ArrayList<GraphNode> nodeList){
+    public BFSFindPath(ArrayList<GraphNode> nodeList){
         this.nodeList = nodeList;
     }
 

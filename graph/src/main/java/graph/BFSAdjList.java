@@ -7,7 +7,7 @@ public class BFSAdjList {
 
 	private ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
 
-	private BFSAdjList(ArrayList<GraphNode> nodeList) {
+	public BFSAdjList(ArrayList<GraphNode> nodeList) {
 		this.nodeList = nodeList;
 	}
 		

@@ -7,7 +7,7 @@ public class DFSAdjListIterative {
 	
 	private ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
 
-	private DFSAdjListIterative(ArrayList<GraphNode> nodeList) {		
+	public DFSAdjListIterative(ArrayList<GraphNode> nodeList) {		
 		this.nodeList = nodeList;
 	}
 

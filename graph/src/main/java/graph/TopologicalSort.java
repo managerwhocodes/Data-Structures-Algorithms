@@ -7,7 +7,7 @@ public class TopologicalSort {
 	
 	private ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
 
-	private TopologicalSort(ArrayList<GraphNode> nodeList) {
+	public TopologicalSort(ArrayList<GraphNode> nodeList) {
 		this.nodeList = nodeList;
 	}
 	
