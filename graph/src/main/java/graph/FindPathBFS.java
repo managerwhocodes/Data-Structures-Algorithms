@@ -3,11 +3,11 @@ package graph;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class BFSFindPath{
+public class FindPathBFS{
 
     private ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
 
-    public BFSFindPath(ArrayList<GraphNode> nodeList){
+    public FindPathBFS(ArrayList<GraphNode> nodeList){
         this.nodeList = nodeList;
     }
 
@@ -59,7 +59,7 @@ public class BFSFindPath{
 			nodeList.add(new GraphNode("V"+i));
 		}
 
-		BFSFindPath graph = new BFSFindPath(nodeList);
+		FindPathBFS graph = new FindPathBFS(nodeList);
 
 		graph.addUndirectedEdge(0,8);
 		graph.addUndirectedEdge(8,2);
