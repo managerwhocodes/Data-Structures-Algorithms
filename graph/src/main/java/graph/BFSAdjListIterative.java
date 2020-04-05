@@ -3,11 +3,11 @@ package graph;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class BFSAdjList {
+public class BFSAdjListIterative {
 
 	private ArrayList<GraphNode> nodeList = new ArrayList<GraphNode>();
 
-	public BFSAdjList(ArrayList<GraphNode> nodeList) {
+	public BFSAdjListIterative(ArrayList<GraphNode> nodeList) {
 		this.nodeList = nodeList;
 	}
 		
@@ -46,7 +46,7 @@ public class BFSAdjList {
 			nodeList.add(new GraphNode("V"+i));
 		}
 				
-		BFSAdjList graph = new BFSAdjList(nodeList);
+		BFSAdjListIterative graph = new BFSAdjListIterative(nodeList);
 				
 		graph.addUndirectedEdge(0,1);
 		graph.addUndirectedEdge(0,3);
