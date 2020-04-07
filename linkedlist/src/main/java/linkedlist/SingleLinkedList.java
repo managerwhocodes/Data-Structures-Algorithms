@@ -2,9 +2,9 @@ package linkedlist;
 
 public class SingleLinkedList{
 
-    private Node head;
-    private Node tail;
-    private int size;
+    protected Node head;
+    protected Node tail;
+    protected int size;
 
     public Node getHead(){
         return head;
@@ -30,14 +30,14 @@ public class SingleLinkedList{
         this.size = size;
     }
 
-    private Node createLinkedList(Node node){
+    protected Node createLinkedList(Node node){
         head = node;
         tail = node;
         size = 1;
         return head;
     }
 
-    private void insertNodeAtStart(Node node){
+    protected void insertNodeAtStart(Node node){
         if(!existsLinkedList()){
             return;
         }
@@ -46,7 +46,7 @@ public class SingleLinkedList{
         setSize(getSize()+1);
     }
 
-    private void insertNodeAtEnd(Node node){
+    protected void insertNodeAtEnd(Node node){
         if(!existsLinkedList()){
             return;
         }
@@ -135,7 +135,7 @@ public class SingleLinkedList{
         return false;
     }
 
-    private void traverseLinkedList() {
+    protected void traverseLinkedList() {
 		if (!existsLinkedList()) {
             return;
         }
@@ -149,7 +149,7 @@ public class SingleLinkedList{
 		}
 	}
 
-    private boolean existsLinkedList() {
+    protected boolean existsLinkedList() {
 		return head != null;
 	}
 
