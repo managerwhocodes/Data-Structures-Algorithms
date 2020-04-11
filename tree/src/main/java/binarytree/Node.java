@@ -5,6 +5,17 @@ public class Node{
 	private int height;
 	private Node leftNode;
 	private Node rightNode;
+	
+	Node(){
+		this.leftNode = null;
+		this.rightNode = null;
+	}
+	
+	Node(int value){
+		this.value = value;
+		this.leftNode = null;
+		this.rightNode = null;
+	}
 
 	public int getValue() {
 		return value;
