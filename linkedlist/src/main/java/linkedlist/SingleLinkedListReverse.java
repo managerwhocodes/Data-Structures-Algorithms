@@ -18,6 +18,22 @@ public class SingleLinkedListReverse extends SingleLinkedList{
         head = previousNode;
     }
     
+    protected Node reverseLinkedList(Node node){
+        Node previousNode = null;
+        Node currentNode = node;
+
+        while(currentNode != null){
+            Node nextNode = currentNode.getNext();
+
+            currentNode.setNext(previousNode);
+
+            previousNode = currentNode;
+            currentNode = nextNode;
+        }
+        // this is important because the head will still be pointing to the first node in the original list
+        return previousNode;
+    }
+    
     protected void reverseRecursive(){   	
     	reverseLinkedListRecursive(head, null);       
     }
