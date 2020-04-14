@@ -148,6 +148,42 @@ public class SingleLinkedList{
 			tempNode = tempNode.getNext();
 		}
 	}
+    
+    protected Node divideList() {
+    	    	
+    	Node node = null;
+    	Node slow = head;
+    	Node fast = head;
+    	int index = 1;
+    	
+    	// run two pointers slow and fast to reach the middle of list
+    	while(fast != null && fast.getNext() != null) {
+    		node = slow;
+    		slow = slow.getNext();
+    		fast = fast.getNext().getNext();
+    		index ++;
+    	}
+    	
+    	// this condition will be valid is the list contains odd number of nodes
+    	if(fast !=  null)
+    		slow = slow.getNext();
+    	
+    	// this is used to divide the list in two parts once the middle node is found
+    	if(slow != null) {
+    		node.setNext(null);
+    		index --;
+    	}
+    	
+    	size = index;
+    	
+    	return slow;
+    }
+    
+    protected boolean compareNodes(Node node1, Node node2) {
+    	if(node1 != null && node2 !=null)
+    		return node1.getData() == node2.getData() ?true:false;
+    	return false;
+    }
 
     protected boolean existsLinkedList() {
 		return head != null;
