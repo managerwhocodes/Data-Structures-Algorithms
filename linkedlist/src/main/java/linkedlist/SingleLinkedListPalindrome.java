@@ -35,7 +35,8 @@ public class SingleLinkedListPalindrome extends SingleLinkedListReverse{
         list.insertNodeAtEnd(new Node(2));
         list.insertNodeAtEnd(new Node(1));
 
-        System.out.println(list.isPalindrome());
-
+        list.traverseLinkedList();
+        System.out.println();
+        System.out.println("Is this list palindrome ? " + list.isPalindrome());
     }
 }
