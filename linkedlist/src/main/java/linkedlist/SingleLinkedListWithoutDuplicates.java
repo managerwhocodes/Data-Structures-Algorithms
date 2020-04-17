@@ -5,7 +5,24 @@ import java.util.HashSet;
 
 public class SingleLinkedListWithoutDuplicates extends SingleLinkedList{
 
-    private void removeDuplicates(){
+    private void removeDuplicatesFromSortedList(){
+        if(!existsLinkedList()){
+            return;
+        }
+
+        Node currentNode = head;
+
+        while(currentNode.getNext() != null){
+            if(currentNode.getData() == currentNode.getNext().getData()){
+            	currentNode.setNext(currentNode.getNext().getNext());
+                setSize(getSize()-1);
+            } else {
+            	currentNode = currentNode.getNext();
+            } 
+        }
+    }
+    
+    private void removeDuplicatesFromUnSortedList(){
         if(!existsLinkedList()){
             return;
         }
@@ -27,22 +44,45 @@ public class SingleLinkedListWithoutDuplicates extends SingleLinkedList{
     }
 
     public static void main(String args[]){
-        SingleLinkedListWithoutDuplicates list = new SingleLinkedListWithoutDuplicates();
-        list.createLinkedList(new Node(1));
-        list.insertNodeAtEnd(new Node(1));
-        list.insertNodeAtEnd(new Node(2));
-        list.insertNodeAtEnd(new Node(1));
-        list.insertNodeAtEnd(new Node(3));
-        list.insertNodeAtEnd(new Node(3));
-        list.insertNodeAtEnd(new Node(4));
-        list.insertNodeAtEnd(new Node(5));
-        list.insertNodeAtEnd(new Node(6));
-        list.insertNodeAtEnd(new Node(7));
-        list.insertNodeAtEnd(new Node(5));
+        SingleLinkedListWithoutDuplicates sortedList = new SingleLinkedListWithoutDuplicates();
+        sortedList.createLinkedList(new Node(1));
+        sortedList.insertNodeAtEnd(new Node(1));
+        sortedList.insertNodeAtEnd(new Node(2));
+        sortedList.insertNodeAtEnd(new Node(2));
+        sortedList.insertNodeAtEnd(new Node(3));
+        sortedList.insertNodeAtEnd(new Node(3));
+        sortedList.insertNodeAtEnd(new Node(3));
+        sortedList.insertNodeAtEnd(new Node(4));
+        sortedList.insertNodeAtEnd(new Node(5));
+        sortedList.insertNodeAtEnd(new Node(5));
+        sortedList.insertNodeAtEnd(new Node(6));
 
-        list.traverseLinkedList();
+        System.out.print("Original sorted list : ");
+        sortedList.traverseLinkedList();
         System.out.println();
-        list.removeDuplicates();
-        list.traverseLinkedList();
+        sortedList.removeDuplicatesFromSortedList();
+        System.out.print("List after removing duplicates : ");
+        sortedList.traverseLinkedList();
+        System.out.println();
+        
+        SingleLinkedListWithoutDuplicates unSortedList = new SingleLinkedListWithoutDuplicates();
+        unSortedList.createLinkedList(new Node(9));
+        unSortedList.insertNodeAtEnd(new Node(6));
+        unSortedList.insertNodeAtEnd(new Node(8));
+        unSortedList.insertNodeAtEnd(new Node(1));
+        unSortedList.insertNodeAtEnd(new Node(2));
+        unSortedList.insertNodeAtEnd(new Node(3));
+        unSortedList.insertNodeAtEnd(new Node(9));
+        unSortedList.insertNodeAtEnd(new Node(5));
+        unSortedList.insertNodeAtEnd(new Node(6));
+        unSortedList.insertNodeAtEnd(new Node(8));
+        unSortedList.insertNodeAtEnd(new Node(8));
+        
+        System.out.print("Original unsorted list : ");
+        unSortedList.traverseLinkedList();
+        System.out.println();
+        unSortedList.removeDuplicatesFromUnSortedList();
+        System.out.print("List after removing duplicates : ");
+        unSortedList.traverseLinkedList();  
     }
 }
