@@ -122,6 +122,17 @@ public class SingleLinkedList{
             setSize(getSize()-1);
         }
     }
+    
+    private Node getKNodeFromEnd(int k){
+    	if(existsLinkedList() && size >=k){
+            Node node = head;
+            for(int index=0; index < size - k ; index++){
+                node = node.getNext();
+            }
+            return node;
+        }
+        return null;
+    }
 
     private boolean findNode(int data){
         if(existsLinkedList()){
@@ -220,6 +231,8 @@ public class SingleLinkedList{
         } else {
         	System.out.println("Node not found with data :35");
         }
+        
+        System.out.println("Third Node from end : "+list.getKNodeFromEnd(3).getData());
         
         list.deleteNodeFromEnd();
         list.traverseLinkedList();
