@@ -209,17 +209,21 @@ public class SingleLinkedList{
         list.insertNodeAtEnd(new Node(10));
         list.insertNodeAtEnd(new Node(14));
         list.insertNodeAtEnd(new Node(20));
+        System.out.print("Created List : ");
         list.traverseLinkedList();
-        System.out.println();
-
-        list.insertNodeAtStart(new Node(4));
-        list.traverseLinkedList();
-        System.out.println();
         
+        System.out.println();
+        System.out.print("Insert Node at start : ");
+        list.insertNodeAtStart(new Node(3));
+        list.traverseLinkedList();
+        
+        System.out.println();
+        System.out.print("Insert Node at position 4 : ");
         list.insertNodeAtLocation(new Node(11),4);
         list.traverseLinkedList();
         System.out.println();
         
+        System.out.println();
         if(list.findNode(14)) {
         	System.out.println("Found node with data : 14");
         } else {
@@ -234,17 +238,20 @@ public class SingleLinkedList{
         
         System.out.println("Third Node from end : "+list.getKNodeFromEnd(3).getData());
         
+        System.out.println();
+        System.out.print("Delete Node from end : ");
         list.deleteNodeFromEnd();
         list.traverseLinkedList();
+
         System.out.println();
-        
+        System.out.print("Delete Node from start : ");
         list.deleteNodeFromStart();
         list.traverseLinkedList();
+
         System.out.println();
-        
+        System.out.print("Delete Node at position 2 : ");
         list.deleteNodeAtLocation(2);
         list.traverseLinkedList();
-        System.out.println();
-           
+        System.out.println();          
     }
 }
