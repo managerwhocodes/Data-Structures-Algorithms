@@ -292,13 +292,7 @@ public class SingleLinkedList{
         System.out.println();
         System.out.print("Insert new Nodes at the end : ");
         list.traverseLinkedList();
-        
-        SingleLinkedList list1 = new SingleLinkedList();
-        list1.createLinkedList(new Node(1));
-        list1.insertNodeAtEnd(new Node(2));
-        list1.insertNodeAtEnd(new Node(3));
-        list1.insertNodeAtEnd(new Node(4));
-        
+                
         System.out.println();
         System.out.print("Delete every 2 Nodes after every 3 nodes from start : ");
         list.deleteXNodesAfterYNodes(list.head,2,3);
