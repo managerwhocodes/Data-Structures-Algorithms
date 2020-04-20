@@ -90,7 +90,7 @@ public class SingleLinkedList{
             return;
         }
         Node tempNode = head;
-        for(int index=0; index < size-1; index++) { // traverse to second last node
+        for(int index=1; index < size-1; index++) { // traverse to second last node
             tempNode = tempNode.getNext();
         }
         // Handle use case where there is only one node
@@ -121,6 +121,33 @@ public class SingleLinkedList{
             deleteNode.setNext(null);
             setSize(getSize()-1);
         }
+    }
+    
+    private Node deleteXNodesAfterYNodes(Node node, int x, int y){
+        if(node == null || node.getNext() ==null)
+        	return node;
+        
+        Node previousNode = null;
+        Node nextNode = null;
+        Node currentNode = node;
+        
+        // iterate to skip y nodes
+        for(int i=0;currentNode !=null && i<y;i++) {
+        	previousNode = currentNode;
+        	currentNode = currentNode.getNext();
+        }       
+        // delete x nodes
+        for(int i=0;currentNode !=null && i<x;i++) {        		
+        	nextNode = currentNode.getNext();
+        	currentNode = nextNode;
+        	setSize(getSize()-1);
+        }
+        
+        previousNode.setNext(currentNode);
+        
+        deleteXNodesAfterYNodes(currentNode,x,y);
+        
+        return previousNode;    
     }
     
     private Node getKNodeFromEnd(int k){
@@ -185,8 +212,7 @@ public class SingleLinkedList{
     		index --;
     	}
     	
-    	size = index;
-    	
+    	size = index;    	
     	return slow;
     }
     
@@ -204,7 +230,6 @@ public class SingleLinkedList{
 
         SingleLinkedList list = new SingleLinkedList();
         list.createLinkedList(new Node(5));
-        
         list.insertNodeAtEnd(new Node(6));
         list.insertNodeAtEnd(new Node(10));
         list.insertNodeAtEnd(new Node(14));
@@ -252,6 +277,32 @@ public class SingleLinkedList{
         System.out.print("Delete Node at position 2 : ");
         list.deleteNodeAtLocation(2);
         list.traverseLinkedList();
-        System.out.println();          
+        System.out.println();  
+        
+        list.insertNodeAtEnd(new Node(15));
+        list.insertNodeAtEnd(new Node(16));
+        list.insertNodeAtEnd(new Node(18));
+        list.insertNodeAtEnd(new Node(20));
+        list.insertNodeAtEnd(new Node(22));
+        list.insertNodeAtEnd(new Node(24));
+        list.insertNodeAtEnd(new Node(26));
+        list.insertNodeAtEnd(new Node(28));
+        list.insertNodeAtEnd(new Node(30));
+        
+        System.out.println();
+        System.out.print("Insert new Nodes at the end : ");
+        list.traverseLinkedList();
+        
+        SingleLinkedList list1 = new SingleLinkedList();
+        list1.createLinkedList(new Node(1));
+        list1.insertNodeAtEnd(new Node(2));
+        list1.insertNodeAtEnd(new Node(3));
+        list1.insertNodeAtEnd(new Node(4));
+        
+        System.out.println();
+        System.out.print("Delete every 2 Nodes after every 3 nodes from start : ");
+        list.deleteXNodesAfterYNodes(list.head,2,3);
+        list.traverseLinkedList();
+        
     }
 }
