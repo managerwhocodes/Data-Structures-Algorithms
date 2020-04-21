@@ -35,9 +35,11 @@ public class SingleLinkedListEvenOddData extends SingleLinkedList{
         list.insertNodeAtEnd(new Node(5));
         list.insertNodeAtEnd(new Node(6));
 
+        System.out.print("Original List : ");
         list.traverseLinkedList();
         System.out.println();
         list.rearrangeEvenOdd();
+        System.out.print("Rearranged List : ");
         list.traverseLinkedList();
     }
 }
