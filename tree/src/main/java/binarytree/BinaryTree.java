@@ -13,7 +13,7 @@ public class BinaryTree{
 		this.root = null;
 	}
 	
-	private void insert(Node node) {
+	protected void insert(Node node) {
 		if(root == null) {
 			root = node;
 			return;
@@ -35,7 +35,7 @@ public class BinaryTree{
 		}	
 	}
 	
-	private List<Node> getLeafNodes(){
+	protected List<Node> getLeafNodes(){
 		List<Node> list = new ArrayList<Node>();
  		Queue<Node> queue = new LinkedList<Node>();
 		queue.add(root);
@@ -52,7 +52,7 @@ public class BinaryTree{
 		return list;
 	}
 	
-	private void levelOrderTraversal() {
+	protected void levelOrderTraversal() {
 		Queue<Node> queue = new LinkedList<Node>();
 		queue.add(root);
 		while(!queue.isEmpty()){
@@ -65,7 +65,32 @@ public class BinaryTree{
 		}
 	}
 	
-	
+	protected void preOrder(Node node) {
+		if (node == null)
+			return;
+		System.out.print(node.getValue() + " ");
+		preOrder(node.getLeftNode());
+		preOrder(node.getRightNode());
+	}
+		
+	protected void postOrder(Node node) {
+		if (node == null)
+			return;
+		postOrder(node.getLeftNode());
+		postOrder(node.getRightNode());
+		System.out.print(node.getValue() + " ");
+	}
+
+	protected void inOrder(Node node) {
+		if (node == null) {
+			return;
+		}
+		inOrder(node.getLeftNode());
+		System.out.print(node.getValue() + " ");
+		inOrder(node.getRightNode());
+	}
+
+		
 	public static void main(String args[]){
 		BinaryTree tree = new BinaryTree();
 		
@@ -73,8 +98,25 @@ public class BinaryTree{
 			tree.insert(new Node(i));
 		}
 		
+		System.out.println("Level-order of tree:");
 		tree.levelOrderTraversal();
-		
 		System.out.println("Leaf Nodes : "+tree.getLeafNodes());
+		
+		System.out.println();
+		
+		System.out.println("Pre-order of tree:");
+		tree.preOrder(tree.root);
+		System.out.println();
+		
+		
+		System.out.println("Post-order of tree:");
+		tree.postOrder(tree.root);
+		System.out.println();
+		
+		
+		System.out.println("In-order of tree:");
+		tree.inOrder(tree.root);
+		System.out.println();
+
 	}
 }
