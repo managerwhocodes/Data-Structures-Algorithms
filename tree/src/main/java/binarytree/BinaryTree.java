@@ -1,6 +1,7 @@
 package binarytree;
 
 import java.util.Queue;
+import java.util.Stack;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -89,6 +90,34 @@ public class BinaryTree{
 		System.out.print(node.getValue() + " ");
 		inOrder(node.getRightNode());
 	}
+	
+	protected void postOrderIterative(Node node)
+	{
+
+		Stack<Node> stack = new Stack<Node>();
+		stack.push(root);
+
+		Stack<Integer> result = new Stack<Integer>();
+
+		while (!stack.empty())
+		{
+
+			Node currentNode = stack.pop();
+			result.push(currentNode.getValue());
+
+			if (currentNode.getLeftNode() != null) {
+				stack.push(currentNode.getLeftNode());
+			}
+
+			if (currentNode.getRightNode() != null) {
+				stack.push(currentNode.getRightNode());
+			}
+		}
+
+		while (!result.empty()) {
+			System.out.print(result.pop() + " ");
+		}
+	}
 
 		
 	public static void main(String args[]){
@@ -100,23 +129,24 @@ public class BinaryTree{
 		
 		System.out.println("Level-order of tree:");
 		tree.levelOrderTraversal();
-		System.out.println("Leaf Nodes : "+tree.getLeafNodes());
-		
-		System.out.println();
+		System.out.println("Leaf Nodes : "+tree.getLeafNodes()+"\n");
 		
 		System.out.println("Pre-order of tree:");
 		tree.preOrder(tree.root);
-		System.out.println();
+		System.out.println("\n");
 		
 		
-		System.out.println("Post-order of tree:");
+		System.out.println("Post-order of tree recursive :");
 		tree.postOrder(tree.root);
-		System.out.println();
+		System.out.println("\n");
 		
-		
+		System.out.println("Post-order of tree iterative :");
+		tree.postOrderIterative(tree.root);
+		System.out.println("\n");
+			
 		System.out.println("In-order of tree:");
 		tree.inOrder(tree.root);
-		System.out.println();
+		System.out.println("\n");
 
 	}
 }
