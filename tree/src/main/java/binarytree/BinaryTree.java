@@ -146,6 +146,30 @@ public class BinaryTree{
 		}
 	}
 
+	protected void inOrderIterative(Node node)
+	{	
+		if (node == null) {
+			return;
+		}
+		
+		Stack<Node> stack = new Stack<Node>();
+		Node currentNode = node;
+
+		while (!stack.empty() || currentNode != null)
+		{
+			if (currentNode != null)
+			{
+				stack.push(currentNode);
+				currentNode = currentNode.getLeftNode();
+			}
+			else
+			{
+				currentNode = stack.pop();
+				System.out.print(currentNode.getValue() + " ");
+				currentNode = currentNode.getRightNode();
+			}
+		}
+	}
 		
 	public static void main(String args[]){
 		BinaryTree tree = new BinaryTree();
@@ -175,9 +199,12 @@ public class BinaryTree{
 		tree.postOrderIterative(tree.root);
 		System.out.println("\n");
 			
-		System.out.println("In-order of tree :");
+		System.out.println("In-order of tree recursive :");
 		tree.inOrder(tree.root);
 		System.out.println("\n");
-
+		
+		System.out.println("In-order of tree iterative :");
+		tree.inOrderIterative(tree.root);
+		System.out.println("\n");
 	}
 }
