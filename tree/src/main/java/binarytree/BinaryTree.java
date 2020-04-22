@@ -93,6 +93,9 @@ public class BinaryTree{
 	
 	protected void postOrderIterative(Node node)
 	{
+		if (node == null) {
+			return;
+		}
 
 		Stack<Node> stack = new Stack<Node>();
 		stack.push(root);
@@ -129,7 +132,6 @@ public class BinaryTree{
 		
 		System.out.println("Level-order of tree:");
 		tree.levelOrderTraversal();
-		System.out.println("Leaf Nodes : "+tree.getLeafNodes()+"\n");
 		
 		System.out.println("Pre-order of tree:");
 		tree.preOrder(tree.root);
