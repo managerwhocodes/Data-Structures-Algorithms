@@ -91,6 +91,31 @@ public class BinaryTree{
 		inOrder(node.getRightNode());
 	}
 	
+	protected void preOrderIterative(Node node)
+	{
+		if (node == null) {
+			return;
+		}
+
+		Stack<Node> stack = new Stack<Node>();
+		stack.push(node);
+
+		while (!stack.empty())
+		{
+			Node currentNode = stack.pop();
+
+			System.out.print(currentNode.getValue() + " ");
+
+			if (currentNode.getRightNode() != null) {
+				stack.push(currentNode.getRightNode());
+			}
+
+			if (currentNode.getLeftNode() != null) {
+				stack.push(currentNode.getLeftNode());
+			}
+		}
+	}
+	
 	protected void postOrderIterative(Node node)
 	{
 		if (node == null) {
@@ -104,7 +129,6 @@ public class BinaryTree{
 
 		while (!stack.empty())
 		{
-
 			Node currentNode = stack.pop();
 			result.push(currentNode.getValue());
 
@@ -133,10 +157,15 @@ public class BinaryTree{
 		System.out.println("Level-order of tree:");
 		tree.levelOrderTraversal();
 		
-		System.out.println("Pre-order of tree:");
+		System.out.println("Leaf Nodes : "+tree.getLeafNodes()+"\n");
+		
+		System.out.println("Pre-order of tree recursive :");
 		tree.preOrder(tree.root);
 		System.out.println("\n");
 		
+		System.out.println("Pre-order of tree iterative :");
+		tree.preOrderIterative(tree.root);
+		System.out.println("\n");
 		
 		System.out.println("Post-order of tree recursive :");
 		tree.postOrder(tree.root);
@@ -146,7 +175,7 @@ public class BinaryTree{
 		tree.postOrderIterative(tree.root);
 		System.out.println("\n");
 			
-		System.out.println("In-order of tree:");
+		System.out.println("In-order of tree :");
 		tree.inOrder(tree.root);
 		System.out.println("\n");
 
