@@ -46,6 +46,41 @@ public class SingleLinkedListMerge extends SingleLinkedList{
         } 	
 	}
 	
+	protected Node mergeListFromEnd(Node nodeOne, Node nodeTwo) {
+				
+		Node result = null;
+		
+		while (nodeOne != null && nodeTwo != null) {
+			if (nodeOne.getData() <= nodeTwo.getData()) { 
+				Node node = nodeOne;
+				nodeOne = nodeOne.getNext();				
+				node.setNext(result);
+				result = node;
+			} else {
+				Node node = nodeTwo;
+				nodeTwo = nodeTwo.getNext();
+				node.setNext(result);
+				result = node;
+			}
+		}
+		
+		while (nodeOne != null) {
+			Node node = nodeOne;
+			nodeOne = nodeOne.getNext();				
+			node.setNext(result);
+			result = node;
+		}
+			
+		while (nodeTwo != null) {
+			Node node = nodeTwo;
+			nodeTwo = nodeTwo.getNext();
+			node.setNext(result);
+			result = node;
+		}
+		
+		return result;		
+	}
+	
 	public static void main(String[] args) {
 		
 		SingleLinkedListMerge list = new SingleLinkedListMerge();
@@ -121,6 +156,43 @@ public class SingleLinkedListMerge extends SingleLinkedList{
 		System.out.println();
 		System.out.print("After merging List Three and List Four :");
 		mergedListRecursive.traverseLinkedList();
+		
+		SingleLinkedList listFive = new SingleLinkedList();
+		listFive.createLinkedList(new Node(2));
+		listFive.insertNodeAtEnd(new Node(4));
+		listFive.insertNodeAtEnd(new Node(8));
+		listFive.insertNodeAtEnd(new Node(12));
+		listFive.insertNodeAtEnd(new Node(19));
+		listFive.insertNodeAtEnd(new Node(22));
+		listFive.insertNodeAtEnd(new Node(25));
+		
+		SingleLinkedList listSix = new SingleLinkedList();
+		listSix.createLinkedList(new Node(1));
+		listSix.insertNodeAtEnd(new Node(7));
+		listSix.insertNodeAtEnd(new Node(10));
+		listSix.insertNodeAtEnd(new Node(15));
+		listSix.insertNodeAtEnd(new Node(16));
+		listSix.insertNodeAtEnd(new Node(20));
+		listSix.insertNodeAtEnd(new Node(25));
+		listSix.insertNodeAtEnd(new Node(27));
+		listSix.insertNodeAtEnd(new Node(30));
+				
+		System.out.println();		
+		System.out.print("List Five : ");
+		listFive.traverseLinkedList();
+		
+		System.out.println();
+		System.out.print("List Six : ");
+		listSix.traverseLinkedList();
+		
+		SingleLinkedList mergedListFromEnd = new SingleLinkedList();
+		
+		mergedListFromEnd.createLinkedList(list.mergeListFromEnd(listFive.head, listSix.head));
+		mergedListFromEnd.setSize(listThree.getSize() + listFour.getSize());
+		System.out.println();
+		System.out.print("After merging List Five and List Six from End :");
+		mergedListFromEnd.traverseLinkedList();
+		
 		
 	}
 }
