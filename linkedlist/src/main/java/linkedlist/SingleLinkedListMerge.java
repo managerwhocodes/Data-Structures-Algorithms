@@ -141,7 +141,7 @@ public class SingleLinkedListMerge extends SingleLinkedList{
 		listFour.insertNodeAtEnd(new Node(27));
 		listFour.insertNodeAtEnd(new Node(30));
 				
-		System.out.println();		
+		System.out.println("\n");		
 		System.out.print("List Three : ");
 		listThree.traverseLinkedList();
 		
@@ -173,11 +173,11 @@ public class SingleLinkedListMerge extends SingleLinkedList{
 		listSix.insertNodeAtEnd(new Node(15));
 		listSix.insertNodeAtEnd(new Node(16));
 		listSix.insertNodeAtEnd(new Node(20));
-		listSix.insertNodeAtEnd(new Node(25));
+		listSix.insertNodeAtEnd(new Node(24));
 		listSix.insertNodeAtEnd(new Node(27));
 		listSix.insertNodeAtEnd(new Node(30));
 				
-		System.out.println();		
+		System.out.println("\n");		
 		System.out.print("List Five : ");
 		listFive.traverseLinkedList();
 		
