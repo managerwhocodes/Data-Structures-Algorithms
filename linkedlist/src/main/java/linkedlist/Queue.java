@@ -5,7 +5,8 @@ public class Queue{
     private Node head;
     private Node tail;
 
-    private void enqueue(int data){ // insert at the end of Linked List
+    // insert at the end of Linked List
+    private void enqueue(int data){ 
         Node node = new Node(data);
         if(isEmpty()){
             head = node;
@@ -16,7 +17,8 @@ public class Queue{
         }
     }
 
-    private int dequeue(){ // delete from the start of the Linked List
+    // delete from the start of the Linked List
+    private int dequeue(){ 
         if(isEmpty()){
             System.out.println("Queue is empty");
             return Integer.MIN_VALUE;

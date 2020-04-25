@@ -8,8 +8,9 @@ public class Stack{
         this.top = null;
     }
     
+
     private int pop(){
-        if(top == null){ // implement exception handling
+        if(top == null){ 
             System.out.println("Stack is empty");
             return Integer.MIN_VALUE;
         }
@@ -27,7 +28,7 @@ public class Stack{
     private int peek(){
         if(!isEmpty()){
             return top.getData();
-        } else { // implement exception handling
+        } else {
             System.out.println("Stack is empty");
             return Integer.MIN_VALUE;
         }
