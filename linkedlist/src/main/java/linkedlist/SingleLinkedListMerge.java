@@ -112,6 +112,46 @@ public class SingleLinkedListMerge extends SingleLinkedList{
 		return mergedHead.getNext();
 	}
 	
+	// merge nodes of second list into first list
+	protected void mergeIntoFirstList(SingleLinkedList listFirst, SingleLinkedList listSecond) {
+		
+		Node mergedHead = new Node();
+		Node mergedTail = mergedHead;
+		
+		Node listFirstHead = listFirst.getHead();
+		Node listSecondHead = listSecond.getHead();
+		
+		int firstListIndex = 0;
+		int secondListIndex = 0;
+		
+		while(listFirstHead !=null && listSecondHead !=null) {
+			
+			mergedTail.setNext(listFirstHead);
+			mergedTail = listFirstHead;
+			listFirstHead = listFirstHead.getNext();
+			firstListIndex++;
+			
+			mergedTail.setNext(listSecondHead);
+			mergedTail = listSecondHead;
+			listSecondHead = listSecondHead.getNext();
+			secondListIndex++;
+		}
+		
+		if(listFirstHead ==  null){
+			mergedTail.setNext(null);		
+		}
+		
+		if(listSecondHead == null) {
+			mergedTail.setNext(listFirstHead);
+		}
+		
+		listFirst.setHead(mergedHead.getNext());
+		listFirst.setSize(listFirst.getSize()+firstListIndex);
+		listSecond.setHead(listSecondHead);
+		listSecond.setSize(listSecond.getSize()-secondListIndex);
+
+	}
+	
 	public static void main(String[] args) {
 		
 		SingleLinkedListMerge list = new SingleLinkedListMerge();
@@ -124,7 +164,6 @@ public class SingleLinkedListMerge extends SingleLinkedList{
 		listOne.insertNodeAtEnd(new Node(16));
 		listOne.insertNodeAtEnd(new Node(22));
 		listOne.insertNodeAtEnd(new Node(25));
-		
 		
 		SingleLinkedList listTwo = new SingleLinkedList();
 		listTwo.createLinkedList(new Node(2));
@@ -259,6 +298,43 @@ public class SingleLinkedListMerge extends SingleLinkedList{
 		System.out.println();
 		System.out.print("After merging alternate nodes of List Six and List Seven : ");
 		mergedAlternateNodesList.traverseLinkedList();
+		
+		SingleLinkedList listNine = new SingleLinkedList();
+		listNine.createLinkedList(new Node(2));
+		listNine.insertNodeAtEnd(new Node(4));
+		listNine.insertNodeAtEnd(new Node(8));
+		listNine.insertNodeAtEnd(new Node(12));
+		listNine.insertNodeAtEnd(new Node(19));
+		listNine.insertNodeAtEnd(new Node(22));
+		listNine.insertNodeAtEnd(new Node(25));
+		
+		SingleLinkedList listTen = new SingleLinkedList();
+		listTen.createLinkedList(new Node(1));
+		listTen.insertNodeAtEnd(new Node(7));
+		listTen.insertNodeAtEnd(new Node(10));
+		listTen.insertNodeAtEnd(new Node(15));
+		listTen.insertNodeAtEnd(new Node(16));
+		listTen.insertNodeAtEnd(new Node(20));
+		listTen.insertNodeAtEnd(new Node(24));
+		listTen.insertNodeAtEnd(new Node(27));
+		listTen.insertNodeAtEnd(new Node(30));
+				
+		System.out.println("\n");		
+		System.out.print("List Nine : ");
+		listNine.traverseLinkedList();
+		
+		System.out.println();
+		System.out.print("List Ten : ");
+		listTen.traverseLinkedList();
+		
+		list.mergeIntoFirstList(listNine, listTen);
+		
+		System.out.println();
+		System.out.print("List Nine after merging nodes of List Ten : ");
+		listNine.traverseLinkedList();
+		System.out.println();
+		System.out.print("Remaining List Ten : ");
+		listTen.traverseLinkedList();
 		
 	}
 }
