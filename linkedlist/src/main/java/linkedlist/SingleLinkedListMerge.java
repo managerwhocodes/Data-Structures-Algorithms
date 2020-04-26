@@ -2,6 +2,7 @@ package linkedlist;
 
 public class SingleLinkedListMerge extends SingleLinkedList{
 	
+	// merge the two sorted lists so that resulting list is also sorted
 	protected Node mergeList(Node nodeOne, Node nodeTwo) {
 				
 		Node mergedHead = new Node();
@@ -29,6 +30,7 @@ public class SingleLinkedListMerge extends SingleLinkedList{
 		return mergedHead.getNext();		
 	}
 
+	// merge the two sorted lists so that resulting list is also sorted
 	protected Node mergeListRecursive(Node nodeOne, Node nodeTwo) {
 		
 		if(nodeOne == null) 
@@ -46,6 +48,7 @@ public class SingleLinkedListMerge extends SingleLinkedList{
         } 	
 	}
 	
+	// merge the two sorted lists from the end so that resulting list is also sorted
 	protected Node mergeListFromEnd(Node nodeOne, Node nodeTwo) {
 				
 		Node result = null;
@@ -79,6 +82,34 @@ public class SingleLinkedListMerge extends SingleLinkedList{
 		}
 		
 		return result;		
+	}
+	
+	// merge alternate nodes of two given lists
+	protected Node mergeAlternateNodes(Node nodeOne, Node nodeTwo) {
+		
+		Node mergedHead = new Node();
+		Node mergedTail = mergedHead;
+		
+		while(nodeOne !=null && nodeTwo!=null) {
+			
+			mergedTail.setNext(nodeOne);
+			mergedTail = nodeOne;
+			nodeOne = nodeOne.getNext();
+			
+			mergedTail.setNext(nodeTwo);
+			mergedTail = nodeTwo;
+			nodeTwo = nodeTwo.getNext();			
+		}
+		
+		if(nodeOne ==  null){
+			mergedTail.setNext(nodeTwo);		
+		}
+		
+		if(nodeTwo == null) {
+			mergedTail.setNext(nodeOne);
+		}
+		
+		return mergedHead.getNext();
 	}
 	
 	public static void main(String[] args) {
@@ -190,9 +221,44 @@ public class SingleLinkedListMerge extends SingleLinkedList{
 		mergedListFromEnd.createLinkedList(list.mergeListFromEnd(listFive.head, listSix.head));
 		mergedListFromEnd.setSize(listThree.getSize() + listFour.getSize());
 		System.out.println();
-		System.out.print("After merging List Five and List Six from End :");
+		System.out.print("After merging List Five and List Six from End : ");
 		mergedListFromEnd.traverseLinkedList();
 		
+		SingleLinkedList listSeven = new SingleLinkedList();
+		listSeven.createLinkedList(new Node(2));
+		listSeven.insertNodeAtEnd(new Node(4));
+		listSeven.insertNodeAtEnd(new Node(8));
+		listSeven.insertNodeAtEnd(new Node(12));
+		listSeven.insertNodeAtEnd(new Node(19));
+		listSeven.insertNodeAtEnd(new Node(22));
+		listSeven.insertNodeAtEnd(new Node(25));
+		
+		SingleLinkedList listEight = new SingleLinkedList();
+		listEight.createLinkedList(new Node(1));
+		listEight.insertNodeAtEnd(new Node(7));
+		listEight.insertNodeAtEnd(new Node(10));
+		listEight.insertNodeAtEnd(new Node(15));
+		listEight.insertNodeAtEnd(new Node(16));
+		listEight.insertNodeAtEnd(new Node(20));
+		listEight.insertNodeAtEnd(new Node(24));
+		listEight.insertNodeAtEnd(new Node(27));
+		listEight.insertNodeAtEnd(new Node(30));
+				
+		System.out.println("\n");		
+		System.out.print("List Seven : ");
+		listSeven.traverseLinkedList();
+		
+		System.out.println();
+		System.out.print("List Eight : ");
+		listEight.traverseLinkedList();
+		
+		SingleLinkedList mergedAlternateNodesList = new SingleLinkedList();
+		
+		mergedAlternateNodesList.createLinkedList(list.mergeAlternateNodes(listSeven.head, listEight.head));
+		mergedAlternateNodesList.setSize(listSeven.getSize() + listEight.getSize());
+		System.out.println();
+		System.out.print("After merging alternate nodes of List Six and List Seven : ");
+		mergedAlternateNodesList.traverseLinkedList();
 		
 	}
 }
