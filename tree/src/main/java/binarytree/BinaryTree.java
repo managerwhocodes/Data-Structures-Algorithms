@@ -14,6 +14,14 @@ public class BinaryTree{
 		this.root = null;
 	}
 	
+	public Node getRoot() {
+		return root;
+	}
+	
+	public void setRoot(Node root) {
+		this.root = root;
+	}
+	
 	protected void insert(Node node) {
 		if(root == null) {
 			root = node;
