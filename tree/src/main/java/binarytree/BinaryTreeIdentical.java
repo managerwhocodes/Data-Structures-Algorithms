@@ -29,6 +29,14 @@ public class BinaryTreeIdentical extends BinaryTree{
 			treeTwo.insert(new Node(i));
 		}
 		
+		System.out.print("In-order traversal of tree one : ");
+		treeOne.inOrderIterative(treeOne.getRoot());
+		System.out.println("\n");
+		
+		System.out.print("In-order traversal of tree two : ");
+		treeTwo.inOrderIterative(treeTwo.getRoot());
+		System.out.println("\n");
+		
 		boolean isIdentical = binaryTreeIdentical.isIdentical(treeOne.getRoot(), treeTwo.getRoot());
 		System.out.println("Is Tree one and Tree two identical : "+isIdentical);
 
