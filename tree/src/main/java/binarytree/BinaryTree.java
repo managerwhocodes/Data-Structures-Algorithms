@@ -186,32 +186,32 @@ public class BinaryTree{
 			tree.insert(new Node(i));
 		}
 		
-		System.out.println("Level-order of tree:");
+		System.out.println("Level-order traversal of tree : ");
 		tree.levelOrderTraversal();
 		
 		System.out.println("Leaf Nodes : "+tree.getLeafNodes()+"\n");
 		
-		System.out.println("Pre-order of tree recursive :");
+		System.out.print("Pre-order traversal of tree recursive : ");
 		tree.preOrder(tree.root);
 		System.out.println("\n");
 		
-		System.out.println("Pre-order of tree iterative :");
+		System.out.print("Pre-order traversal of tree iterative : ");
 		tree.preOrderIterative(tree.root);
 		System.out.println("\n");
 		
-		System.out.println("Post-order of tree recursive :");
+		System.out.print("Post-order traversal of tree recursive : ");
 		tree.postOrder(tree.root);
 		System.out.println("\n");
 		
-		System.out.println("Post-order of tree iterative :");
+		System.out.print("Post-order traversal of tree iterative : ");
 		tree.postOrderIterative(tree.root);
 		System.out.println("\n");
 			
-		System.out.println("In-order of tree recursive :");
+		System.out.print("In-order traversal of tree recursive : ");
 		tree.inOrder(tree.root);
 		System.out.println("\n");
 		
-		System.out.println("In-order of tree iterative :");
+		System.out.print("In-order traversal of tree iterative : ");
 		tree.inOrderIterative(tree.root);
 		System.out.println("\n");
 	}
