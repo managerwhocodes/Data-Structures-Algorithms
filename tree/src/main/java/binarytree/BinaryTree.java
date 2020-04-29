@@ -61,6 +61,13 @@ public class BinaryTree{
 		return list;
 	}
 	
+	protected int size(Node node) {
+		if(node == null) {
+			return 0;
+		}
+		return 1 + size(node.getLeftNode()) + size(node.getRightNode());
+	}
+	
 	protected void levelOrderTraversal() {
 		Queue<Node> queue = new LinkedList<Node>();
 		queue.add(root);
@@ -185,6 +192,8 @@ public class BinaryTree{
 		for(int i=0;i<10;i++) {
 			tree.insert(new Node(i));
 		}
+		
+		System.out.println("Size of tree : "+tree.size(tree.getRoot()));
 		
 		System.out.println("Level-order traversal of tree : ");
 		tree.levelOrderTraversal();
