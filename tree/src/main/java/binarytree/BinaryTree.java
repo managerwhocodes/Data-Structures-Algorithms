@@ -68,12 +68,26 @@ public class BinaryTree{
 		return 1 + size(node.getLeftNode()) + size(node.getRightNode());
 	}
 	
+	protected boolean isComplete(Node node, int index, int size) {
+		if(node == null)
+			return true;
+		
+		if((node.getLeftNode() != null && 2*index + 1 >= size) || !isComplete(node.getLeftNode(), 2*index + 1, size)){
+			return false;
+		}
+		
+		if((node.getRightNode() != null && 2*index + 2 >= size) || !isComplete(node.getRightNode(), 2*index + 2, size)){
+			return false;
+		}
+		return true;
+	}
+	
 	protected void levelOrderTraversal() {
 		Queue<Node> queue = new LinkedList<Node>();
 		queue.add(root);
 		while(!queue.isEmpty()){
 			Node currentNode = queue.poll();
-			System.out.println(currentNode.getValue()+ " ");
+			System.out.print(currentNode.getValue()+ " ");
 			if(currentNode.getLeftNode() != null) 
 				queue.add(currentNode.getLeftNode());
 			if(currentNode.getRightNode() !=null)
@@ -193,12 +207,16 @@ public class BinaryTree{
 			tree.insert(new Node(i));
 		}
 		
-		System.out.println("Size of tree : "+tree.size(tree.getRoot()));
+		int size = tree.size(tree.getRoot());
 		
-		System.out.println("Level-order traversal of tree : ");
+		System.out.println("Size of tree : "+size);
+		
+		System.out.println("Is binary tree complete : "+tree.isComplete(tree.getRoot(), 0, size));
+		
+		System.out.print("Level-order traversal of tree : ");
 		tree.levelOrderTraversal();
 		
-		System.out.println("Leaf Nodes : "+tree.getLeafNodes()+"\n");
+		System.out.println("\nLeaf Nodes : "+tree.getLeafNodes()+"\n");
 		
 		System.out.print("Pre-order traversal of tree recursive : ");
 		tree.preOrder(tree.root);
