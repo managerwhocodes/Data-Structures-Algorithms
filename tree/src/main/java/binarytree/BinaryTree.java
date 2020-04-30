@@ -62,11 +62,19 @@ public class BinaryTree{
 	}
 	
 	protected int size(Node node) {
-		if(node == null) {
+		if(node == null) 
 			return 0;
-		}
+		
 		return 1 + size(node.getLeftNode()) + size(node.getRightNode());
 	}
+	
+	
+	protected int height(Node node)	{ 
+        if (node == null) 
+            return 0; 
+  
+        return 1 + Math.max(height(node.getLeftNode()), height(node.getRightNode())); 
+    } 
 	
 	protected boolean isComplete(Node node, int index, int size) {
 		if(node == null)
@@ -208,15 +216,19 @@ public class BinaryTree{
 		}
 		
 		int size = tree.size(tree.getRoot());
+		int height = tree.height(tree.getRoot());
 		
 		System.out.println("Size of tree : "+size);
 		
+		System.out.println("Height of tree : "+height);
+		
 		System.out.println("Is binary tree complete : "+tree.isComplete(tree.getRoot(), 0, size));
+		
+		System.out.println("\nLeaf Nodes : "+tree.getLeafNodes()+"\n");
 		
 		System.out.print("Level-order traversal of tree : ");
 		tree.levelOrderTraversal();
-		
-		System.out.println("\nLeaf Nodes : "+tree.getLeafNodes()+"\n");
+		System.out.println("\n");
 		
 		System.out.print("Pre-order traversal of tree recursive : ");
 		tree.preOrder(tree.root);
