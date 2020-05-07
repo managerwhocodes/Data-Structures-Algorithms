@@ -3,7 +3,7 @@ package dp;
 public class EditDistance {
 	
 	// Top-Down Approach
-	protected int getMinOperationstoConvert(String strOne, String strTwo) {
+	protected int getMinOperationstoConvert_TD(String strOne, String strTwo) {
 		Integer [][]dp = new Integer[strOne.length()+1][strTwo.length()+1];
 		return getMinOperationstoConvertUtil(dp, strOne, strTwo, 0, 0);		
 	}
@@ -43,6 +43,6 @@ public class EditDistance {
 							+" to "
 							+inputStrOne
 							+" : "
-							+dis.getMinOperationstoConvert(inputStrOne,inputStrTwo));	
+							+dis.getMinOperationstoConvert_TD(inputStrOne,inputStrTwo));	
 	}
 }
