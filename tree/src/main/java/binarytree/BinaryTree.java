@@ -44,7 +44,7 @@ public class BinaryTree{
 		}	
 	}
 	
-	protected List<Node> getLeafNodes(){
+	protected List<Node> getLeafNodes()	{
 		List<Node> list = new ArrayList<Node>();
  		Queue<Node> queue = new LinkedList<Node>();
 		queue.add(root);
@@ -128,8 +128,7 @@ public class BinaryTree{
 		inOrder(node.getRightNode());
 	}
 	
-	protected void preOrderIterative(Node node)
-	{
+	protected void preOrderIterative(Node node)	{
 		if (node == null) {
 			return;
 		}
@@ -153,8 +152,7 @@ public class BinaryTree{
 		}
 	}
 	
-	protected void postOrderIterative(Node node)
-	{
+	protected void postOrderIterative(Node node) {
 		if (node == null) {
 			return;
 		}
@@ -183,8 +181,7 @@ public class BinaryTree{
 		}
 	}
 
-	protected void inOrderIterative(Node node)
-	{	
+	protected void inOrderIterative(Node node) {	
 		if (node == null) {
 			return;
 		}
@@ -206,6 +203,27 @@ public class BinaryTree{
 				currentNode = currentNode.getRightNode();
 			}
 		}
+	}
+	
+	protected boolean printAncestors(Node root, int nodeValue) {
+		
+		if(root == null)
+			return false;
+		
+		if(root.getValue() == nodeValue)
+			return true;
+		
+		boolean left = printAncestors(root.getLeftNode(), nodeValue);
+		
+		boolean right = false;
+		if(!left)
+			right = printAncestors(root.getRightNode(), nodeValue);
+		
+		if(left || right)
+			System.out.print(root.getValue() + " ");
+		
+		return left || right;
+		
 	}
 		
 	public static void main(String args[]){
@@ -253,5 +271,9 @@ public class BinaryTree{
 		System.out.print("In-order traversal of tree iterative : ");
 		tree.inOrderIterative(tree.root);
 		System.out.println("\n");
+		
+		int nodeValue = 9;
+		System.out.print("Ancestors of node with value " +nodeValue+ " : " );
+		tree.printAncestors(tree.getRoot(), 9);
 	}
 }
