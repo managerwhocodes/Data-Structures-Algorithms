@@ -30,6 +30,22 @@ public class LongestCommonSubsequence {
 		return dp[indexOne][indexTwo];	
 	}
 	
+	// Bottom-Up Approach
+	protected int getLCSCount_BU(String strOne, String strTwo) {
+		
+		int dp[][] =  new int[strOne.length()+1][strTwo.length()+1];
+		for (int i = strOne.length(); i >= 1; i--) {
+			for (int j = strTwo.length(); j >= 1; j--) {
+				if(strOne.charAt(i-1) == strTwo.charAt(j-1)) {
+					dp[i-1][j-1] = Math.max((1+ dp[i][j]), Math.max(dp[i][j-1], dp[i-1][j]));
+				} else {
+					dp[i-1][j-1] = Math.max(dp[i][j-1], dp[i-1][j]);
+				}			
+			}
+		}
+		return dp[0][0];
+	}
+	
 	public static void main(String[] args) {
 		
 		LongestCommonSubsequence lcs = new LongestCommonSubsequence();
@@ -40,7 +56,14 @@ public class LongestCommonSubsequence {
 							+inputStrOne
 							+" and "
 							+inputStrTwo
-							+" : "
+							+" using Top Down : "
 							+lcs.getLCSCount_TD(inputStrOne,inputStrTwo));	
+		
+		System.out.print("\nLength of Longest Common Subsequence in "
+				+inputStrOne
+				+" and "
+				+inputStrTwo
+				+" using Bottom Up : "
+				+lcs.getLCSCount_BU(inputStrOne,inputStrTwo));
 	}
 }
