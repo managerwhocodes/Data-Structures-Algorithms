@@ -2,6 +2,7 @@ package trie;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 public class TrieMaxWord extends Trie{
@@ -30,7 +31,7 @@ public class TrieMaxWord extends Trie{
 			return maxCount;
 		}
 
-		for (Entry<Character, Node> entry: currentNode.getChildren().entrySet())
+		for (Map.Entry<Character, Node> entry: currentNode.children.entrySet())
 		{
 			if (maxCount < entry.getValue().count) {
 				key.replace(0, key.length(), entry.getValue().key);
