@@ -8,6 +8,10 @@ public class Trie {
 		root = new Node();
 	}
 	
+	public Node getRoot() {
+		return root;
+	}
+	
 	protected void insert(String word) {
 		Node currentNode = root;
 		for(int i=0; i < word.length(); i++) {
