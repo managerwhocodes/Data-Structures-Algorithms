@@ -17,7 +17,7 @@ public class SelectionSort {
 		}
 	}
 	
-	protected static void printArray(int []array) {
+	protected void printArray(int []array) {
 		for (int i = 0; i < array.length; i++) {
 			System.out.print(array[i]+" ");
 		}
@@ -28,11 +28,11 @@ public class SelectionSort {
 		SelectionSort ss = new SelectionSort();
 		
 		System.out.print("Before Sorting : ");
-		SelectionSort.printArray(array);
+		ss.printArray(array);
 		
 		ss.selectionSort(array);
 		
 		System.out.print("\nAfter sorting : ");
-		SelectionSort.printArray(array);
+		ss.printArray(array);
 	}
 }
