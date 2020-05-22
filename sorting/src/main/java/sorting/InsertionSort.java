@@ -27,10 +27,10 @@ public class InsertionSort {
 		System.out.print("Before Sorting : ");
 		sort.printArray(array);
 		
-		//long start = System.nanoTime();
+		long start = System.nanoTime();
 		sort.insertionSort(array);
-		//long end = System.nanoTime();
-		//System.out.println("\n\nTime to execute this algo: " + (end-start));
+		long end = System.nanoTime();
+		System.out.print("\nTime to execute Insertion sort : " + (end-start) + " ms");
 		
 		System.out.print("\nAfter sorting : ");
 		sort.printArray(array);
