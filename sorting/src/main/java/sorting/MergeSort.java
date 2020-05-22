@@ -49,10 +49,10 @@ public class MergeSort {
 		System.out.print("Before Sorting : ");
 		ms.printArray(array);
 		
-		//long start = System.nanoTime();
+		long start = System.nanoTime();
 		ms.mergeSort(array, 0, array.length-1);
-		//long end = System.nanoTime();
-		//System.out.println("\n\nTime to execute this algo: " + (end-start));
+		long end = System.nanoTime();
+		System.out.print("\nTime to execute merge sort : " + (end-start) + " ms");
 		
 		System.out.print("\nAfter Sorting : ");
 		ms.printArray(array);
