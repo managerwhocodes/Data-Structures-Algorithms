@@ -14,15 +14,23 @@ public class Rotation {
 		return rotated;
 	}
 	
+	protected List<String> getAllRotationUsingConcat(String str) {
+		List<String> rotated = new ArrayList<String>();
+		String concatString = str+str;
+		for(int i=1,j=str.length()+1;i<str.length()&&j<concatString.length();i++,j++) {
+			rotated.add(concatString.substring(i,j));			
+		}		
+		return rotated;
+	}
+	
 	public static void main(String[] args) {
 		
 		Rotation strRotate = new Rotation();
-		String input = "abcde";
+		String input = "tests";
 		
 		System.out.println("All the rotations for the input string - "+input + " : ");
-		for(String output : strRotate.getAllRotation(input))
+		for(String output : strRotate.getAllRotationUsingConcat(input))
 			System.out.println(output);
 
 	}
-
 }
