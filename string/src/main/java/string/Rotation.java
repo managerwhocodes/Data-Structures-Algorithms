@@ -23,14 +23,35 @@ public class Rotation {
 		return rotated;
 	}
 	
+	protected boolean isRotation(String strOne, String strTwo) {
+		boolean check = false;
+		String concatString = strOne+strOne;
+		
+		for(int i=1,j=strOne.length()+1;i<strOne.length()&&j<concatString.length();i++,j++) {
+			if(strTwo.equals(concatString.substring(i,j)))
+				check = true;
+		}
+		
+		return check;
+	}
+	
 	public static void main(String[] args) {
 		
 		Rotation strRotate = new Rotation();
 		String input = "tests";
+		String inputForRotOne = "geeks";
+		String inputForRotTwo = "eeksg";
 		
 		System.out.println("All the rotations for the input string - "+input + " : ");
+		for(String output : strRotate.getAllRotation(input))
+			System.out.println(output);
+		
+		System.out.println("\nAll the rotations for the input string - "+input + " using concat : ");
 		for(String output : strRotate.getAllRotationUsingConcat(input))
 			System.out.println(output);
+		
+		System.out.println("\nIs "+inputForRotTwo+ " rotation of "+inputForRotOne+ " : "
+								+strRotate.isRotation(inputForRotOne, inputForRotTwo));
 
 	}
 }
