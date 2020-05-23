@@ -34,6 +34,5 @@ public class InsertionSort {
 		
 		System.out.print("\nAfter sorting : ");
 		sort.printArray(array);
-
 	}
 }
