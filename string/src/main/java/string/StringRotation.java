@@ -3,7 +3,7 @@ package string;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rotation {
+public class StringRotation {
 
 	protected List<String> getAllRotation(String str) {
 		List<String> rotated = new ArrayList<String>();
@@ -37,7 +37,7 @@ public class Rotation {
 	
 	public static void main(String[] args) {
 		
-		Rotation strRotate = new Rotation();
+		StringRotation strRotate = new StringRotation();
 		String input = "tests";
 		String inputForRotOne = "geeks";
 		String inputForRotTwo = "eeksg";
