@@ -73,9 +73,49 @@ public class StringPermutation {
     	}
     }
     
+    private String getNextLexicographic(String str) {
+    	String output = "";
+       	
+    	char []chars = str.toCharArray();
+    	if(chars.length == 0 || chars.length == 1)
+    		return output;
+    	
+    	int i = chars.length - 1;
+    	int j = chars.length - 1;
+    	
+		while (chars[i - 1] >= chars[i])
+		{
+			if (--i == 0) {
+				return output;
+			}
+		}
+		
+		while (j > i && chars[j] <= chars[i - 1]) {
+			j--;
+		}
+    	
+		swap(chars, i-1, j);
+		reverse(chars, i);
+
+		return new String(chars);
+    }
+    
+    private void swap(char[] chars, int i, int j) {
+		char ch = chars[i];
+		chars[i] = chars[j];
+		chars[j] = ch;
+	}
+    
+    private void reverse(char[] chars, int start) {
+		for (int i = start, j = chars.length - 1; i < j; i++, j--) {
+			swap(chars, i, j);
+		}
+	}
+    
     public static void main(String args[]) {
         StringPermutation sp = new StringPermutation();
         String input = "SBC"; 
+        String lexInput = "dkhc";
         
 		List<String> resultListOne = sp.getPermutation(input.toCharArray());	
 		System.out.println("All the permutations of the input string without char repetition - "+input+" : "); 
@@ -86,6 +126,9 @@ public class StringPermutation {
 		List<String> resultListTwo = sp.getLexicographic(new String(input.toCharArray()));
 		for(String s : resultListTwo)
 			System.out.println(s);
+		
+		System.out.println("The next lexicographic string for - "+"a"+" : "+sp.getNextLexicographic("a"));
+		System.out.println("The next lexicographic string for - "+lexInput+" : "+sp.getNextLexicographic(lexInput));
         
     }
 }
