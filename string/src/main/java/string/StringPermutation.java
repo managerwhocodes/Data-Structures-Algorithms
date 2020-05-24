@@ -50,13 +50,41 @@ public class StringPermutation {
         }
     }
     
+    protected List<String> getLexicographic(String str) {
+    	String res = "";
+    	List<String> result = new ArrayList<String>();
+    	
+    	getLexicographicUtil(str,res,result);
+    	return result;
+    }
+    
+    protected void getLexicographicUtil(String str, String res, List<String> result) {
+
+    	if (res.length() == str.length()) {
+    		result.add(res);
+    		return;
+    	}
+
+    	for(int i = 0; i < str.length(); i++) {
+    		while (i + 1 < str.length() && str.charAt(i) == str.charAt(i + 1))
+    			i++;
+
+    		getLexicographicUtil(str, res + str.charAt(i), result);
+    	}
+    }
+    
     public static void main(String args[]) {
         StringPermutation sp = new StringPermutation();
-        String input = "AABC"; 
+        String input = "SBC"; 
         
-		List<String> resultList = sp.getPermutation(input.toCharArray());	
-		System.out.println("All the permutations of the input string - "+input+" : "); 
-		for(String s : resultList)
+		List<String> resultListOne = sp.getPermutation(input.toCharArray());	
+		System.out.println("All the permutations of the input string without char repetition - "+input+" : "); 
+		for(String s : resultListOne)
+			System.out.println(s);
+		
+		System.out.println("All the permutations of the input string with char repetition- "+input+" : "); 
+		List<String> resultListTwo = sp.getLexicographic(new String(input.toCharArray()));
+		for(String s : resultListTwo)
 			System.out.println(s);
         
     }
