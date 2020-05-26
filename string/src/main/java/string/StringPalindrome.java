@@ -2,8 +2,10 @@ package string;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class StringPalindrome {
 
@@ -63,6 +65,33 @@ public class StringPalindrome {
 		
 		return freqStrOne.equals(freqStrTwo);
 	}
+	
+	protected boolean isIsomorphic(String strOne, String strTwo) {
+
+		if (strOne.length() != strTwo.length()) {
+			return false;
+		}
+
+		Map<Character, Character> map = new HashMap<>();
+		Set<Character> set = new HashSet<>();
+
+		for (int i = 0; i < strOne.length(); i++)
+		{
+			char x = strOne.charAt(i);
+			char y = strTwo.charAt(i);
+
+			if (map.containsKey(x)) {
+				if (map.get(x) != y)
+					return false;
+			} else {
+				if (set.contains(y))
+					return false;
+				map.put(x, y);
+				set.add(y);
+			}
+		}
+		return true;
+	}
 
 	public static void main(String[] args) {
 		
@@ -74,13 +103,20 @@ public class StringPalindrome {
 		String strOne = "Tom Marvolo Riddle";
 		String strTwo = "I Am Lord Voldemort";
 		
-		System.out.println("Are string - "+strOne
+		System.out.println("\nAre string - "+strOne
 							+" and "+strTwo
 							+" anagrams : "+sp.isAnagram(strOne,strTwo));
 		
 		String strFour = "geeksogeeks";
 		
-		System.out.println("Can the characters of the string - "+strFour
+		System.out.println("\nCan the characters of the string - "+strFour
 							+" be rearranged to make a plaindrome : "+sp.canMakePalindrome(strFour));
+		
+		String strFive = "ACAB";
+		String strSix = "XCXY";
+		System.out.println("\nAre string - "+strFive
+							+" and "+strSix
+							+" isomorphic : "+sp.isIsomorphic(strFive,strSix));
+		
 	}
 }
