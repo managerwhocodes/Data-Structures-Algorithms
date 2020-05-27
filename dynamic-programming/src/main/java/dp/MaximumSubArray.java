@@ -1,7 +1,7 @@
 package dp;
 
 
-public class MaximumSubarray {
+public class MaximumSubArray {
 	
 	// Kadane's Algorithm
     protected int maxSubArray(int[] nums) {
@@ -36,10 +36,9 @@ public class MaximumSubarray {
     
 	public static void main(String []args) {
 		
-		MaximumSubarray ms = new MaximumSubarray();
+		MaximumSubArray ms = new MaximumSubArray();
 		int [] input = {-2,1,-3,4,-1,2,1,-5,4};
 		int output = ms.maxSubArray(input);
-		System.out.println(output);
-				
+		System.out.println(output);		
 	}
 }
