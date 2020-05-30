@@ -11,7 +11,7 @@ public class FindPathBFS{
         this.nodeList = nodeList;
     }
 
-    private static void printPath(GraphNode node){
+    private void printPath(GraphNode node){
         if(node.getParent() != null)
             printPath(node.getParent());
         System.out.print(node.getName()+" ");
