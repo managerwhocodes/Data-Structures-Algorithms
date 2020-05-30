@@ -24,11 +24,17 @@ class ShortestPathInMatrix{
 
     public ShortestPathInMatrix(int matrix[][]){
         this.adjMatrix = matrix;
-        this.visited = new boolean[adjMatrix.length][adjMatrix.length];
+        this.visited = new boolean[matrix.length][matrix.length];
     }
 
     private int path(Node source, Node destination){
-
+    	
+    	if(adjMatrix.length==0)
+    		return -1;
+    	
+    	if(source.x >= adjMatrix.length || destination.x >= adjMatrix.length || 
+    			source.y >= adjMatrix[0].length || destination.y >= adjMatrix[0].length)
+    		return -1;
     	// Check if source and destination are valid
         if(adjMatrix[source.x][source.y] !=1 || adjMatrix[destination.x][destination.y] !=1)
             return -1;
@@ -52,7 +58,7 @@ class ShortestPathInMatrix{
     }
 
     private static List<Node> getNeighbours(Node node, int [][] adjMatrix, boolean [][] visited) {
-
+   
 		List<Node> list = new ArrayList<Node>();
 
 		if((node.x-1 >= 0 && node.x-1 < adjMatrix.length) && adjMatrix[node.x-1][node.y] == 1
@@ -68,13 +74,13 @@ class ShortestPathInMatrix{
 			visited[node.x+1][node.y] = true;
             
 		}
-        if((node.y-1 >= 0 && node.y-1 < adjMatrix.length) && adjMatrix[node.x][node.y-1] == 1
+        if((node.y-1 >= 0 && node.y-1 < adjMatrix[0].length) && adjMatrix[node.x][node.y-1] == 1
         		&& !visited[node.x][node.y-1]) {
             Node neighbour = new Node(node.x, node.y-1, node.distanceFromSource+1);
 			list.add(neighbour);
 			visited[node.x][node.y-1] = true;         
 		}
-        if((node.y+1 >= 0 && node.y+1 < adjMatrix.length) && adjMatrix[node.x][node.y+1] == 1
+        if((node.y+1 >= 0 && node.y+1 < adjMatrix[0].length) && adjMatrix[node.x][node.y+1] == 1
         		&& !visited[node.x][node.y+1]) {
             Node neighbour = new Node(node.x, node.y+1, node.distanceFromSource+1);
 			list.add(neighbour);
@@ -94,18 +100,35 @@ class ShortestPathInMatrix{
                         { 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
                         { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1 },
                         { 1, 1, 0, 0, 0, 0, 1, 0, 0, 1 }};
+        
+        int matrixTwo[][] = {{ 1, 0, 1, 1},
+                			 { 1, 0, 1, 0},
+                			 { 1, 1, 1, 0},
+                			 { 0, 0, 1, 0},
+                			 { 1, 1, 1, 1}};
 
 
         ShortestPathInMatrix graph = new ShortestPathInMatrix(matrix);
+        ShortestPathInMatrix graphTwo = new ShortestPathInMatrix(matrixTwo);
 
         // Change the input from here
         Node source = new Node(0,0,0);
-        Node destination = new Node(3,4,0);
+        Node destination = new Node(8,0,0);
+        
+        Node sourceTwo = new Node(0,0,0);
+        Node destinationTwo = new Node(4,0,0);
+        
 
         int distance = graph.path(source, destination);
+        int distanceTwo = graphTwo.path(sourceTwo, destinationTwo);
 
         if (distance > 0)
             System.out.println("Shortest Path = " + distance);
+        else
+            System.out.println("Path doesn't exist");
+        
+        if (distanceTwo > 0)
+            System.out.println("Shortest Path = " + distanceTwo);
         else
             System.out.println("Path doesn't exist");
 
