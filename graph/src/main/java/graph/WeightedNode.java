@@ -10,6 +10,7 @@ public class WeightedNode implements Comparable<WeightedNode>{
     private ArrayList<WeightedNode> neighbours = new ArrayList<WeightedNode>();
     private HashMap<WeightedNode, Integer> weightMap = new HashMap<WeightedNode, Integer>();
     private WeightedNode parent;
+    private DisjointSet set;
 
     public WeightedNode(String name){
         this.name = name;
@@ -56,6 +57,14 @@ public class WeightedNode implements Comparable<WeightedNode>{
     public void setParent(WeightedNode parent){
         this.parent = parent;
     }
+    
+	public DisjointSet getSet() {
+		return set;
+	}
+
+	public void setSet(DisjointSet set) {
+		this.set = set;
+	}
 
     @Override
     public String toString() {
