@@ -5,20 +5,17 @@ import java.util.List;
 
 public class TrieMaxWord extends Trie{
 	
-	protected void insert(Node head, String str)
+	protected void insert(String str)
 	{
-		Node currentNode = head;
+		Node currentNode = root;
 		
 		for (int i = 0; i < str.length(); i++)
 		{
-
 			if (!currentNode.getChildren().containsKey(str.charAt(i))) {
 				currentNode.getChildren().put(str.charAt(i), new Node());
 			}
-
 			currentNode = currentNode.getChildren().get(str.charAt(i));
 		}
-
 		currentNode.key = str;
 		currentNode.count += 1;
 	}
@@ -44,16 +41,16 @@ public class TrieMaxWord extends Trie{
 				"coded", "codeless", "codec", "codecs", "codependence",
 				"codex", "codify", "codependents", "codes", "code",
 				"coder", "codesign", "codec", "codeveloper", "codrive",
-				"codec", "codecs", "codiscovered"
+				"codec", "codecs", "codiscovered", "code"
 			);
 
 		System.out.println("Dictionary : ");
 		for( String word : dictionary) {
-			trie.insert(trie.getRoot(), word);
+			trie.insert(word);
 			System.out.println(word);
 		}
 		
-		String searchWord = "codependence";
+		String searchWord = "code";
 		System.out.println("\nWord "+searchWord+" exists in dictionary : "+trie.maxCount(searchWord)+" times");
 		
 	}
