@@ -2,7 +2,7 @@ package trie;
 
 public class Trie {
 	
-	private final Node root;
+	protected final Node root;
 
 	public Trie() {
 		root = new Node();
@@ -48,6 +48,26 @@ public class Trie {
 		
 		System.out.println("word abcde exists in trie : "+trie.search("abcde"));
 		System.out.println("word abc exists in trie : "+trie.search("abc"));
+		
+		Trie trieTwo = new Trie();
+
+		
+		
+		trieTwo.insert("techa");
+		trieTwo.insert("techi");
+		trieTwo.insert("techie");
+
+		System.out.println(trieTwo.search("tech"));			// true
+		System.out.println(trieTwo.search("techi"));   		// true
+		System.out.println(trieTwo.search("techie"));  		// true
+		System.out.println(trieTwo.search("techiedelight"));   // false
+
+		trieTwo.insert("techiedelight");
+
+		System.out.println(trieTwo.search("tech"));			// true
+		System.out.println(trieTwo.search("techi"));   		// true
+		System.out.println(trieTwo.search("techie"));  		// true
+		System.out.println(trieTwo.search("techiedelight"));   // true
 		
 	}
 }

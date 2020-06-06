@@ -2,8 +2,6 @@ package trie;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class TrieMaxWord extends Trie{
 	
@@ -24,22 +22,18 @@ public class TrieMaxWord extends Trie{
 		currentNode.key = str;
 		currentNode.count += 1;
 	}
-
 	
-	protected int maxCount(Node currentNode, int maxCount, StringBuilder key) {
-		if (currentNode == null) {
-			return maxCount;
-		}
-
-		for (Map.Entry<Character, Node> entry: currentNode.children.entrySet())
-		{
-			if (maxCount < entry.getValue().count) {
-				key.replace(0, key.length(), entry.getValue().key);
-				maxCount = entry.getValue().count;
+	protected int maxCount(String searchWord) {
+		Node currentNode = root;
+		for (int i = 0; i < searchWord.length(); i++) {
+			char ch = searchWord.charAt(i);
+			Node node = currentNode.children.get(ch); 
+			if (node == null) {
+				return 0;
 			}
-			maxCount = maxCount(entry.getValue(), maxCount, key);
+			currentNode = node;
 		}
-		return maxCount;
+		return currentNode.count;
 	}
 	
 	public static void main(String[] args) {
@@ -52,14 +46,15 @@ public class TrieMaxWord extends Trie{
 				"coder", "codesign", "codec", "codeveloper", "codrive",
 				"codec", "codecs", "codiscovered"
 			);
-		Node head = new Node();
-		for( String word : dictionary)
-			trie.insert(head, word);
+
+		System.out.println("Dictionary : ");
+		for( String word : dictionary) {
+			trie.insert(trie.getRoot(), word);
+			System.out.println(word);
+		}
 		
-		int count = 0;
-		StringBuilder string = new StringBuilder("code");
-		Node node = trie.getRoot();
-		System.out.println("word code exists in trie : "+trie.maxCount(node, count, string));
+		String searchWord = "codependence";
+		System.out.println("\nWord "+searchWord+" exists in dictionary : "+trie.maxCount(searchWord)+" times");
 		
 	}
 }
