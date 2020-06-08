@@ -65,6 +65,50 @@ public class Matrix {
 
 		return p;
 	}
+	
+	protected void printSpiral(int mat[][], int top, int bottom, int left, int right)	{
+		
+			if (left > right) {
+				return;
+			}
+			// print top row
+			for (int i = left; i <= right; i++) {
+				System.out.print(mat[top][i] + " ");
+			}
+			top++;
+			
+			if (top > bottom) {
+				return;
+			}
+			
+			// print right column
+			for (int i = top; i <= bottom; i++) {
+				System.out.print(mat[i][right] + " ");
+			}
+			right--;
+			
+			if (left > right) {
+				return;
+			}
+			// print bottom row
+			for (int i = right; i >= left; i--) {
+				System.out.print(mat[bottom][i] + " ");
+			}
+			bottom--;
+			
+			if (top > bottom) {
+				return;
+			}
+			
+			// print left column
+			for (int i = bottom; i >= top; i--) {
+				System.out.print(mat[i][left] + " ");
+			}
+			left++;
+			
+			printSpiral(mat, top, bottom, left, right);
+	}
+
 
 	public static void main(String[] args) {
 
@@ -89,9 +133,14 @@ public class Matrix {
 				int c = j + p.second - k + 1;
 				System.out.printf("%3d", mat[r][c]);
 			}
-
 			System.out.println();
 		}
+		
+		int top = 0, bottom = mat.length - 1;
+		int left = 0, right = mat[0].length - 1;
+
+		System.out.println("\nPrinting the input matrix in Spiral Order : ");
+		matrix.printSpiral(mat, top, bottom, left, right);
 
 	}
 }
