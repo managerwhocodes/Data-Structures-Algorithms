@@ -1,5 +1,6 @@
 package dp;
 
+import java.util.Arrays;
 
 public class MaximumSumSubArray {
 	
@@ -33,12 +34,37 @@ public class MaximumSumSubArray {
 	    }
 	    return result;        
     }
-    
+	
+	protected int[] getLongestAlternatingSubArray(int[] arr)	{
+		int maxLen = 1;
+		int endIndex = 0;
+		int currLen = 1;
+
+		for (int i = 1; i < arr.length; i++)	{
+			if (arr[i] * arr[i - 1] < 0)	{
+				currLen++;
+				if (currLen > maxLen)	{
+					maxLen = currLen;
+					endIndex = i;
+				}
+			}
+			else {
+				currLen = 1;
+			}
+		}
+		return Arrays.copyOfRange(arr, (endIndex - maxLen + 1), endIndex + 1);
+	}
+
 	public static void main(String []args) {
 		
 		MaximumSumSubArray ms = new MaximumSumSubArray();
 		int [] input = {-2,1,-3,4,-1,2,1,-5,4};
 		int output = ms.maxSubArray(input);
 		System.out.println(output);		
+		
+		System.out.println("The longest alternating subarray : ");
+		int []longestAltArr = ms.getLongestAlternatingSubArray(input);
+		for(int n : longestAltArr)
+			System.out.print(n+" , ");
 	}
 }
