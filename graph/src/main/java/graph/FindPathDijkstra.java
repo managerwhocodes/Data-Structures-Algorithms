@@ -49,14 +49,16 @@ public class FindPathDijkstra{
         WeightedNode source = nodeList.get(i);
         WeightedNode destination = nodeList.get(j);
         source.getNeighbours().add(destination);
+        //destination.getNeighbours().add(source);
         source.getWeightMap().put(destination,d);
+        //destination.getWeightMap().put(source, d);
     }
 
     public static void main(String[] args) {
 
         ArrayList<WeightedNode> nodeList = new ArrayList<WeightedNode>();
 
-        for(int i=0;i<5;i++){
+        for(int i=0;i<7;i++){
             nodeList.add(new WeightedNode("V"+i));
         }
 
@@ -70,6 +72,7 @@ public class FindPathDijkstra{
 		graph.addWeightedEdge(3,1,1);
 		graph.addWeightedEdge(4,1,4);
 		graph.addWeightedEdge(4,3,2);
+		graph.addWeightedEdge(5,6,2);
 
 		graph.findPath(nodeList.get(4));
 
