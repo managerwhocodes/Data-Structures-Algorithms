@@ -42,6 +42,24 @@ public class StringPalindrome {
 		
 	}
 	
+	protected int getMaxLenNonPalindromeSubstring(String str) 
+    { 
+        int n = str.length(); 
+        char ch = str.charAt(0); 
+        
+        int i=1;
+        for (i = 1; i < n; i++) 
+            if(str.charAt(i) != ch) 
+                break; 
+
+        if (i == n) 
+            return 0; 
+  
+        if (isPalindrome(str)) 
+            return n-1; 
+  
+        return n; 
+    } 
 	
 	protected boolean isAnagram(String strOne, String strTwo) {
 		
@@ -118,5 +136,8 @@ public class StringPalindrome {
 							+" and "+strSix
 							+" isomorphic : "+sp.isIsomorphic(strFive,strSix));
 		
+		String strSeven = "XCXY";
+        System.out.println("\nMaximum length of the largest substring which is not palindrome : "
+                + sp.getMaxLenNonPalindromeSubstring(strSeven)); 
 	}
 }
