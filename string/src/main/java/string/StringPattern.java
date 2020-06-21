@@ -26,20 +26,18 @@ public class StringPattern {
 		int textLength = text.length();
 		int patternLength = pattern.length();
 
-		int i = 0;
 		long startTime = System.nanoTime();
-		while (i <= textLength - patternLength) {
-			for (int j = 0; j < patternLength; j++) {
+		for (int i=0; i <= textLength - patternLength; i++) {
+			for (int j=0; j < patternLength; j++) {
 				if (text.charAt(i + j) != pattern.charAt(j))
 					break;
 
 				if (j == patternLength - 1)
 					System.out.println("Pattern occurs with shift " + i);
 			}
-			i++;
 		}
 		long endTime = System.nanoTime();
-		System.out.print("Total time taken in nanosecs : "+(endTime-startTime));
+		System.out.print("Total time taken in nanosecs : "+(endTime-startTime));		
 	}
 	
 	protected void KMP(String text, String pattern) {
@@ -80,11 +78,11 @@ public class StringPattern {
 		
 		StringPattern sp = new StringPattern();
 		
-		//String text = "ABCABAABCABAC";
-		//String pattern = "CAB";
+		String text = "ABCABAABCABAC";
+		String pattern = "CAB";
 		
-		String text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-		String pattern = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB";
+		//String text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+		//String pattern = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB";
 
 		
 		System.out.print("Input text : "+text);
