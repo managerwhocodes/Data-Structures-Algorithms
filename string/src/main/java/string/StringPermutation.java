@@ -1,8 +1,10 @@
 package string;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class StringPermutation {
@@ -100,6 +102,23 @@ public class StringPermutation {
 		return new String(chars);
     }
     
+    protected void interleavings(String curr, String X, String Y, Set<String> result) {
+
+		if (X.length() == 0 && Y.length() == 0) {
+			result.add(curr);
+			return;
+		}
+
+		if (X.length() > 0) {
+			interleavings(curr + X.charAt(0), X.substring(1), Y, result);
+		}
+
+		if (Y.length() > 0) {
+			interleavings(curr + Y.charAt(0), X, Y.substring(1), result);
+		}
+	}
+
+    
     private void swap(char[] chars, int i, int j) {
 		char ch = chars[i];
 		chars[i] = chars[j];
@@ -129,6 +148,15 @@ public class StringPermutation {
 		
 		System.out.println("The next lexicographic string for - "+"a"+" : "+sp.getNextLexicographic("a"));
 		System.out.println("The next lexicographic string for - "+lexInput+" : "+sp.getNextLexicographic(lexInput));
+		
+		
+		String X = "ABC";
+		String Y = "ACB";
+
+		Set<String> result = new HashSet<>();
+		sp.interleavings("", X, Y, result);
+		System.out.println("All the interleavings of string "+X+" and "+Y+" : ");
+		result.stream().forEach(System.out::println);
         
     }
 }
