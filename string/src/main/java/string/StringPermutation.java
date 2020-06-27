@@ -1,6 +1,7 @@
 package string;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -119,6 +120,29 @@ public class StringPermutation {
 	}
 
     
+	protected List<String> findCombinations(List<List<Character>> keypad, int[] input) {
+
+		List<String> outputList = new ArrayList<>();
+		
+
+		for (Character ch: keypad.get(input[0])) {
+			outputList.add(String.valueOf(ch));
+		}
+		
+		for (int i = 1; i < input.length; i++) {
+			List<String> prevList = new ArrayList<>(outputList);
+			outputList.clear();
+		
+			for (Character ch: keypad.get(input[i])) {
+				for (String s: prevList) {
+					outputList.add(s + ch);
+				}
+			}
+		}
+		
+		return outputList;
+	}
+    
     private void swap(char[] chars, int i, int j) {
 		char ch = chars[i];
 		chars[i] = chars[j];
@@ -132,7 +156,9 @@ public class StringPermutation {
 	}
     
     public static void main(String args[]) {
+    	
         StringPermutation sp = new StringPermutation();
+        
         String input = "SBC"; 
         String lexInput = "dkhc";
         
@@ -157,6 +183,25 @@ public class StringPermutation {
 		sp.interleavings("", X, Y, result);
 		System.out.println("All the interleavings of string "+X+" and "+Y+" : ");
 		result.stream().forEach(System.out::println);
+		
+		List<List<Character>> keypad = Arrays.asList(
+				Arrays.asList(),
+				Arrays.asList(),
+				Arrays.asList( 'A', 'B', 'C' ),
+				Arrays.asList( 'D', 'E', 'F' ),
+				Arrays.asList( 'G', 'H', 'I' ),
+				Arrays.asList( 'J', 'K', 'L' ),
+				Arrays.asList( 'M', 'N', 'O' ),
+				Arrays.asList( 'P', 'Q', 'R', 'S'),
+				Arrays.asList( 'T', 'U', 'V' ),
+				Arrays.asList( 'W', 'X', 'Y', 'Z')
+				);
+
+
+		int[] inputArray = { 2, 3, 4 };
+
+		List<String> output = sp.findCombinations(keypad, inputArray);
+		System.out.println(output);
         
     }
 }
