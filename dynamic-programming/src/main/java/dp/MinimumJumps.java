@@ -6,7 +6,7 @@ public class MinimumJumps {
 
 	// Top-Down Approach
 	protected int findMinJumpsTopDown(int[] arr, int i, int n, int lookup[]) {
-
+		
 		if (i == n - 1) {
 			return 0;
 		}
