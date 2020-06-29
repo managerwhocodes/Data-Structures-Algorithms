@@ -43,6 +43,42 @@ public class GoldPots {
 		}
 		return lookup[i][j];
 	}
+	
+	protected int optimalStrategyBottomUp(int[] coin) {
+		
+		int n = coin.length;
+
+		if (n == 1) {
+			return coin[0];
+		}
+
+		if (n  == 2) {
+			return Integer.max(coin[0], coin[1]);
+		}
+
+		int[][] T = new int[n][n];
+
+		for (int iteration = 0; iteration < n ; iteration++) {
+			for (int i = 0, j = iteration; j < n ; i++, j++) {
+				
+				int start = coin[i] + Integer.min(calculate(T, i + 2, j),
+											calculate(T, i + 1, j - 1));
+
+				int end = coin[j] + Integer.min(calculate(T, i + 1, j - 1),
+											calculate(T, i, j - 2));
+
+				T[i][j] = Integer.max(start, end);
+			}
+		}
+		return T[0][n - 1];
+	}
+	
+	private int calculate(int[][] T, int i, int j) {
+		if (i <= j) {
+			return T[i][j];
+		}
+		return 0;
+	}
 
 	public static void main(String[] args) {
 		
@@ -57,6 +93,9 @@ public class GoldPots {
 		
 		System.out.println("Maximum coins collected by player is "
 				+ gp.optimalStrategyTopDown(coin, 0, coin.length - 1, lookup));
+		
+		System.out.println("Maximum coins collected by player is "
+				+ gp.optimalStrategyBottomUp(coin));
 
 	}
 }
