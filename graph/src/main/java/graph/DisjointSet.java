@@ -6,7 +6,7 @@ public class DisjointSet {
 	
 	private ArrayList<WeightedNode> nodeList = new ArrayList<WeightedNode>();
 	
-	private void makeSet(ArrayList<WeightedNode> nodeList) {
+	protected void makeSet(ArrayList<WeightedNode> nodeList) {
 
 		for(WeightedNode node: nodeList) {
 			DisjointSet set = new DisjointSet();
@@ -15,7 +15,7 @@ public class DisjointSet {
 		}
 	}
 		
-	private DisjointSet union(WeightedNode node1, WeightedNode node2) {
+	protected DisjointSet union(WeightedNode node1, WeightedNode node2) {
 		if(node1.getSet().equals(node2.getSet())) {
 			return null;
 		}	
@@ -41,7 +41,7 @@ public class DisjointSet {
 		}
 	}
 			
-	private DisjointSet findSet(WeightedNode node) {
+	protected DisjointSet findSet(WeightedNode node) {
 		return node.getSet();
 	}
 	
@@ -49,7 +49,7 @@ public class DisjointSet {
 		return nodeList;
 	}		
 	
-	public void printAllNodesOfThisSet() {
+	protected void printAllNodesOfThisSet() {
 		System.out.println("Printing all nodes of the set: ");
 		for(WeightedNode node: nodeList) {
 			System.out.print(node + "  ");
