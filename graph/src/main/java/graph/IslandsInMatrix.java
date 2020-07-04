@@ -1,6 +1,9 @@
 package graph;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 class Pair {
@@ -35,24 +38,58 @@ class IslandsInMatrix{
 	// BFS
     protected void findIsland(int[][] mat, boolean[][] visited, int i, int j) {
 
-		Queue<Pair> q = new ArrayDeque<Pair>();
-		q.add(new Pair(i, j));
+    	Queue<Pair> queue = new LinkedList<Pair>();
+		queue.add(new Pair(i, j));
 
 		visited[i][j] = true;
 
-		while (!q.isEmpty()) {
-			int x = q.peek().x;
-			int y = q.peek().y;
-			q.poll();
+		/*
+		while (!queue.isEmpty()) {
+			int x = queue.peek().x;
+			int y = queue.peek().y;
+			queue.poll();
 
 			for (int k = 0; k < 8; k++) {
 				if (canMove(mat, x + row[k], y + col[k], visited)) {
 					visited[x + row[k]][y + col[k]] = true;
-					q.add(new Pair(x + row[k], y + col[k]));
+					queue.add(new Pair(x + row[k], y + col[k]));
 				}
 			}
 		}
+		*/
+		
+        while(!queue.isEmpty()){
+
+            Pair pair = queue.poll();
+            int x = pair.x ;
+            int y = pair.y;
+            visited[x][y] = true;
+
+            List<Pair> neighbourList = getNeighbours(pair, mat, visited);
+            queue.addAll(neighbourList);
+
+        }
 	}
+    
+    // Get all valid neighbours
+    private List<Pair> getNeighbours(Pair pair, int [][] mat, boolean [][] visited) {
+    	   
+		List<Pair> list = new ArrayList<Pair>();
+		
+		for(int i=0;i<row.length;i++) {
+			
+			int x = pair.x + row[i];
+			int y = pair.y + col[i];
+						
+			if((x >= 0) && (x < mat.length) && (y >= 0) && (y < mat[0].length) 
+					&& (mat[x][y] == 1 && !visited[x][y])) {
+				Pair neighbour = new Pair(x, y);	
+				list.add(neighbour);
+				visited[x][y] = true;	
+			}
+		}
+		return list;
+    }
 
     public static void main(String args[]){
     	
