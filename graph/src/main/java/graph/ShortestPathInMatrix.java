@@ -21,6 +21,9 @@ class ShortestPathInMatrix{
 
     private int adjMatrix [][];
     private boolean visited[][];
+    
+    private int[] row = {-1,1,0,0};
+    private int[] col = {0,0,-1,1};
 
     public ShortestPathInMatrix(int matrix[][]){
         this.adjMatrix = matrix;
@@ -57,10 +60,24 @@ class ShortestPathInMatrix{
         return -1;
     }
 
-    private static List<Node> getNeighbours(Node node, int [][] adjMatrix, boolean [][] visited) {
+    private List<Node> getNeighbours(Node node, int [][] adjMatrix, boolean [][] visited) {
    
 		List<Node> list = new ArrayList<Node>();
+		
+		for(int i=0;i<row.length;i++) {
+			
+			int x = node.x + row[i];
+			int y = node.y + col[i];
+						
+			if((x >= 0) && (x < adjMatrix.length) && (y >= 0) && (y < adjMatrix[0].length) 
+					&& (adjMatrix[x][y] == 1 && !visited[x][y])) {
+				Node neighbour = new Node(x, y, node.distanceFromSource+1);	
+				list.add(neighbour);
+				visited[x][y] = true;	
+			}
+		}
 
+		/*
 		if((node.x-1 >= 0 && node.x-1 < adjMatrix.length) && adjMatrix[node.x-1][node.y] == 1
 				&& !visited[node.x-1][node.y]) {
             Node neighbour = new Node(node.x-1, node.y, node.distanceFromSource+1);		
@@ -86,6 +103,8 @@ class ShortestPathInMatrix{
 			list.add(neighbour);
 			visited[node.x][node.y+1] = true;
 		}
+		*/
+		
 		return list;
 	}
 
