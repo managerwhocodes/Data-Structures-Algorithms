@@ -12,23 +12,33 @@ class Pair {
 	}
 }
 
+// Problem : Given a binary matrix where 0 represents water and 1 represents land, 
+//			 count the number of islands in it. A island is formed by connected one’s.
+
+// Approach : The idea is to start BFS from each unprocessed node and increment the island count. 
+//			  Each BFS traversal will mark all cells which make one island as processed. 
+//			  So, the problem reduces to finding number of BFS calls.
+
 class IslandsInMatrix{
 
-	private static final int[] row = { -1, -1, -1, 0, 1, 0, 1, 1 };
-	private static final int[] col = { -1, 1, 0, -1, -1, 1, 0, 1 };
+	// For valid moves
+	private final int[] row = { -1, -1, -1, 0, 1, 0, 1, 1 };
+	private final int[] col = { -1, 1, 0, -1, -1, 1, 0, 1 };
 
-	protected boolean isSafe(int[][] mat, int x, int y, boolean[][] processed) {
-		return (x >= 0) && (x < processed.length) &&
-				(y >= 0) && (y < processed[0].length) &&
-				(mat[x][y] == 1 && !processed[x][y]);
+	// Check if the move is allowed
+	protected boolean canMove(int[][] mat, int x, int y, boolean[][] visited) {
+		return (x >= 0) && (x < visited.length) &&
+				(y >= 0) && (y < visited[0].length) &&
+				(mat[x][y] == 1 && !visited[x][y]);
 	}
 
-    protected void findIsland(int[][] mat, boolean[][] processed, int i, int j) {
+	// BFS
+    protected void findIsland(int[][] mat, boolean[][] visited, int i, int j) {
 
 		Queue<Pair> q = new ArrayDeque<Pair>();
 		q.add(new Pair(i, j));
 
-		processed[i][j] = true;
+		visited[i][j] = true;
 
 		while (!q.isEmpty()) {
 			int x = q.peek().x;
@@ -36,15 +46,13 @@ class IslandsInMatrix{
 			q.poll();
 
 			for (int k = 0; k < 8; k++) {
-
-				if (isSafe(mat, x + row[k], y + col[k], processed)) {
-					processed[x + row[k]][y + col[k]] = true;
+				if (canMove(mat, x + row[k], y + col[k], visited)) {
+					visited[x + row[k]][y + col[k]] = true;
 					q.add(new Pair(x + row[k], y + col[k]));
 				}
 			}
 		}
 	}
-
 
     public static void main(String args[]){
     	
@@ -61,19 +69,21 @@ class IslandsInMatrix{
     			{ 0, 0, 0, 0, 0, 1, 1, 1, 0, 0 },
     			{ 0, 0, 0, 1, 0, 0, 1, 1, 1, 0 },
     			{ 1, 0, 1, 0, 1, 0, 0, 1, 0, 0 },
+    			{ 1, 1, 1, 1, 0, 0, 0, 1, 1, 1 },
+    			{ 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 },
     			{ 1, 1, 1, 1, 0, 0, 0, 1, 1, 1 }
     		};
 
 		int M = mat.length;
 		int N = mat[0].length;
 
-		boolean[][] processed = new boolean[M][N];
+		boolean[][] visited = new boolean[M][N];
 
 		int island = 0;
 		for (int i = 0; i < M; i++) {
 			for (int j = 0; j < N; j++) {
-				if (mat[i][j] == 1 && !processed[i][j]) {
-					matrix.findIsland(mat, processed, i, j);
+				if (mat[i][j] == 1 && !visited[i][j]) {
+					matrix.findIsland(mat, visited, i, j);
 					island++;
 				}
 			}
