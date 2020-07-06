@@ -46,7 +46,7 @@ public class BestTimeBuySellStock {
     	int previousProfit[] = new int[prices.length];
     		
     	for(int i=1;i<3;i++) {
-    		int maxSoFar = -prices[0];
+    		int maxSoFar = -prices[0]; 		
     		
     		for(int j=1;j<prices.length;j++) {
     			maxSoFar = Math.max(maxSoFar, previousProfit[j-1]-prices[j-1]);
@@ -61,7 +61,7 @@ public class BestTimeBuySellStock {
     	return currentProfit[prices.length-1];
       
     }
-    
+     	
 	public static void main(String []args) {
 		BestTimeBuySellStock solution = new BestTimeBuySellStock();
 		int [] input = {3,3,5,0,0,3,1,4};
