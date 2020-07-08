@@ -19,6 +19,21 @@ public class ArrayRotation {
 		reverse(arr, 0, arr.length - 1);
 	}
 	
+	public void rightRotate(int[] arr, int r) {
+		
+		if(r > arr.length || r < 0)
+			return;
+		
+		// Reverse the last 'k' elements
+		reverse(arr, arr.length - r, arr.length - 1);
+
+		// Reverse the first 'n-k' elements
+		reverse(arr, 0, arr.length - r - 1);
+
+		// Reverse the whole array
+		reverse(arr, 0, arr.length - 1);
+	}
+	
 	protected void swap(int[] arr, int i, int j) {
 		int data = arr[i];
 		arr[i] = arr[j];
@@ -36,11 +51,16 @@ public class ArrayRotation {
 		ArrayRotation ar = new ArrayRotation();
 		
 		int []input = { 1, 2, 3, 4, 5 };
-		int r = 2;
+		int rLeft = 2;
+		int rRight = 2;
 
 		System.out.println("Input Array : "+Arrays.toString(input));	
-		ar.leftRotate(input, r);
-		System.out.println("Left Rotating the Array by "+r+" positions");	
+		ar.leftRotate(input, rLeft);
+		System.out.println("Left Rotating the Array by "+rLeft+" positions");	
+		System.out.println("Output Array "+Arrays.toString(input));	
+				
+		ar.rightRotate(input, rRight);
+		System.out.println("Right Rotating the Array by "+rRight+" positions");	
 		System.out.println("Output Array "+Arrays.toString(input));	
 	}
 }
