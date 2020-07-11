@@ -3,6 +3,34 @@ package dp;
 import java.util.Arrays;
 
 public class MinimumJumps {
+	
+	
+	protected int findMinJumps(int[] arr, int start) {
+
+		// Base condition : start = end
+		if(start == arr.length-1)
+			return 0;
+		
+		// Base condition : no jumps from start
+		if(arr[start] == 0)
+			return Integer.MAX_VALUE;
+		
+		// Base condition : reached the end
+		if(arr.length - start <= arr[start]){
+            return 1;
+        }
+		
+		int minJumps = Integer.MAX_VALUE;
+		
+		for(int i=1; i<=arr[start];i++) {
+			int cost = findMinJumps(arr, start+i);
+			if(cost != Integer.MAX_VALUE)
+				minJumps = Math.min(minJumps, cost+1);
+		}
+		
+		return minJumps;
+	}
+
 
 	// Top-Down Approach
 	protected int findMinJumpsTopDown(int[] arr, int i, int n, int lookup[]) {
@@ -59,6 +87,13 @@ public class MinimumJumps {
 		
 		int[] arr = { 1, 3, 6, 1, 0, 9 };
 		int[] lookup = new int[arr.length];
+		
+		
+		if(jumps.findMinJumps(arr, 0) == Integer.MAX_VALUE)
+			System.out.println("Jump not possible till the end");
+		else
+			System.out.println("Minimum jumps required to reach the destination using recursion : " +
+				jumps.findMinJumps(arr,0));
 
 		System.out.println("Minimum jumps required to reach the destination using top-down approach : " +
 				jumps.findMinJumpsTopDown(arr, 0, arr.length, lookup));
