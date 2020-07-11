@@ -33,29 +33,31 @@ public class MinimumJumps {
 
 
 	// Top-Down Approach
-	protected int findMinJumpsTopDown(int[] arr, int i, int n, int lookup[]) {
+	protected int findMinJumpsTopDown(int[] arr, int start, int arrLength, int lookup[]) {
 		
-		if (i == n - 1) {
+		// Base condition : start = end
+		if (start == arrLength - 1) {
 			return 0;
 		}
 
-		if (i >= n || arr[i] == 0) {
+		// Base condition : no jumps from start or reached the end
+		if (start >= arrLength || arr[start] == 0) {
 			return Integer.MAX_VALUE;
 		}
 
-		if (lookup[i] != 0) {
-			return lookup[i];
+		if (lookup[start] != 0) {
+			return lookup[start];
 		}
 
-		int min_jumps = Integer.MAX_VALUE;
+		int minJumps = Integer.MAX_VALUE;
 		
-		for (int j = i + 1; j <= i + arr[i]; j++) {
-			int cost = findMinJumpsTopDown(arr, j, n, lookup);
+		for (int j = start + 1; j <= start + arr[start]; j++) {
+			int cost = findMinJumpsTopDown(arr, j, arrLength, lookup);
 			if (cost != Integer.MAX_VALUE) {
-				min_jumps = Math.min(min_jumps, cost + 1);
+				minJumps = Math.min(minJumps, cost + 1);
 			}
 		}
-		return (lookup[i] = min_jumps);
+		return (lookup[start] = minJumps);
 	}
 	
 	// Bottom-Up Approach
