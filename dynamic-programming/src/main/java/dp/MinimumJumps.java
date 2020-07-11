@@ -63,24 +63,25 @@ public class MinimumJumps {
 	// Bottom-Up Approach
 	protected int findMinJumpsBottomUp(int[] arr) {
 
-		int n = arr.length;
+		int arrLength = arr.length;
 		
+		// Base condition : no jumps from start
 		if (arr[0] == 0) {
 			return Integer.MAX_VALUE;
 		}
 
-		int[] lookup = new int[n];
+		int[] lookup = new int[arrLength];
+		
 		Arrays.fill(lookup, Integer.MAX_VALUE);
-
 		lookup[0] = 0;
 
-		for (int i = 0; i < n; i++) {
-			for (int j = 1; (i + j < n) && j <= Math.min(n - 1, arr[i]); j++) {
+		for (int i = 0; i < arrLength; i++) {
+			for (int j = 1; (i + j < arrLength) && j <= Math.min(arrLength - 1, arr[i]); j++) {
 				lookup[i + j] = (lookup[i + j] != Integer.MAX_VALUE) ?
 								Math.min(lookup[i + j], lookup[i] + 1): (lookup[i] + 1);
 			}
 		}
-		return lookup[n - 1];
+		return lookup[arrLength - 1];
 	}
 
 	public static void main(String[] args) {
@@ -97,10 +98,16 @@ public class MinimumJumps {
 			System.out.println("Minimum jumps required to reach the destination using recursion : " +
 				jumps.findMinJumps(arr,0));
 
-		System.out.println("Minimum jumps required to reach the destination using top-down approach : " +
+		if(jumps.findMinJumpsTopDown(arr, 0, arr.length, lookup) == Integer.MAX_VALUE)
+			System.out.println("Jump not possible till the end");
+		else
+			System.out.println("Minimum jumps required to reach the destination using top-down approach : " +
 				jumps.findMinJumpsTopDown(arr, 0, arr.length, lookup));
 		
-		System.out.println("Minimum jumps required to reach the destination using bottom-up approach : " +
+		if(jumps.findMinJumpsBottomUp(arr) == Integer.MAX_VALUE)
+			System.out.println("Jump not possible till the end");
+		else
+			System.out.println("Minimum jumps required to reach the destination using bottom-up approach : " +
 				jumps.findMinJumpsBottomUp(arr));
 
 	}
