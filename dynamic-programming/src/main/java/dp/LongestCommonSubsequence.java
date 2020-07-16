@@ -2,6 +2,25 @@ package dp;
 
 public class LongestCommonSubsequence {
 	
+	// Recursion 
+	protected int getLCSCount(String strOne, String strTwo, int i, int j) {
+		
+		// Base Condition
+		if(i == strOne.length() || j== strTwo.length())
+			return 0;
+		
+		int c1 = 0;
+		if(strOne.charAt(i) == strTwo.charAt(j))
+			c1 = 1 + getLCSCount(strOne, strTwo, i+1, j+1);
+		
+		int c2 = getLCSCount(strOne, strTwo, i+1, j);
+		int c3 = getLCSCount(strOne, strTwo, i, j+1);
+		
+		return Math.max(c1, Math.max(c2, c3));
+		
+	}
+	
+	
 	// Top-Down Approach
 	protected int getLCSCount_TD(String strOne, String strTwo) {
 		
@@ -51,8 +70,15 @@ public class LongestCommonSubsequence {
 		LongestCommonSubsequence lcs = new LongestCommonSubsequence();
 		String inputStrOne = "Thistableismine";
 		String inputStrTwo = "ismine";
-		
+
 		System.out.print("Length of Longest Common Subsequence in "
+				+inputStrOne
+				+" and "
+				+inputStrTwo
+				+" using recursion : "
+				+lcs.getLCSCount(inputStrOne,inputStrTwo, 0 , 0));	
+		
+		System.out.print("\nLength of Longest Common Subsequence in "
 							+inputStrOne
 							+" and "
 							+inputStrTwo
