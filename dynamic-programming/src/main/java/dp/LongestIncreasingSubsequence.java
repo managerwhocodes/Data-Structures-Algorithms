@@ -22,25 +22,25 @@ public class LongestIncreasingSubsequence {
 	}
 	
 	// Top-down
-	protected int findLIS_TD(int dp[], int arr[], int i, int prev) {
+	protected int findLIS_TD(Integer dp[][], int arr[], int curr, int prev) {
 		
 		// Base condition
-		if(i >= arr.length)
+		if(curr >= arr.length)
 			return 0;
 		
-		if(dp[i] != 0)
-			return dp[i];
+		if(dp[prev+1][curr] != null)
+			return dp[prev+1][curr];
 		
 		int includeCount = 0;
-		if(arr[i] > prev) {
-			includeCount = 1 + findLIS(arr, i+1, arr[i]);
-			dp[i] = includeCount;
+		if(prev < 0 || arr[curr] > arr[prev]) {
+			includeCount = 1 + findLIS_TD(dp, arr, curr+1, curr);
+			//dp[i] = includeCount;
 		}
 		
-		int excludeCount = findLIS(arr, i+1, prev);
-		dp[i] = Math.max(includeCount, excludeCount);
+		int excludeCount = findLIS_TD(dp, arr, curr+1, prev);
+		dp[prev+1][curr] = Math.max(includeCount, excludeCount);
 		
-		return dp[i];	
+		return dp[prev+1][curr];	
 	}	
 	
 	public static void main(String[] args) {
@@ -55,10 +55,10 @@ public class LongestIncreasingSubsequence {
 						+ lis.findLIS(input, 0, Integer.MIN_VALUE));
 		
 		
-		int []dp = new int[input.length];
+		Integer [][]dp = new Integer[input.length+1][input.length];
 		
 		System.out.print("\nLength of LIS using top down : "
-				+ lis.findLIS_TD(dp,input, 0, Integer.MIN_VALUE));
+				+ lis.findLIS_TD(dp,input, 0, -1));
 
 	}
 }
