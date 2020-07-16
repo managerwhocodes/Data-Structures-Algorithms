@@ -33,10 +33,10 @@ public class MaximumSumIncreasingSubsequence {
 		
 		int includeCurrentSum = sum;
 		if(arr[i] > prev) {
-			includeCurrentSum = findLIS(arr, i+1, arr[i], sum+arr[i]);
+			includeCurrentSum = findLIS_TD(dp, arr, i+1, arr[i], sum+arr[i]);
 		}
 		
-		int excludeCurrentSum = findLIS(arr, i+1, prev,sum);
+		int excludeCurrentSum = findLIS_TD(dp, arr, i+1, prev,sum);
 		dp[i] = Math.max(includeCurrentSum, excludeCurrentSum);
 		
 		return dp[i];	
