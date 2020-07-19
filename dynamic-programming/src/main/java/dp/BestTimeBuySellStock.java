@@ -2,10 +2,25 @@ package dp;
 
 public class BestTimeBuySellStock {
 	
-	// Allowed to complete at most one transaction 
-	private int maxProfitOneTrasaction(int[] prices) {
+	// Brute force : Allowed to complete at most one transaction 
+	private int maxProfitOneTrasactionRecursion(int[] prices) {
+		
+		if (prices.length <=0)
+		    return 0;
+		
+		int diff = 0;
+		for(int i=0;i<prices.length;i++) {
+			for(int j=i+1;j<prices.length;j++){
+				diff = Math.max(prices[j]-prices[i],diff);
+			}
+		}
+		return diff;
+	}
+		
+	// Top Down : Allowed to complete at most one transaction 
+	private int maxProfitOneTrasactionTD(int[] prices) {
 
-		if(prices.length == 0) 
+		if(prices.length <= 0) 
 			return 0;
 
 		int[] profit = new int[prices.length];
@@ -28,7 +43,7 @@ public class BestTimeBuySellStock {
 
 		int profit = 0;
 
-		for(int i=1; i< prices.length;i++){
+		for(int i=1; i< prices.length; i++){
 			if(prices[i-1] < prices[i]) {
 				profit = profit + prices[i] - prices[i-1];
 			}		
@@ -65,14 +80,21 @@ public class BestTimeBuySellStock {
 	public static void main(String []args) {
 		BestTimeBuySellStock solution = new BestTimeBuySellStock();
 		int [] input = {3,3,5,0,0,3,1,4};
-		int output = solution.maxProfitOneTrasaction(input);
+		
 		int index = 1;
 		for(int price : input)
 			System.out.println("Price of stock on Day "+index+++" : "+price);
-		System.out.println("Maximum profit that can be made by buying and selling stocks with atmost one transaction : "+output);
+		
+		
+		int output = solution.maxProfitOneTrasactionRecursion(input);
+		System.out.println("Maximum profit that can be made by buying and selling stocks with atmost one transaction - brute force : "+output);	
+		
+		output = solution.maxProfitOneTrasactionTD(input);
+		System.out.println("Maximum profit that can be made by buying and selling stocks with atmost one transaction - top down : "+output);
 		output = solution.maxProfitTwoTransaction(input);
 		System.out.println("Maximum profit that can be made by buying and selling stocks with atmost two transactions : "+output);
 		output = solution.maxProfitMultipleTrasaction(input);
 		System.out.println("Maximum profit that can be made by buying and selling stocks with multiple transactions : "+output);
+			
 	}
 }
