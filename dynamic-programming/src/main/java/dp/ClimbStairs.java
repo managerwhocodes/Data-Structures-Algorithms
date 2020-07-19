@@ -1,7 +1,7 @@
 package dp;
 
 public class ClimbStairs {
-	
+		
 	// Using Recursion
     public int minCostClimbingStairs(int [] cost, int i,int min) {
     	
@@ -39,10 +39,13 @@ public class ClimbStairs {
     }
 
 	public static void main(String[] args) {
-		int [] cost  = {100 , 15, 30, 25, 5, 30, 2, 90, 6, 1, 1 ,1};
-		ClimbStairs sol = new ClimbStairs();
-		System.out.println(sol.minCostClimbingStairs(cost));	
 		
-		System.out.println(sol.minCostClimbingStairs(cost,0,0));
+		int [] cost  = {100, 15, 30, 25, 5, 30, 2, 90, 6, 1};
+		
+		ClimbStairs sol = new ClimbStairs();
+		
+		System.out.println("Minimum cost to reach top using recussion : "+sol.minCostClimbingStairs(cost,0,0));
+		System.out.println("Minimum cost to reach top using top down : "+sol.minCostClimbingStairs(cost));	
+		
 	}
 }
