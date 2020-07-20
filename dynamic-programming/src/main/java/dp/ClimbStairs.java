@@ -1,7 +1,31 @@
 package dp;
 
 public class ClimbStairs {
+	
+	
+	// Using Recursion
+	public int wayToReachTop(int stairs) {
 		
+		if(stairs <= 0)
+			return 1;
+		
+		return wayToReachTop(stairs-1) + wayToReachTop(stairs-2);
+	}
+	
+	// Using Top Down
+	public int wayToReachTopTD(int stairs, int dp[], int i) {
+		
+		if(stairs <= 0)
+			return 1;
+		
+		if(dp[i] !=0)
+			return dp[i];
+		
+		dp[i] = wayToReachTopTD(stairs-1, dp, i+1) + wayToReachTopTD(stairs-2, dp, i+2);
+		
+		return dp[i];
+	}
+	
 	// Using Recursion
     public int minCostClimbingStairs(int [] cost, int i,int min) {
     	
@@ -40,9 +64,15 @@ public class ClimbStairs {
 
 	public static void main(String[] args) {
 		
+		int stairs = 10;
 		int [] cost  = {100, 15, 30, 25, 5, 30, 2, 90, 6, 1};
 		
 		ClimbStairs sol = new ClimbStairs();
+		
+		int dp[] = new int[stairs];
+		
+		System.out.println("Ways to reach top using recussion : "+sol.wayToReachTop(stairs));
+		System.out.println("Ways to reach top using Top Down : "+sol.wayToReachTopTD(stairs,dp,0));
 		
 		System.out.println("Minimum cost to reach top using recussion : "+sol.minCostClimbingStairs(cost,0,0));
 		System.out.println("Minimum cost to reach top using top down : "+sol.minCostClimbingStairs(cost));	
