@@ -2,6 +2,23 @@ package dp;
 
 public class KnapsackUnbounded {
 	
+	// Using recursion
+	protected int getMaxProfit(int []profit, int []weights, int capacity, int index) {
+		
+		// Base conditions
+		if(capacity <= 0 || index < 0 || index >= profit.length)
+			return 0;
+		
+		int profitOne = 0;
+		
+		if(weights[index] <= capacity) 
+			profitOne = profit[index] + getMaxProfit(profit, weights, capacity-weights[index], index);
+			
+		int profitTwo = getMaxProfit(profit, weights, capacity, index+1);
+		
+		return Math.max(profitOne, profitTwo);
+	}
+	
 	
 	// Top-Down Approach
 	protected int getMaxProfit_TD(int []profit, int []weight, int capacity) {
@@ -45,8 +62,11 @@ public class KnapsackUnbounded {
 			System.out.print(w + "  ");
 		
 		System.out.println("\nCapacity of Knapsack : "+knapsackCapacity);
-				
+		
+		System.out.println("Maxium profit using Recursion : "+ks.getMaxProfit(profit,weight,knapsackCapacity,0));
+		
 		System.out.println("Maxium profit using Top Down Approach : "+maxProfit);
-			
+		
+		
 	}
 }
