@@ -1,6 +1,7 @@
 package array;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SumArray {
 
@@ -25,6 +26,37 @@ public class SumArray {
 		
 		return list;
 	}
+	
+	// Using sorting : TC O(nlogn)
+	protected ArrayList<ArrayList<Integer>> findPairWithSumUseSorting(int arr[], int sum) {
+		
+		ArrayList<ArrayList<Integer>> list = new ArrayList<ArrayList<Integer>>();
+		
+		if(arr.length<=1)
+			return list;
+		
+		Arrays.sort(arr);
+		
+		 int low = 0;
+		 int high = arr.length-1;
+		 
+		 while(low<high) {
+			 
+			 ArrayList<Integer> numList = new ArrayList<Integer>();
+					 
+			 if(arr[low]+arr[high] == sum) {
+				numList.add(low);
+				numList.add(high); 
+				list.add(numList);
+			 }
+			 
+			 if(arr[low]+arr[high] < sum)
+				 low ++;
+			 else
+				 high --; 
+		 }
+		return list;
+	}
 
 	public static void main(String[] args) {
 
@@ -33,6 +65,9 @@ public class SumArray {
 		int sum = 10;
 		
 		for(ArrayList list : sa.findPairWithSum(input, sum))
+			System.out.println(list.toString());
+		
+		for(ArrayList list : sa.findPairWithSumUseSorting(input, sum))
 			System.out.println(list.toString());
 			
 	}
