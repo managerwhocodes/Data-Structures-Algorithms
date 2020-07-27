@@ -2,6 +2,7 @@ package array;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class SumArray {
 
@@ -57,6 +58,30 @@ public class SumArray {
 		 }
 		return list;
 	}
+	
+	// Using sorting : TC O(nlogn)
+	protected ArrayList<ArrayList<Integer>> findPairWithSumUseHash(int arr[], int sum) {
+		
+		ArrayList<ArrayList<Integer>> list = new ArrayList<ArrayList<Integer>>();
+		
+		if(arr.length<=1)
+			return list;
+		
+		HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
+		
+		for(int i=0;i<arr.length;i++) {
+			if(map.containsKey(sum - arr[i])) {
+				ArrayList<Integer> numList = new ArrayList<Integer>();
+				numList.add(map.get(sum - arr[i]));
+				numList.add(i);				
+				list.add(numList);
+			} else {
+				map.put(arr[i], i);
+			}
+		}				
+		return list;		
+	}
+			
 
 	public static void main(String[] args) {
 
@@ -64,12 +89,17 @@ public class SumArray {
 		int input[] = {8, 7, 2, 5, 3, 1};
 		int sum = 10;
 		
+		System.out.println("Input array : "+Arrays.toString(input));
+		System.out.println("Input sum value : "+sum);
+		
+		System.out.println("Index pair for which value equals given sum");
 		for(ArrayList list : sa.findPairWithSum(input, sum))
+			System.out.println(list.toString());
+				
+		for(ArrayList list : sa.findPairWithSumUseHash(input, sum))
 			System.out.println(list.toString());
 		
 		for(ArrayList list : sa.findPairWithSumUseSorting(input, sum))
 			System.out.println(list.toString());
-			
 	}
-
 }
