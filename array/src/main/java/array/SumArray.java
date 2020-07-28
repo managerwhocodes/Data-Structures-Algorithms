@@ -3,6 +3,8 @@ package array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SumArray {
 
@@ -59,7 +61,7 @@ public class SumArray {
 		return list;
 	}
 	
-	// Using sorting : TC O(nlogn)
+	// Using HashMap : TC O(nlogn)
 	protected ArrayList<ArrayList<Integer>> findPairWithSumUseHash(int arr[], int sum) {
 		
 		ArrayList<ArrayList<Integer>> list = new ArrayList<ArrayList<Integer>>();
@@ -81,7 +83,46 @@ public class SumArray {
 		}				
 		return list;		
 	}
-			
+	
+	
+	// Brute Force : TC O(n^2)
+	protected boolean ifSubArrayWithZeroSum(int []arr) {
+		
+		if(arr.length<=0)
+			return false;
+		
+		for(int i=0;i<arr.length;i++) {
+			int sum = arr[i];
+			for(int j=i+1;j<arr.length;j++) {
+				sum = sum + arr[j];
+				if(sum == 0)
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	// Using HashSet
+	protected boolean ifSubArrayWithZeroSumUseHash(int[] arr)
+	{
+
+		Set<Integer> set = new HashSet<Integer>();
+
+		set.add(0);
+
+		int sum = 0;
+
+		for (int value : arr) {
+			sum += value;
+
+			if (set.contains(sum)) {
+				return true;
+			}
+			set.add(sum);
+		}
+		return false;
+	}
+
 
 	public static void main(String[] args) {
 
@@ -101,5 +142,9 @@ public class SumArray {
 		
 		for(ArrayList list : sa.findPairWithSumUseSorting(input, sum))
 			System.out.println(list.toString());
+		
+		int inputTwo[] = {4, 2, -3, -1, 0, 4};
+		System.out.println("Is there any sub array with zero sum : "+sa.ifSubArrayWithZeroSum(inputTwo));
+		System.out.println("Is there any sub array with zero sum : "+sa.ifSubArrayWithZeroSumUseHash(inputTwo));
 	}
 }
