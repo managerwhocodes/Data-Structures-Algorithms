@@ -2,25 +2,27 @@ package trie;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class Dictionary extends Trie{
+	
 	
     private void preOrderTraversal(Node root, StringBuilder sb) {
 
         if (root == null) 
         	return;
 
-        if (root.end) {
+        if (root.wordEnd) {
             System.out.println(sb.toString());
         }
         
-        Map<Character, Node> children = root.getChildren();
-        for (Map.Entry<Character, Node> entity : children.entrySet()) {
-            sb.append(entity.getKey());
-            preOrderTraversal(entity.getValue(), sb);
-            sb.deleteCharAt(sb.length() - 1);
-        }
+        for (char ch = 'a'; ch <= 'z'; ch++){
+			if (root.getChildren()!=null && root.getChildren().containsKey(ch));
+			{
+	            sb.append(ch);
+	            preOrderTraversal(root.getChildren().get(ch), sb);
+	            sb.deleteCharAt(sb.length() - 1);
+			}
+		}
     }
 
 	public static void main(String[] args) {
@@ -28,7 +30,10 @@ public class Dictionary extends Trie{
 		Dictionary dic = new Dictionary();
 		
 		List<String> dictionary = Arrays.asList(
-				"code", "coder", "codec", "codecs"
+				"code", "coder", "codec", "codecs", "coda", "codea",
+				"actually","accuse","achieve","achievement","acid","acknowledge",
+				"acquire","across","act","action","active","activist","activity",
+				"actor","actress","actual"
 			);
 
 		//System.out.println("Dictionary : ");
