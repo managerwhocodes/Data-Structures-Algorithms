@@ -25,33 +25,31 @@ public class Dictionary extends Trie{
 		}
     }
     
-    private boolean wordBreak(String str) {
-    	boolean isBreak = true;
-    	Node currentNode = root;
-		for (int i = 0; i < str.length(); i++) {
-			char ch = str.charAt(i);
-			Node node = currentNode.children.get(ch); 
-
-			if (node == null) {
-				isBreak = false;
-				return isBreak;
-			} 
-						
-			currentNode = node;
-			
-			if(currentNode.wordEnd == true) {
-				System.out.println(str.substring(0, i+1)+" ");
-				str = str.substring(i+1, str.length());
-				currentNode = root;
-				i=-1;
-			}
-			
-		}
-		// if currentNode.end == true then word exists in trie
-		// else it is a prefix of another word
-		return isBreak;
-    }
-
+    protected boolean wordBreak(String str, String answer) {
+    	
+    	if (str.length() == 0) {
+    		System.out.println(answer);
+    		return true;
+    	} else {
+    		int index = 0;
+    		String word = "";
+    		while (index < str.length()) {
+    			word += str.charAt(index);			
+    			if (search(word)) {
+    				if (wordBreak(str.substring(index + 1), answer + word + " ")) {
+    					System.out.println(answer + word + " "); 
+    					return true;
+    				} else {
+    					index++;
+    				}
+    			} else {
+    				index++;
+    			}
+    		}
+    		return false;
+    	}
+    }  
+    
 	public static void main(String[] args) {
 
 		Dictionary dic = new Dictionary();
@@ -75,13 +73,15 @@ public class Dictionary extends Trie{
 		Dictionary dic2 = new Dictionary();
 		
 		List<String> dictionary2 = Arrays.asList("this", "th", "is", "famous",
-				"word", "break", "b", "r", "e", "a", "k",
-				"br", "bre", "brea", "ak", "problem");
+				"word", "break", "b", "r", "e", "a", 
+				"k",
+				"br", "bre", "brea", "ak", 
+				"problem");
 		
 		for( String word : dictionary2) {
 			dic2.insert(word);
 		}
 		String str = "wordbreakproblem";
-		dic2.wordBreak(str);
+		dic2.wordBreak(str,"");
 	}
 }
