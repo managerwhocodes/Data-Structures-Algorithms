@@ -1,6 +1,7 @@
 package trie;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class Dictionary extends Trie{
@@ -48,7 +49,35 @@ public class Dictionary extends Trie{
     		}
     		return false;
     	}
-    }  
+    } 
+    
+    protected boolean wordBreakDP(String s, HashSet<String> memory, String answer) {
+    	
+		if (s.length() == 0) {
+			System.out.println(answer);
+			return true;
+		} else if (memory.contains(s)) {
+			return false;
+		} else {
+			int index = 0;
+			String word = "";
+			while (index < s.length()) {
+				word += s.charAt(index);
+				if (search(word)) {
+					if (wordBreakDP(s.substring(index + 1), memory,
+							answer + word + " ")) {
+						return true;
+					} else {
+						index++;
+					}
+				} else {					
+					index++;
+				}
+			}
+			memory.add(s);
+			return false;
+		}
+	}
     
 	public static void main(String[] args) {
 
@@ -71,6 +100,7 @@ public class Dictionary extends Trie{
 		dic.preOrderTraversal(dic.getRoot(), sb);
 
 		Dictionary dic2 = new Dictionary();
+		HashSet<String> memory  = new HashSet<String>();
 		
 		List<String> dictionary2 = Arrays.asList("this", "th", "is", "famous",
 				"word", "break", "b", "r", "e", "a", 
@@ -83,5 +113,7 @@ public class Dictionary extends Trie{
 		}
 		String str = "wordbreakproblem";
 		dic2.wordBreak(str,"");
+		System.out.println("Using Dynamic Programming : ");
+		dic2.wordBreakDP(str,memory,"");
 	}
 }
