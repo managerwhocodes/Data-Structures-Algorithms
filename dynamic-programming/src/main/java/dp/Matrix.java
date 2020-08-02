@@ -77,6 +77,7 @@ public class Matrix {
 			}
 			top++;
 			
+			
 			if (top > bottom) {
 				return;
 			}

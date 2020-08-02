@@ -9,17 +9,14 @@ public class MaximumProductSubarray {
     	for(int i=1;i<nums.length;i++) {
     		prodLocal = Math.max(nums[i], prodLocal * nums[i]);
     		prodMax = Math.max(prodMax, prodLocal);
-    	}
-    	
-    	return prodMax;
-        
+    	}	
+    	return prodMax;      
     }
     
 	public static void main(String []args) {
 		MaximumProductSubarray mp = new MaximumProductSubarray();
 		int [] input = {-2,0,-1};
 		int output = mp.maxProduct(input);
-		System.out.println(" Maximum product of subarray : "+output);
-		
+		System.out.println(" Maximum product of subarray : "+output);	
 	}
 }
