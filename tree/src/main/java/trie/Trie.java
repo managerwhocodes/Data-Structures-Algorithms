@@ -1,5 +1,8 @@
 package trie;
 
+import java.util.List;
+import java.util.Map.Entry;
+
 public class Trie {
 	
 	protected final Node root;
@@ -54,6 +57,21 @@ public class Trie {
 			currentNode = node;
 		}
 		return true;
+	}
+	
+	protected String findLCP(List<String> dict) {
+
+		StringBuilder lcp = new StringBuilder();
+		Node curr = root;
+
+		while (curr != null && !curr.wordEnd && (curr.getChildren().size() == 1)) {
+			for (Entry<Character, Node> entry: curr.getChildren().entrySet()) {
+
+				lcp.append(entry.getKey());
+				curr = entry.getValue();
+			}
+		}
+		return lcp.toString();
 	}
 
 	public static void main(String[] args) {
