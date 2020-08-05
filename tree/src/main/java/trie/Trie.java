@@ -1,5 +1,6 @@
 package trie;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -103,6 +104,22 @@ public class Trie {
 		System.out.println(trieTwo.search("techi"));   		// true
 		System.out.println(trieTwo.search("techie"));  		// true
 		System.out.println(trieTwo.search("techiedelight"));   // true
+		
+
+		List<String> dict = Arrays.asList(
+				"code", "coder", "coding", "codable", "codec", "codecs", "coded",
+				"codeless", "codependence", "codependency", "codependent",
+				"codependents", "codes", "codesign", "codesigned", "codeveloped",
+				"codeveloper", "codex", "codify", "codiscovered", "codrive"
+		);
+		
+		Trie trieThree = new Trie();
+		
+		for(String word : dict) {
+			trieThree.insert(word);
+		}
+
+		System.out.println("Longest Common Prefix is " + trieThree.findLCP(dict));
 		
 	}
 }
