@@ -8,6 +8,8 @@ import java.util.List;
 
 public class BinaryTree{
 	
+	ArrayList<ListNode> al = new ArrayList<ListNode>();
+	
 	private Node root;
 	
 	BinaryTree(){
@@ -225,6 +227,35 @@ public class BinaryTree{
 		return left || right;
 		
 	}
+	
+	protected void listAtDepth(Node root){
+ 		Queue<Node> q = new LinkedList<Node>();
+ 		int levelNodes =0;
+ 		if(root==null) return;
+ 		q.add(root);
+ 		while(!q.isEmpty()){
+			levelNodes = q.size();
+			ListNode head = null;
+			ListNode curr = null;
+			while(levelNodes>0){
+				Node n = (Node)q.remove();
+				ListNode ln = new ListNode(n.getValue());
+				if(head==null){
+					head = ln;
+					curr = ln;
+				} else {
+					curr.next = ln;
+					curr = curr.next;
+				}
+				if(n.getLeftNode()!=null) q.add(n.getLeftNode());
+				if(n.getRightNode()!=null) q.add(n.getRightNode());
+				levelNodes--;
+			}
+			al.add(head);
+		}
+		al.get(0).display(al);
+	}
+	
 		
 	public static void main(String args[]){
 		BinaryTree tree = new BinaryTree();
@@ -275,5 +306,8 @@ public class BinaryTree{
 		int nodeValue = 9;
 		System.out.print("Ancestors of node with value " +nodeValue+ " : " );
 		tree.printAncestors(tree.getRoot(), 9);
+		
+		System.out.println();
+		tree.listAtDepth(tree.getRoot());
 	}
 }
