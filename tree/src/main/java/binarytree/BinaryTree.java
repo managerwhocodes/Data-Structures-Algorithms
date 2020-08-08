@@ -256,6 +256,34 @@ public class BinaryTree{
 		al.get(0).display(al);
 	}
 	
+	protected void printRootToleafPaths(Node node, Queue<Integer> path) {
+
+		if (node == null) {
+			return;
+		}
+
+		path.add(node.getValue());
+
+		if (isLeaf(node)) {
+			System.out.println(path);
+		}
+
+		printRootToleafPaths(node.getLeftNode(), path);
+		printRootToleafPaths(node.getRightNode(), path);
+
+		path.remove();
+	}
+
+	protected void printRootToleafPaths(Node node) {
+
+		Queue<Integer> path = new LinkedList<Integer>();
+		printRootToleafPaths(node, path);
+	}
+	
+	protected boolean isLeaf(Node node) {
+		return (node.getLeftNode() == null && node.getRightNode() == null);
+	}
+	
 		
 	public static void main(String args[]){
 		BinaryTree tree = new BinaryTree();
@@ -309,5 +337,9 @@ public class BinaryTree{
 		
 		System.out.println();
 		tree.listAtDepth(tree.getRoot());
+		
+		System.out.println();
+		tree.printRootToleafPaths(tree.getRoot());
+		
 	}
 }
