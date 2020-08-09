@@ -284,6 +284,32 @@ public class BinaryTree{
 		return (node.getLeftNode() == null && node.getRightNode() == null);
 	}
 	
+	
+	protected int isHeightBalanced(Node root, boolean isBalanced) {
+
+		if (root == null || isBalanced) {
+			return 0;
+		}
+
+		int left_height = isHeightBalanced(root.getLeftNode(), isBalanced);
+		int right_height = isHeightBalanced(root.getRightNode(), isBalanced);
+
+		if (Math.abs(left_height - right_height) > 1) {
+			isBalanced = false;
+		}
+
+		return Math.max(left_height, right_height) + 1;
+	}
+
+
+	protected boolean isHeightBalanced(Node root) {
+
+		boolean isBalanced =  true;
+		isHeightBalanced(root, isBalanced);
+
+		return isBalanced;
+	}
+	
 		
 	public static void main(String args[]){
 		BinaryTree tree = new BinaryTree();
@@ -340,6 +366,9 @@ public class BinaryTree{
 		
 		System.out.println();
 		tree.printRootToleafPaths(tree.getRoot());
+		
+		System.out.println(tree.isHeightBalanced(tree.getRoot()));
+		
 		
 	}
 }
