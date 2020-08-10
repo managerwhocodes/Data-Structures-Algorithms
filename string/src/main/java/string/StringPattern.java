@@ -74,6 +74,44 @@ public class StringPattern {
 		System.out.print("Total time taken in nanosecs : "+(endTime-startTime));
 	}
 	
+	protected boolean isMatching(char[] chars, char[] pattern, int n, int m,
+			 boolean[][] lookup) {
+
+		if (m < 0 && n < 0) {
+			return true;
+		}
+
+		else if (m < 0) {
+			return false;
+		}
+		
+		else if (n < 0) {
+			for (int i = 0; i <= m; i++) {
+				if (pattern[i] != '*') {
+					return false;
+				}
+			}	
+			return true;
+		}
+
+		if (!lookup[n][m]){
+			if (pattern[m] == '*'){
+				lookup[n][m] = isMatching(chars, pattern, n - 1, m, lookup) || isMatching(chars, pattern, n, m - 1, lookup);
+			}
+			else {
+
+				if (pattern[m] != '?' && pattern[m] != chars[n]) {
+					lookup[n][m] = false;
+				}
+
+				else {
+					lookup[n][m] = isMatching(chars, pattern, n - 1, m - 1, lookup);
+				}
+			}
+		}
+		return lookup[n][m];
+	}
+	
 	public static void main(String[] args) {
 		
 		StringPattern sp = new StringPattern();
@@ -95,5 +133,18 @@ public class StringPattern {
 		sp.KMP(text, pattern);
 		
 		//sp.KMP(text, pattern);
+		
+		System.out.println();
+		
+		char[] inputString = "xyxzzxy".toCharArray();
+		char[] patternString = "x***x?".toCharArray();
+
+		boolean[][] lookup = new boolean[inputString.length + 1][patternString.length + 1];
+
+		if (sp.isMatching(inputString, patternString, inputString.length - 1, patternString.length - 1, lookup)) {
+			System.out.println("Match");
+		} else {
+			System.out.println("No Match");
+		}
 	}
 }
