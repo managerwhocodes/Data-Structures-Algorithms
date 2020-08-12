@@ -2,11 +2,14 @@ package string;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public class StringPermutation {
 
@@ -118,7 +121,27 @@ public class StringPermutation {
 			interleavings(curr + Y.charAt(0), X, Y.substring(1), result);
 		}
 	}
+    
+    protected void groupAnagrams(String[] words) {
 
+		List<String> list = Arrays.stream(words)
+				.map(s -> s.toCharArray())
+				.map(chars -> { Arrays.sort(chars); return new String(chars); })
+				.collect(Collectors.toList());
+
+		Map<String, List<Integer>> map = new HashMap<>();
+		for (int i = 0; i < list.size(); i++)
+		{
+			map.putIfAbsent(list.get(i), new ArrayList<>());
+			map.get(list.get(i)).add(i);
+		}
+
+		for (Entry<String, List<Integer>> entry: map.entrySet()) {
+			System.out.println(entry.getValue().stream()
+							.map(index -> words[index])
+							.collect(Collectors.toList()));
+		}
+	}
     
 	protected List<String> findCombinations(List<List<Character>> keypad, int[] input) {
 
@@ -202,6 +225,14 @@ public class StringPermutation {
 
 		List<String> output = sp.findCombinations(keypad, inputArray);
 		System.out.println(output);
+		
+		String[] words = {
+				"CARS", "REPAID", "DUES", "NOSE", "SIGNED", "LANE",
+				"PAIRED", "ARCS", "GRAB", "USED", "ONES", "BRAG",
+				"SUED", "LEAN", "SCAR", "DESIGN"
+		};
+
+		sp.groupAnagrams(words);
         
     }
 }
