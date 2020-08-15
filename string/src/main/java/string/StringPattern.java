@@ -112,6 +112,28 @@ public class StringPattern {
 		return lookup[n][m];
 	}
 	
+	protected int countOfPatternAsSubsequence(String inputString, String pattern, int inputStrLength, int patternLength) {
+
+		if (inputStrLength == 1 && patternLength == 1)
+			return (inputString.charAt(0) == pattern.charAt(0)) ? 1: 0;
+
+		if (inputStrLength == 0) {
+			return 0;
+		}
+
+		if (patternLength == 0) {
+			return 1;
+		}
+
+		if (patternLength > inputStrLength) {
+			return 0;
+		}
+
+		return ((inputString.charAt(inputStrLength-1) == pattern.charAt(patternLength-1)) ?
+				countOfPatternAsSubsequence(inputString, pattern, inputStrLength - 1, patternLength - 1) : 0)
+				+ countOfPatternAsSubsequence(inputString, pattern, inputStrLength - 1, patternLength);
+	}
+	
 	public static void main(String[] args) {
 		
 		StringPattern sp = new StringPattern();
@@ -146,5 +168,8 @@ public class StringPattern {
 		} else {
 			System.out.println("No Match");
 		}
+		
+		System.out.println(sp.countOfPatternAsSubsequence(text, pattern, text.length(), pattern.length()));
+		
 	}
 }
