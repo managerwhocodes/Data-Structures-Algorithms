@@ -25,6 +25,19 @@ public class NumberRecursion {
         return getMod(dividend - divisor, divisor);
         
     }
+    
+    protected int getGCD(int nummberOne, int nummberTwo){
+        
+        if(nummberOne == nummberTwo){
+            return nummberOne;
+        }
+        
+        if(nummberOne  <  nummberTwo)
+            return getGCD(nummberOne, nummberTwo-nummberOne);
+        else
+            return getGCD(nummberOne-nummberTwo, nummberTwo);
+        
+    }
 	
 	public static void main(String[] args) {
 		
@@ -33,6 +46,8 @@ public class NumberRecursion {
 		System.out.println(" 4  power 3 = "+recursion.getPower(4,3));
 		
 		System.out.println(" 17  mod  3 = "+recursion.getMod(17,3));
+		
+		System.out.println(" GCD(72,36) = "+recursion.getGCD(72,36));
 
 	}
 }
