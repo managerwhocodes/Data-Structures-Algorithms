@@ -38,6 +38,18 @@ public class NumberRecursion {
             return getGCD(nummberOne-nummberTwo, nummberTwo);
         
     }
+    
+    protected boolean isPrime(int num, int i) {
+        
+        if(num==i)
+            return true;
+            
+        if(num%i==0)
+            return false;
+        else
+            return isPrime(num,i+1);
+        
+    }
 	
 	public static void main(String[] args) {
 		
@@ -48,6 +60,8 @@ public class NumberRecursion {
 		System.out.println(" 17  mod  3 = "+recursion.getMod(17,3));
 		
 		System.out.println(" GCD(72,36) = "+recursion.getGCD(72,36));
+		
+		System.out.println("Is 27 a prime number ? "+recursion.isPrime(27,2));
 
 	}
 }
