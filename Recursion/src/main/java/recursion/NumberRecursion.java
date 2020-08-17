@@ -50,6 +50,17 @@ public class NumberRecursion {
             return isPrime(num,i+1);
         
     }
+    
+    protected int decimalToBinary(int n) {
+        
+        if(n==0){
+            return 0;
+        }
+         
+        else {
+            return n%2 + 10*decimalToBinary(n/2);
+        }    
+    }
 	
 	public static void main(String[] args) {
 		
@@ -62,6 +73,8 @@ public class NumberRecursion {
 		System.out.println(" GCD(72,36) = "+recursion.getGCD(72,36));
 		
 		System.out.println("Is 27 a prime number ? "+recursion.isPrime(27,2));
+		
+		System.out.println("The binary equivalent of 19 = "+recursion.decimalToBinary(19));
 
 	}
 }
