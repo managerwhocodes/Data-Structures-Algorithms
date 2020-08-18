@@ -19,6 +19,25 @@ public class KnapsackZeroOne {
 		return Math.max(profitOne, profitTwo);
 	}
 	
+	// Using recursion
+	protected boolean isSubsetSum(int []arr, int sum, int index) {
+		
+		// Base condition
+		if(sum == 0)
+			return true;
+		
+		// Base condition
+		if(arr.length == 0 || index >= arr.length)
+			return false;
+		
+		if(arr[index] <= sum) {
+			if(isSubsetSum(arr, sum-arr[index], index+1))
+					return true;
+		}
+			
+		return isSubsetSum(arr, sum, index+1);
+	}
+	
 	
 	// Top-Down Approach
 	protected int getMaxProfit_TD(int []profit, int []weight, int capacity) {
@@ -67,6 +86,8 @@ public class KnapsackZeroOne {
 		
 		System.out.println("Maxium profit using Top Down Approach : "+maxProfit);
 		
+		int []num = { 1, 2, 7, 1, 5 };
+	    System.out.println(ks.isSubsetSum(num, 10, 0));
 		
 	}
 }
