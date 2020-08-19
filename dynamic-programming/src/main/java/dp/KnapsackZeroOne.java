@@ -183,6 +183,34 @@ public class KnapsackZeroOne {
 		
 	}
 	
+	// Using Top-Down
+	protected int countSubsets_TD(int[] arr, int sum, int index) {
+		
+		Integer [][]dp = new Integer[arr.length][sum+1];
+		return countSubsetsUtil_TD(dp, arr, sum, index);	
+	}
+	
+	private int countSubsetsUtil_TD(Integer [][]dp, int[] arr, int sum, int index) {
+		
+		if(sum ==0)
+			return 1;
+		
+		if(arr.length == 0 || index>= arr.length)
+			return 0;
+		
+		if(dp[index][sum] == null) {
+			int sumOne = 0;
+			if(arr[index] <= sum) {
+				sumOne = countSubsets(arr, sum-arr[index], index+1);
+			}
+			
+			int sumTwo = countSubsets(arr, sum, index+1);
+			dp[index][sum] = sumOne + sumTwo;
+		}
+		
+		return dp[index][sum];
+	}
+	
 	public static void main(String[] args) {
 		
 		KnapsackZeroOne ks = new KnapsackZeroOne();
@@ -214,7 +242,7 @@ public class KnapsackZeroOne {
 	    System.out.println(ks.canPartitionEqualSubset_TD(num));
 	    
 	    System.out.println(ks.countSubsets(num,7,0));
-	    
-	    
+	    System.out.println(ks.countSubsets_TD(num,7,0));
+	      
 	}
 }
