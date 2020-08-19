@@ -18,27 +18,7 @@ public class KnapsackZeroOne {
 		
 		return Math.max(profitOne, profitTwo);
 	}
-	
-	// Using recursion
-	protected boolean isSubsetSum(int []arr, int sum, int index) {
 		
-		// Base condition
-		if(sum == 0)
-			return true;
-		
-		// Base condition
-		if(arr.length == 0 || index >= arr.length)
-			return false;
-		
-		if(arr[index] <= sum) {
-			if(isSubsetSum(arr, sum-arr[index], index+1))
-					return true;
-		}
-			
-		return isSubsetSum(arr, sum, index+1);
-	}
-	
-	
 	// Top-Down Approach
 	protected int getMaxProfit_TD(int []profit, int []weight, int capacity) {
 		Integer[][] dp = new Integer[profit.length][capacity + 1];
@@ -61,6 +41,52 @@ public class KnapsackZeroOne {
 		
 		dp[index][capacity] = Math.max(profitOne, profitTwo);
 		return dp[index][capacity];
+	}
+	
+	// Using recursion
+	protected boolean isSubsetSum(int []arr, int sum, int index) {
+		
+		// Base condition
+		if(sum == 0)
+			return true;
+		
+		// Base condition
+		if(arr.length == 0 || index >= arr.length)
+			return false;
+		
+		if(arr[index] <= sum) {
+			if(isSubsetSum(arr, sum-arr[index], index+1))
+					return true;
+		}
+			
+		return isSubsetSum(arr, sum, index+1);
+	}
+	
+	// Top-Down Approach
+	protected boolean isSubsetSum_TD(int []arr, int sum, int index) {
+		Boolean[][] dp = new Boolean[arr.length][sum + 1];
+		return isSubsetSumUtil(dp, arr, sum, 0);
+	}
+	
+	protected boolean isSubsetSumUtil(Boolean [][]dp, int []arr, int sum, int index ) {
+		
+		if(sum == 0 )
+			return true;
+		
+		if(arr.length == 0 || index >= arr.length)
+			return false;
+		
+		if(dp[index][sum] == null) {
+			if(arr[index] <= sum) {
+				if(isSubsetSumUtil(dp, arr, sum-arr[index], index+1)) {
+					dp[index][sum] = true;
+					return true;
+				}
+			}
+			dp[index][sum] = isSubsetSumUtil(dp, arr, sum, index+1);
+		}
+		
+		return dp[index][sum];	
 	}
 	
 	public static void main(String[] args) {
@@ -88,6 +114,7 @@ public class KnapsackZeroOne {
 		
 		int []num = { 1, 2, 7, 1, 5 };
 	    System.out.println(ks.isSubsetSum(num, 10, 0));
+	    System.out.println(ks.isSubsetSum_TD(num, 10, 0));
 		
 	}
 }
