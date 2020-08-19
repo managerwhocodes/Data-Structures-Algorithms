@@ -30,23 +30,21 @@ public class KnapsackZeroOne {
 		if(capacity <=0 || index < 0 || index >= profit.length)
 			return 0;
 
-		if (dp[index][capacity] != null)
-			return dp[index][capacity];
-		
-		int profitOne = 0;
-		if(weight[index] <= capacity)
-			profitOne = profit[index] + getMaxProfitUtil(dp, profit, weight, capacity - weight[index], index+1);
-		
-		int profitTwo = getMaxProfitUtil(dp, profit, weight, capacity, index+1);
-		
-		dp[index][capacity] = Math.max(profitOne, profitTwo);
+		if (dp[index][capacity] == null) {
+			int profitOne = 0;
+			if(weight[index] <= capacity)
+				profitOne = profit[index] + getMaxProfitUtil(dp, profit, weight, capacity - weight[index], index+1);
+			
+			int profitTwo = getMaxProfitUtil(dp, profit, weight, capacity, index+1);
+			
+			dp[index][capacity] = Math.max(profitOne, profitTwo);
+		}
 		return dp[index][capacity];
 	}
 	
 	// Using recursion
 	protected boolean isSubsetSum(int []arr, int sum, int index) {
 		
-		// Base condition
 		if(sum == 0)
 			return true;
 		
@@ -73,6 +71,7 @@ public class KnapsackZeroOne {
 		if(sum == 0 )
 			return true;
 		
+		// Base condition
 		if(arr.length == 0 || index >= arr.length)
 			return false;
 		
@@ -87,6 +86,43 @@ public class KnapsackZeroOne {
 		}
 		
 		return dp[index][sum];	
+	}
+	
+	
+	// Using recursion
+	protected boolean canPartitionEqualSubset(int []arr) {
+		
+		int sum = 0;
+		for(int i=0;i<arr.length;i++) {
+			sum = sum + arr[i];
+		}
+		
+		if(sum % 2 != 0)
+			return false;
+		
+		return canPartitionEqualSubsetRecusion(arr, sum/2, 0);
+		
+		
+	}
+	
+	protected boolean canPartitionEqualSubsetRecusion(int []arr, int sum, int index) {
+		
+		// Base Condition
+		if (sum == 0)
+			return true;
+		
+		// Base Condition
+		if(arr.length == 0 || index>= arr.length)
+			return false;
+		
+		if(arr[index] <= sum) {
+			if(canPartitionEqualSubsetRecusion(arr, sum-arr[index], index+1)) {
+				return true;
+			}
+		}
+		
+		return canPartitionEqualSubsetRecusion(arr, sum, index+1);
+		
 	}
 	
 	public static void main(String[] args) {
@@ -115,6 +151,8 @@ public class KnapsackZeroOne {
 		int []num = { 1, 2, 7, 1, 5 };
 	    System.out.println(ks.isSubsetSum(num, 10, 0));
 	    System.out.println(ks.isSubsetSum_TD(num, 10, 0));
+	    
+	    System.out.println(ks.canPartitionEqualSubset(num));
 		
 	}
 }
