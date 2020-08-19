@@ -100,8 +100,7 @@ public class KnapsackZeroOne {
 		if(sum % 2 != 0)
 			return false;
 		
-		return canPartitionEqualSubsetRecusion(arr, sum/2, 0);
-		
+		return canPartitionEqualSubsetRecusion(arr, sum/2, 0);	
 		
 	}
 	
@@ -122,6 +121,46 @@ public class KnapsackZeroOne {
 		}
 		
 		return canPartitionEqualSubsetRecusion(arr, sum, index+1);
+		
+	}
+	
+	// Using Top-Down
+	protected boolean canPartitionEqualSubset_TD(int []arr) {
+		
+		int sum = 0;
+		for(int i=0;i<arr.length;i++) {
+			sum = sum + arr[i];
+		}
+		
+		if(sum % 2 != 0)
+			return false;
+		
+		Boolean [][]dp = new Boolean[arr.length][sum+1];
+		return canPartitionEqualSubsetRecusion_TD(dp, arr, sum/2, 0);	
+		
+	}
+	
+	protected boolean canPartitionEqualSubsetRecusion_TD(Boolean [][]dp, int []arr, int sum, int index) {
+		
+		// Base Condition
+		if (sum == 0)
+			return true;
+		
+		// Base Condition
+		if(arr.length == 0 || index>= arr.length)
+			return false;
+		
+		if(dp[index][sum] == null) {
+			if(arr[index] <= sum) {
+				if(canPartitionEqualSubsetRecusion_TD(dp, arr, sum-arr[index], index+1)) {
+					dp[index][sum] = true; 
+					return true;
+				}
+			}
+			dp[index][sum] = canPartitionEqualSubsetRecusion_TD(dp, arr, sum, index+1);
+		}
+		
+		return dp[index][sum];
 		
 	}
 	
@@ -153,6 +192,7 @@ public class KnapsackZeroOne {
 	    System.out.println(ks.isSubsetSum_TD(num, 10, 0));
 	    
 	    System.out.println(ks.canPartitionEqualSubset(num));
-		
+	    System.out.println(ks.canPartitionEqualSubset_TD(num));
+	    
 	}
 }
