@@ -254,7 +254,7 @@ public class KnapsackZeroOne {
 		return dp[index][sum];
 	}
 	
-	// Using recursion
+	// Using Recursion
 	protected int canPartitionMinDiffSubset(int []arr) {
 		
 		return canPartitionMinDiffSubsetUtil(arr , 0 , 0 , 0);
@@ -270,6 +270,33 @@ public class KnapsackZeroOne {
 		int diff2 = canPartitionMinDiffSubsetUtil(arr, sum1, sum2+arr[index], index+1);
 		
 		return Math.min(diff1, diff2);
+	}
+	
+	// Using Top-Down
+	protected int canPartitionMinDiffSubset_TD(int []arr) {
+		
+		int sum = 0;
+		for(int i=0; i<arr.length; i++)
+			sum = sum + arr[i];
+		
+		Integer [][]dp = new Integer[arr.length][sum+1];
+		return canPartitionMinDiffSubsetUtil_TD(dp, arr , 0 , 0 , 0);
+	}
+		
+		
+	protected int canPartitionMinDiffSubsetUtil_TD(Integer [][]dp, int []arr, int sum1, int sum2, int index) {
+		
+		if(index >= arr.length)
+			return Math.abs(sum1-sum2);
+		
+		if(dp[index][sum1] == null ) {
+			int diff1 = canPartitionMinDiffSubsetUtil(arr, sum1+arr[index], sum2, index+1);
+			int diff2 = canPartitionMinDiffSubsetUtil(arr, sum1, sum2+arr[index], index+1);
+			
+			dp[index][sum1] = Math.min(diff1, diff2);
+		}
+		
+		return dp[index][sum1];
 	}
 	
 	public static void main(String[] args) {
@@ -309,8 +336,11 @@ public class KnapsackZeroOne {
 	    int k = 4;	
 
 	    System.out.println(ks.canPartitionEqualKSubset(arr,k));
+	  
+	    int []input = {1, 3, 100, 4};
+	    System.out.println(ks.canPartitionMinDiffSubset(input));
+	    System.out.println(ks.canPartitionMinDiffSubset_TD(input));
 	    
-	    System.out.println(ks.canPartitionMinDiffSubset(arr));
 	      
 	}
 }
