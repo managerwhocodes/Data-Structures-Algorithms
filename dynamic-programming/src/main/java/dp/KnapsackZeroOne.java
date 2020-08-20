@@ -311,6 +311,19 @@ public class KnapsackZeroOne {
 		return countSubsets(arr, sumSubset, 0);		
 	}
 	
+	// Using Recursion
+	protected int findTargetSubsets(int[] num, int s) {
+	    
+		int sum = 0;
+	    for(int n : num)
+	        sum += n;
+
+	    if(sum < s || (s + sum) % 2 == 1)
+	        return 0;
+
+	    return countSubsets(num, (s + sum) / 2, 0);
+	  }
+	
 	public static void main(String[] args) {
 		
 		KnapsackZeroOne ks = new KnapsackZeroOne();
@@ -353,9 +366,11 @@ public class KnapsackZeroOne {
 	    System.out.println(ks.canPartitionMinDiffSubset(input));
 	    System.out.println(ks.canPartitionMinDiffSubset_TD(input));
 	    
-	    int []input2 = {1, 1, 2, 3};
-	    System.out.println(ks.countSubsetsWithGivenDiff(input2,1));
+	    input = new int[]{1, 1, 2, 3};
+	    System.out.println(ks.countSubsetsWithGivenDiff(input,1));
 	    
-	      
+	    input = new int[]{1, 2, 7, 1};
+	    System.out.println(ks.findTargetSubsets(input, 9));
+	          
 	}
 }
