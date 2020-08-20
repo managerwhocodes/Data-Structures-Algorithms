@@ -253,7 +253,25 @@ public class KnapsackZeroOne {
 		
 		return dp[index][sum];
 	}
+	
+	// Using recursion
+	protected int canPartitionMinDiffSubset(int []arr) {
 		
+		return canPartitionMinDiffSubsetUtil(arr , 0 , 0 , 0);
+	}
+		
+		
+	protected int canPartitionMinDiffSubsetUtil(int []arr, int sum1, int sum2, int index) {
+		
+		if(index >= arr.length)
+			return Math.abs(sum1-sum2);
+		
+		int diff1 = canPartitionMinDiffSubsetUtil(arr, sum1+arr[index], sum2, index+1);
+		int diff2 = canPartitionMinDiffSubsetUtil(arr, sum1, sum2+arr[index], index+1);
+		
+		return Math.min(diff1, diff2);
+	}
+	
 	public static void main(String[] args) {
 		
 		KnapsackZeroOne ks = new KnapsackZeroOne();
@@ -291,7 +309,8 @@ public class KnapsackZeroOne {
 	    int k = 4;	
 
 	    System.out.println(ks.canPartitionEqualKSubset(arr,k));
-
+	    
+	    System.out.println(ks.canPartitionMinDiffSubset(arr));
 	      
 	}
 }
