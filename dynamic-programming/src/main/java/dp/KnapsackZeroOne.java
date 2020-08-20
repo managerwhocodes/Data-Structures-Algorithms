@@ -163,6 +163,49 @@ public class KnapsackZeroOne {
 		return dp[index][sum];	
 	}
 	
+	// Using recursion
+	protected boolean canPartitionEqualKSubset(int []arr, int k) {
+		
+		int sum = 0;
+		for(int i=0;i<arr.length;i++) {
+			sum = sum + arr[i];
+		}
+		
+		if(sum % k != 0)
+			return false;
+		
+		int []bucket = new int[k];
+		
+		return canPartitionEqualKSubsetUtil(bucket, arr, sum/k, 0);	
+		
+	}
+	
+	// Using recursion
+	protected boolean canPartitionEqualKSubsetUtil(int[] bucket, int []arr, int sum , int index) {
+		
+		// Base condition
+		if(arr.length == 0 || index>= arr.length)
+		{
+			for(int i = 0;i<bucket.length;i++) {
+				if(bucket[i] != sum)
+					return false;
+			}
+			return true;
+		}
+		
+		for(int i=0 ;i<bucket.length;i++) {
+			if(bucket[i] + arr[index] > sum ) {
+				continue;
+			}
+			bucket[i] = bucket[i] + arr[index];
+			if(canPartitionEqualKSubsetUtil(bucket, arr, sum, index+1)) {
+				return true;
+			}
+			bucket[i] = bucket[i] - arr[index];
+		}
+		return false;
+	}
+		
 	// Using Recursion
 	private int countSubsets(int[] arr, int sum, int index) {
 		
@@ -210,7 +253,7 @@ public class KnapsackZeroOne {
 		
 		return dp[index][sum];
 	}
-	
+		
 	public static void main(String[] args) {
 		
 		KnapsackZeroOne ks = new KnapsackZeroOne();
@@ -243,6 +286,12 @@ public class KnapsackZeroOne {
 	    
 	    System.out.println(ks.countSubsets(num,7,0));
 	    System.out.println(ks.countSubsets_TD(num,7,0));
+	    
+	    int []arr = {1, 2, 7, 1, 5};
+	    int k = 4;	
+
+	    System.out.println(ks.canPartitionEqualKSubset(arr,k));
+
 	      
 	}
 }
