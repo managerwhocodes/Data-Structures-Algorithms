@@ -144,6 +144,33 @@ public class KnapsackUnbounded {
 		return dp[n-1][total];
 	}	
 	
+	// Using Recursion
+	protected int getMinCoinChange(int[] denominations, int total) {
+	    int result = getMinCoinChangeUtil(denominations, total, 0);
+	    return (result == Integer.MAX_VALUE ? -1 : result);
+	}
+	
+	
+	public int getMinCoinChangeUtil(int[] denominations, int total, int index) {
+		
+		if(total == 0)
+			return 0;
+		
+		if(denominations.length ==0 || index >= denominations.length)
+			return Integer.MAX_VALUE;
+		
+		int countOne = Integer.MAX_VALUE;
+		if(denominations[index] <= total) {
+			int res = getMinCoinChangeUtil(denominations,total - denominations[index],index);
+			if(res != Integer.MAX_VALUE)
+				countOne = res  + 1 ;
+		}
+		
+		int countTwo = getMinCoinChangeUtil(denominations, total, index+1);
+		
+		return Math.min(countOne, countTwo);	
+	}
+	
 	public static void main(String[] args) {
 		
 		KnapsackUnbounded ks = new KnapsackUnbounded();
@@ -171,7 +198,7 @@ public class KnapsackUnbounded {
 	    System.out.println(ks.countCoinChange(denominations, 5));
 	    System.out.println(ks.countCoinChange_TD(denominations, 5));
 	    System.out.println(ks.countCoinChange_BU(denominations, 5));
-	    
-	
+	    System.out.println(ks.getMinCoinChange(denominations, 5));
+
 	}
 }
