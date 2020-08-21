@@ -124,6 +124,29 @@ public class KnapsackUnbounded {
 		return dp[index][total];
 	}
 	
+	// Bottom-up Approach
+	protected int countCoinChange_BU(int []denominations, int total) {
+		
+		int n = denominations.length;
+		int [][]dp = new int[n][total+1];
+		
+		for(int i =0;i<n;i++)
+			dp[i][0] = 1;
+		
+		for(int i=0;i<n;i++) {
+			for(int j=1;j<=total;j++) {
+				int sum1 = 0, sum2 = 0;
+				if(denominations[i] <= j)
+					sum1 = dp[i][j-denominations[i]];
+				if(i>0)
+					sum2 = dp[i-1][j];
+				
+				dp[i][j] = sum1 + sum2;
+			}
+		}
+		return dp[n-1][total];
+	}	
+	
 	public static void main(String[] args) {
 		
 		KnapsackUnbounded ks = new KnapsackUnbounded();
@@ -150,6 +173,8 @@ public class KnapsackUnbounded {
 		int[] denominations = {1, 2, 3};
 	    System.out.println(ks.countCoinChange(denominations, 5));
 	    System.out.println(ks.countCoinChange_TD(denominations, 5));
+	    System.out.println(ks.countCoinChange_BU(denominations, 5));
+	    
 	
 	}
 }
