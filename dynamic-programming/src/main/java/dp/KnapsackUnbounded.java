@@ -19,7 +19,6 @@ public class KnapsackUnbounded {
 		return Math.max(profitOne, profitTwo);
 	}
 	
-	
 	// Top-Down Approach
 	protected int getMaxProfit_TD(int []profit, int []weight, int capacity) {
 		Integer[][] dp = new Integer[profit.length][capacity + 1];
@@ -44,6 +43,30 @@ public class KnapsackUnbounded {
 		return dp[index][capacity];
 	}
 	
+	// Given an infinite supply of ‘n’ coin denominations and a total money amount, 
+	// find the total number of distinct ways to make up that amount
+	// Using Recursion
+	protected int countCoinChange(int []denominations, int total) {
+		return countCoinChangeUtil(denominations, total, 0);
+	}
+	
+	protected int countCoinChangeUtil(int []denominations, int total, int index) {
+		
+		if(total == 0)
+			return 1;
+		
+		if(denominations.length == 0 || index >= denominations.length)
+			return 0;
+		
+		int sum1 = 0;
+		if(denominations[index] <= total)
+			sum1 = countCoinChangeUtil(denominations, total - denominations[index], index);
+		
+		int sum2 = countCoinChangeUtil(denominations, total, index+1);
+		
+		return sum1 + sum2;
+	}
+	
 	public static void main(String[] args) {
 		
 		KnapsackUnbounded ks = new KnapsackUnbounded();
@@ -66,6 +89,9 @@ public class KnapsackUnbounded {
 		System.out.println("Maxium profit using Recursion : "+ks.getMaxProfit(profit,weight,knapsackCapacity,0));
 		
 		System.out.println("Maxium profit using Top Down Approach : "+maxProfit);
+		
+		int[] denominations = {1, 2, 3};
+	    System.out.println(ks.countCoinChange(denominations, 5));
 		
 		
 	}
