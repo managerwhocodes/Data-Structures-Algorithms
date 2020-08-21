@@ -22,10 +22,10 @@ public class KnapsackUnbounded {
 	// Top-Down Approach
 	protected int getMaxProfit_TD(int []profit, int []weight, int capacity) {
 		Integer[][] dp = new Integer[profit.length][capacity + 1];
-		return getMaxProfitUtil(dp, profit, weight, capacity, 0);
+		return getMaxProfitUtil_TD(dp, profit, weight, capacity, 0);
 	}
 
-	private int getMaxProfitUtil(Integer[][] dp, int []profit, int []weight, int capacity, int index) {
+	private int getMaxProfitUtil_TD(Integer[][] dp, int []profit, int []weight, int capacity, int index) {
 		
 		if(capacity <=0 || index < 0 || index >= profit.length)
 			return 0;
@@ -35,9 +35,9 @@ public class KnapsackUnbounded {
 		
 		int profitOne = 0;
 		if(weight[index] <= capacity)
-			profitOne = profit[index] + getMaxProfitUtil(dp, profit, weight, capacity - weight[index], index);
+			profitOne = profit[index] + getMaxProfitUtil_TD(dp, profit, weight, capacity - weight[index], index);
 		
-		int profitTwo = getMaxProfitUtil(dp, profit, weight, capacity, index+1);
+		int profitTwo = getMaxProfitUtil_TD(dp, profit, weight, capacity, index+1);
 		
 		dp[index][capacity] = Math.max(profitOne, profitTwo);
 		return dp[index][capacity];
@@ -53,18 +53,15 @@ public class KnapsackUnbounded {
 		
 		for(int i=0; i < profit.length; i++)
 		      dp[i][0] = 0;
-		
-	    for(int c=0; c <= capacity; c++) {
-		      if(weight[0] <= c)
-		        dp[0][c] = profit[0];
-		}
-		
-		for(int i=1;i<profit.length;i++) {
-			for(int j=1;j<=capacity;j++) {
+				
+		for(int i=0; i<profit.length; i++) {
+			for(int j=1; j<=capacity; j++) {
 				int profitOne = 0 , profitTwo = 0;
+				
 				if(weight[i] <= j)
 					profitOne = profit[i]  + dp[i][j-weight[i]];	
 				
+				if( i > 0 )
 				profitTwo = dp[i-1][j];
 				
 				dp[i][j] = Math.max(profitOne, profitTwo);
