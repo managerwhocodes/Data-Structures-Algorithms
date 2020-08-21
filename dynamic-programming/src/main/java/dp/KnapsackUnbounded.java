@@ -67,6 +67,33 @@ public class KnapsackUnbounded {
 		return sum1 + sum2;
 	}
 	
+	// Using Top-down
+	protected int countCoinChange_TD(int []denominations, int total) {
+		Integer [][]dp = new Integer[denominations.length][total+1];
+		return countCoinChangeUtil_TD(dp, denominations, total, 0);
+	}
+	
+	protected int countCoinChangeUtil_TD(Integer[][] dp,int []denominations, int total, int index) {
+		
+		if(total == 0)
+			return 1;
+		
+		if(denominations.length == 0 || index >= denominations.length)
+			return 0;
+		
+		if(dp[index][total] ==  null) {
+			int sum1 = 0;
+			if(denominations[index] <= total)
+				sum1 = countCoinChangeUtil_TD(dp, denominations, total - denominations[index], index);
+			
+			int sum2 = countCoinChangeUtil_TD(dp, denominations, total, index+1);
+			
+			dp[index][total] = sum1 + sum2;
+		}
+		
+		return dp[index][total];
+	}
+	
 	public static void main(String[] args) {
 		
 		KnapsackUnbounded ks = new KnapsackUnbounded();
@@ -92,7 +119,7 @@ public class KnapsackUnbounded {
 		
 		int[] denominations = {1, 2, 3};
 	    System.out.println(ks.countCoinChange(denominations, 5));
-		
-		
+	    System.out.println(ks.countCoinChange_TD(denominations, 5));
+	
 	}
 }
