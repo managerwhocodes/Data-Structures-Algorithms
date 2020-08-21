@@ -35,12 +35,42 @@ public class KnapsackUnbounded {
 		
 		int profitOne = 0;
 		if(weight[index] <= capacity)
-			profitOne = profit[index] + getMaxProfitUtil(dp, profit, weight, capacity - weight[index], index+1);
+			profitOne = profit[index] + getMaxProfitUtil(dp, profit, weight, capacity - weight[index], index);
 		
 		int profitTwo = getMaxProfitUtil(dp, profit, weight, capacity, index+1);
 		
 		dp[index][capacity] = Math.max(profitOne, profitTwo);
 		return dp[index][capacity];
+	}
+	
+	// Bottom-up Approach
+	protected int getMaxProfit_BU(int []profit, int []weight, int capacity) {
+		
+		if(capacity <=0 || profit.length ==0 || weight.length != profit.length )
+			return 0;
+		
+		int dp[][] = new int[profit.length][capacity+1];
+		
+		for(int i=0; i < profit.length; i++)
+		      dp[i][0] = 0;
+		
+	    for(int c=0; c <= capacity; c++) {
+		      if(weight[0] <= c)
+		        dp[0][c] = profit[0];
+		}
+		
+		for(int i=1;i<profit.length;i++) {
+			for(int j=1;j<=capacity;j++) {
+				int profitOne = 0 , profitTwo = 0;
+				if(weight[i] <= j)
+					profitOne = profit[i]  + dp[i][j-weight[i]];	
+				
+				profitTwo = dp[i-1][j];
+				
+				dp[i][j] = Math.max(profitOne, profitTwo);
+			}
+		}
+		return dp[profit.length-1][capacity];		
 	}
 	
 	// Given an infinite supply of ‘n’ coin denominations and a total money amount, 
@@ -101,8 +131,6 @@ public class KnapsackUnbounded {
 		int[] weight = { 3, 1, 5, 2 };
 		int knapsackCapacity = 7;
 		
-		int maxProfit = ks.getMaxProfit_TD(profit,weight,knapsackCapacity);
-		
 		System.out.print("Profit : ");
 		for(int p : profit)
 			System.out.print(p + "  ");
@@ -115,7 +143,9 @@ public class KnapsackUnbounded {
 		
 		System.out.println("Maxium profit using Recursion : "+ks.getMaxProfit(profit,weight,knapsackCapacity,0));
 		
-		System.out.println("Maxium profit using Top Down Approach : "+maxProfit);
+		System.out.println("Maxium profit using Top Down Approach : "+ks.getMaxProfit_TD(profit,weight,knapsackCapacity));
+		
+		System.out.println("Maxium profit using Bottom Up Approach : "+ks.getMaxProfit_BU(profit,weight,knapsackCapacity));
 		
 		int[] denominations = {1, 2, 3};
 	    System.out.println(ks.countCoinChange(denominations, 5));
