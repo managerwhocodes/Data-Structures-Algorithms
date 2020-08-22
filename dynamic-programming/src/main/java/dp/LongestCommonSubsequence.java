@@ -77,6 +77,42 @@ public class LongestCommonSubsequence {
 	    return dp[strOne.length()][strTwo.length()];
 	}
 	
+	protected String printLCS(String one, String two) {
+		
+		int dp[][] = new int[one.length()+1][two.length()+1];
+		for(int i=1; i<=one.length(); i++) {
+			for(int j=1; j<=two.length(); j++) {
+				if(one.charAt(i-1) == two.charAt(j-1)) {
+					dp[i][j] = 1 + dp[i-1][j-1];
+				} else {
+					dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+				}
+			}
+		}
+		
+		int i = one.length();
+		int j = two.length();
+		int count = dp[i][j];
+		char []lcs = new char[count+1];
+		
+		while(i>0 && j>0) {
+			
+			if(one.charAt(i-1) == two.charAt(j-1)) {
+				lcs[count-1] = one.charAt(i-1);	
+				i--;
+				j--;
+				count--;
+			} else if(dp[i-1][j] > dp[i][j-1]) {
+				i--;
+			} else {
+				j--;
+			}
+				
+		}
+		
+		return new String(lcs);		
+	}
+		
 	public static void main(String[] args) {
 		
 		LongestCommonSubsequence lcs = new LongestCommonSubsequence();
@@ -103,6 +139,9 @@ public class LongestCommonSubsequence {
 				+inputStrTwo
 				+" using Bottom Up : "
 				+lcs.getLCSCount_BU(inputStrOne,inputStrTwo));
+		
+		System.out.print("\nLongest Common Subsequence : "
+				+lcs.printLCS(inputStrOne,inputStrTwo));
 		
 	}
 }
