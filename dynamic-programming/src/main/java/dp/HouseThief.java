@@ -54,6 +54,83 @@ public class HouseThief {
 		return dp[0];
 	}
 	
+	// Using Recursion
+	protected int maxMoneyCircular(int[] wealth) {
+		
+        if(wealth.length == 0 )
+            return 0;
+        
+        if(wealth.length == 1 )
+            return wealth[0];
+		
+		int arr1[] = new int[wealth.length-1];
+		int arr2[] = new int[wealth.length-1];
+		
+		for(int i=0;i<wealth.length-1;i++)
+			arr1[i] = wealth[i];
+		
+		for(int i=0;i<wealth.length-1;i++)
+			arr2[i] = wealth[i+1];
+		
+		int sum1 = maxMoneyCircularUtil(arr1, 0);
+		int sum2 = maxMoneyCircularUtil(arr2, 0);
+		
+		return Math.max(sum1, sum2);
+	}
+
+	private int maxMoneyCircularUtil(int[] wealth, int index) {
+		  
+	    if( index >= wealth.length)
+	      return 0;
+	
+	    // steal from current house and skip one to steal from the next house
+	    int stealCurrent = wealth[index] + maxMoneyCircularUtil(wealth, index + 2);
+	    
+	    // skip current house to steel from the adjacent house
+	    int skipCurrent = maxMoneyCircularUtil(wealth, index + 1);
+	
+	    return Math.max(stealCurrent, skipCurrent);
+	}
+	
+	protected int maxMoneyCircular_TD(int[] wealth) {
+		
+        if(wealth.length == 0 )
+            return 0;
+        
+        if(wealth.length == 1 )
+            return wealth[0];
+		
+		int arr1[] = new int[wealth.length-1];
+		int arr2[] = new int[wealth.length-1];
+		
+		for(int i=0;i<wealth.length-1;i++)
+			arr1[i] = wealth[i];
+		
+		for(int i=0;i<wealth.length-1;i++)
+			arr2[i] = wealth[i+1];
+		
+		Integer dp1[]  = new Integer[wealth.length-1];
+		Integer dp2[]  = new Integer[wealth.length-1];
+		
+		int sum1 = maxMoneyCircularUtil_TD(dp1, arr1, 0);
+		int sum2 = maxMoneyCircularUtil_TD(dp2, arr2, 0);
+		
+		return Math.max(sum1, sum2);
+	}
+	
+	private int maxMoneyCircularUtil_TD(Integer []dp, 	int []totalHouseMoney , int index) {
+		
+		if(index >= totalHouseMoney.length)
+			return 0;
+		
+		if(dp[index] == null) {
+			int stealCurrentHouse = totalHouseMoney[index] + maxMoneyCircularUtil_TD(dp,totalHouseMoney, index+2);
+			int skipCurrentHouse = maxMoneyCircularUtil_TD(dp,totalHouseMoney, index+1);
+			dp[index] = Math.max(stealCurrentHouse, skipCurrentHouse);
+		}
+		
+		return dp[index];
+	}
 
 	public static void main(String[] args) {
 		HouseThief ht = new HouseThief();
@@ -68,6 +145,11 @@ public class HouseThief {
 		System.out.println("\nMaximum money the thief can steal using Recursion : "+ ht.maxMoney(totalHouseMoney));
 		System.out.println("Maximum money the thief can steal using Top Down Approach : "+ht.maxMoney_TD(totalHouseMoney, 0));
 		System.out.println("Maximum money the thief can steal using Bottom up Approach : "+ht.maxMoney_BU(totalHouseMoney));
+		
+		totalHouseMoney = new int[] {1,2,3,1};
+		
+		System.out.println("Maximum money the thief can steal in circular house using Recursion : "+ ht.maxMoneyCircular(totalHouseMoney));
+		System.out.println("Maximum money the thief can steal in circular house using Recursion : "+ ht.maxMoneyCircular_TD(totalHouseMoney));
 		
 	}
 }
