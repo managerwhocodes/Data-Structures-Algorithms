@@ -1,5 +1,8 @@
 package dp;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class KnapsackUnbounded {
 	
 	// Using recursion
@@ -150,7 +153,6 @@ public class KnapsackUnbounded {
 	    return (result == Integer.MAX_VALUE ? -1 : result);
 	}
 	
-	
 	public int getMinCoinChangeUtil(int[] denominations, int total, int index) {
 		
 		if(total == 0)
@@ -169,6 +171,36 @@ public class KnapsackUnbounded {
 		int countTwo = getMinCoinChangeUtil(denominations, total, index+1);
 		
 		return Math.min(countOne, countTwo);	
+	}
+	
+	// Using Top-down
+	protected int getMinCoinChange_TD(int[] denominations, int total) {
+		Integer [][]dp = new Integer[denominations.length][total+1];
+	    int result = getMinCoinChangeUtil_TD(dp, denominations, total, 0);
+	    return (result == Integer.MAX_VALUE ? -1 : result);
+	}
+	
+	private int getMinCoinChangeUtil_TD(Integer[][]dp, int[] denominations, int total, int index) {
+		
+		if(total == 0)
+			return 0;
+		
+		if(denominations.length ==0 || index >= denominations.length)
+			return Integer.MAX_VALUE;
+		
+		if(dp[index][total] == null) {
+			int countOne = Integer.MAX_VALUE;
+			if(denominations[index] <= total) {
+				int res = getMinCoinChangeUtil(denominations,total - denominations[index],index);
+				if(res != Integer.MAX_VALUE)
+					countOne = res  + 1 ;
+			}
+			
+			int countTwo = getMinCoinChangeUtil(denominations, total, index+1);
+			dp[index][total] = Math.min(countOne, countTwo);
+		}
+		
+		return dp[index][total];
 	}
 	
 	public static void main(String[] args) {
@@ -199,6 +231,7 @@ public class KnapsackUnbounded {
 	    System.out.println(ks.countCoinChange_TD(denominations, 5));
 	    System.out.println(ks.countCoinChange_BU(denominations, 5));
 	    System.out.println(ks.getMinCoinChange(denominations, 5));
-
+	    System.out.println(ks.getMinCoinChange_TD(denominations, 5));
+	    
 	}
 }
