@@ -24,22 +24,18 @@ public class LongestCommonSubsequence {
 	// Top-Down Approach
 	protected int getLCSCount_TD(String strOne, String strTwo) {
 		
-		int dp[][] =  new int[strOne.length()][strTwo.length()];
-		for (int i = 0; i < strOne.length(); i++)
-			for (int j = 0; j < strTwo.length(); j++)
-				dp[i][j] = -1;
+		Integer dp[][] =  new Integer[strOne.length()][strTwo.length()];
 		return getLCSCountUtil(dp, strOne, strTwo, 0, 0);
 	}
 
-	private int getLCSCountUtil(int [][]dp, String strOne, String strTwo, int indexOne, int indexTwo) {
+	private int getLCSCountUtil(Integer [][]dp, String strOne, String strTwo, int indexOne, int indexTwo) {
 				
 		if(indexOne == strOne.length() || indexTwo == strTwo.length())
 			return 0;
 		
-		if(dp[indexOne][indexTwo] == -1) {
+		if(dp[indexOne][indexTwo] == null) {
 			if(strOne.charAt(indexOne) == strTwo.charAt(indexTwo)) {
 				dp[indexOne][indexTwo] = 1 + getLCSCountUtil(dp, strOne, strTwo, indexOne+1, indexTwo+1);
-				return dp[indexOne][indexTwo];	
 			} else {
 				int moveStrTwoCount = getLCSCountUtil(dp, strOne, strTwo, indexOne, indexTwo+1);
 				int moveStrOneCount = getLCSCountUtil(dp, strOne, strTwo, indexOne+1, indexTwo);
@@ -50,6 +46,7 @@ public class LongestCommonSubsequence {
 	}
 	
 	// Bottom-Up Approach
+	/*
 	protected int getLCSCount_BU(String strOne, String strTwo) {
 		
 		int dp[][] =  new int[strOne.length()+1][strTwo.length()+1];
@@ -63,6 +60,21 @@ public class LongestCommonSubsequence {
 			}
 		}
 		return dp[0][0];
+	}
+	*/
+	
+	protected int getLCSCount_BU(String strOne, String strTwo) {
+		
+	    int[][] dp = new int[strOne.length()+1][strTwo.length()+1];
+	    for(int i=1; i <= strOne.length(); i++) {
+	    	for(int j=1; j <= strTwo.length(); j++) {
+	    		if(strOne.charAt(i-1) == strTwo.charAt(j-1))
+	    			dp[i][j] = 1 + dp[i-1][j-1];
+	    		else
+	    			dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+	        }
+	    }
+	    return dp[strOne.length()][strTwo.length()];
 	}
 	
 	public static void main(String[] args) {
@@ -91,5 +103,6 @@ public class LongestCommonSubsequence {
 				+inputStrTwo
 				+" using Bottom Up : "
 				+lcs.getLCSCount_BU(inputStrOne,inputStrTwo));
+		
 	}
 }
