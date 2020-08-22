@@ -131,6 +131,27 @@ public class LongestCommonSubsequence {
 		
 	}
 	
+	protected int getSCSCount_BU(String strOne, String strTwo) {
+		
+	    int[][] dp = new int[strOne.length()+1][strTwo.length()+1];
+	    
+	    for(int i=0; i<=strOne.length(); i++)
+	    	dp[i][0] = i;
+	    
+	    for(int j=0; j<=strTwo.length(); j++)
+	    	dp[0][j] = j;
+	    
+	    for(int i=1; i <= strOne.length(); i++) {
+	    	for(int j=1; j <= strTwo.length(); j++) {
+	    		if(strOne.charAt(i-1) == strTwo.charAt(j-1))
+	    			dp[i][j] = 1 + dp[i-1][j-1];
+	    		else
+	    			dp[i][j] = 1 + Math.min(dp[i-1][j], dp[i][j-1]);
+	        }
+	    }
+	    return dp[strOne.length()][strTwo.length()];
+	}
+	
 	public static void main(String[] args) {
 		
 		LongestCommonSubsequence lcs = new LongestCommonSubsequence();
@@ -161,8 +182,11 @@ public class LongestCommonSubsequence {
 		System.out.print("\nLongest Common Subsequence : "
 				+lcs.printLCS(inputStrOne,inputStrTwo));
 		
-		System.out.print("\nLength of Shortest Common Supersequence : "
+		System.out.print("\nLength of Shortest Common Supersequence using Recursion : "
 				+lcs.getSCSCount("dynamic","programming", 0 , 0));
+		
+		System.out.print("\nLength of Shortest Common Supersequence using Bottom-up : "
+				+lcs.getSCSCount_BU("dynamic","programming"));
 		
 	}
 }
