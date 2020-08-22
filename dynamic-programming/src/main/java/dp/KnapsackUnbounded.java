@@ -232,6 +232,38 @@ public class KnapsackUnbounded {
 		return Math.max(profitOne, profitTwo);
 	}
 	
+	// Using top-down
+	protected int getMinTicketCost_TD(int[] days, int[] costs) {
+        Set<Integer> set = new HashSet<>();
+        for(int day : days) {
+            set.add(day);
+        }
+        Integer []dp = new Integer[366];
+		return getMinTicketCostUtil_TD(dp,set,costs,365);
+	}
+	
+	protected int getMinTicketCostUtil_TD(Integer []dp, Set<Integer> days, int[] costs, int day) {
+		
+		// Base conditions
+		if(day < 0)
+			return 0;
+		
+		if(dp[day] == null) {
+			int profitOne = 0;
+			if(days.contains(day)) {
+				int one = costs[0] + getMinTicketCostUtil_TD(dp ,days, costs, day-1);
+				int two = costs[1] + getMinTicketCostUtil_TD(dp ,days, costs, day-7);
+				int three = costs[2] + getMinTicketCostUtil_TD(dp ,days, costs, day-30);
+				profitOne = Math.min(one, Math.min(two, three));
+			} 
+			
+			int profitTwo = getMinTicketCostUtil_TD(dp, days, costs, day-1);
+			dp[day] = Math.max(profitOne, profitTwo);
+		}
+		
+		return dp[day];
+	}
+	
 	public static void main(String[] args) {
 		
 		KnapsackUnbounded ks = new KnapsackUnbounded();
@@ -266,6 +298,7 @@ public class KnapsackUnbounded {
 	    int []days = {1,2,3,4,5,6,7,8,9,10,30,31};
 	    denominations = new int[]{2,7,15};
 	    System.out.println(ks.getMinTicketCost(days,denominations));
+	    System.out.println(ks.getMinTicketCost_TD(days,denominations));
 
 	}
 }
