@@ -2,6 +2,7 @@ package trie;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 public class Trie {
@@ -60,6 +61,43 @@ public class Trie {
 		return true;
 	}
 	
+	protected boolean searchWildCard(String word) {
+		return searchWildCardUtil(root.getChildren(), word, 0);
+	}
+	
+	private boolean searchWildCardUtil(Map<Character, Node> children , String word, int index) {
+		
+		if(index == word.length()) {
+			if(children.size() == 0)
+				return true;
+			else
+				return false;
+		}
+		
+		char ch = word.charAt(index);
+		
+		if(children.containsKey(ch)) {
+			
+			if(index == word.length()-1 && children.get(ch).wordEnd)
+				return true;
+			
+			return searchWildCardUtil(children.get(ch).getChildren(), word, index+1);
+			
+		} else if(ch == '.') {
+			boolean result = false;
+			for(Map.Entry<Character, Node> child : children.entrySet()) {
+				if( index == word.length()-1 && child.getValue().wordEnd)
+					return true;
+				
+				if(searchWildCardUtil(child.getValue().getChildren(), word, index+1))
+					result = true;
+			}
+			return result;
+		} else {
+			return false;
+		}       
+    }
+	
 	protected String findLCP(List<String> dict) {
 
 		StringBuilder lcp = new StringBuilder();
@@ -87,6 +125,9 @@ public class Trie {
 		System.out.println("word abcd exists in trie : "+trie.search("abcd"));
 		System.out.println("word abcd is a prefix in trie : "+trie.isPrefix("abcd"));
 		
+		System.out.println(trie.searchWildCard("a."));
+		System.out.println(trie.searchWildCard(".a"));
+		
 		Trie trieTwo = new Trie();
 		
 		trieTwo.insert("techa");
@@ -103,8 +144,7 @@ public class Trie {
 		System.out.println(trieTwo.search("tech"));			// false
 		System.out.println(trieTwo.search("techi"));   		// true
 		System.out.println(trieTwo.search("techie"));  		// true
-		System.out.println(trieTwo.search("techiedelight"));   // true
-		
+		System.out.println(trieTwo.search("techiedelight"));   // true	
 
 		List<String> dict = Arrays.asList(
 				"code", "coder", "coding", "codable", "codec", "codecs", "coded",
