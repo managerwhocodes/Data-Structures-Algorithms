@@ -16,7 +16,6 @@ public class TrieMaxWord extends Trie{
 			}
 			currentNode = currentNode.getChildren().get(str.charAt(i));
 		}
-		currentNode.key = str;
 		currentNode.count += 1;
 	}
 	
