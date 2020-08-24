@@ -29,6 +29,7 @@ public class Trie {
 			currentNode = node;
 		}
 		currentNode.wordEnd = true;
+		currentNode.count += 1;
 	}
 	
 	protected boolean search(String word) {
@@ -98,7 +99,20 @@ public class Trie {
 		}       
     }
 	
-	protected String findLCP(List<String> dict) {
+	protected int maxCount(String searchWord) {
+		Node currentNode = root;
+		for (int i = 0; i < searchWord.length(); i++) {
+			char ch = searchWord.charAt(i);
+			Node node = currentNode.children.get(ch); 
+			if (node == null) {
+				return 0;
+			}
+			currentNode = node;
+		}
+		return currentNode.count;
+	}
+	
+	protected String findLCP() {
 
 		StringBuilder lcp = new StringBuilder();
 		Node curr = root;
@@ -159,7 +173,24 @@ public class Trie {
 			trieThree.insert(word);
 		}
 
-		System.out.println("Longest Common Prefix is " + trieThree.findLCP(dict));
+		System.out.println("Longest Common Prefix is " + trieThree.findLCP());
+		
+		List<String> dictionary = Arrays.asList(
+				"code", "coder", "coding", "codable", "codec", "codecs",
+				"coded", "codeless", "codec", "codecs", "codependence",
+				"codex", "codify", "codependents", "codes", "code",
+				"coder", "codesign", "codec", "codeveloper", "codrive",
+				"codec", "codecs", "codiscovered", "code"
+			);
+
+		System.out.println("Dictionary : ");
+		for( String word : dictionary) {
+			trie.insert(word);
+			//System.out.println(word);
+		}
+		
+		String searchWord = "code";
+		System.out.println("\nWord "+searchWord+" exists in dictionary : "+trie.maxCount(searchWord)+" times");
 		
 	}
 }
