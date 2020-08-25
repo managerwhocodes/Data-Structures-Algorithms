@@ -5,35 +5,36 @@ import java.util.Map.Entry;
 
 class TrieNode {
 
-	Map<Character, TrieNode> map = new HashMap<Character, TrieNode>();
+	Map<Character, TrieNode> children = new HashMap<Character, TrieNode>();
 	Set<String> word = new HashSet<String>();
 	boolean isLeaf = false;
 }
 
-class TriePattern {
+public class TriePattern {
+	
+	protected final TrieNode root;
 
-	protected TrieNode insert(TrieNode head, String word) {
+	public TriePattern() {
+		root = new TrieNode();
+	}
+
+	protected void insert(String word) {
 		
-		if (head == null) {
-			head = new TrieNode();
-		}
-
-		TrieNode currentNode = head;
+		TrieNode currentNode = root;
 		
 		for (char c: word.toCharArray())
 		{
 
 			if (Character.isUpperCase(c)) {
 
-				currentNode.map.putIfAbsent(c, new TrieNode());
-				currentNode = currentNode.map.get(c);
+				currentNode.children.putIfAbsent(c, new TrieNode());
+				currentNode = currentNode.children.get(c);
 			}
 		}
 
 		currentNode.isLeaf = true;
 		currentNode.word.add(word);
 
-		return head;
 	}
 
 	protected void printAllWords(TrieNode root) {
@@ -46,7 +47,7 @@ class TriePattern {
 			System.out.println(root.word);
 		}
 
-		for (Entry<Character, TrieNode> pair: root.map.entrySet())
+		for (Entry<Character, TrieNode> pair: root.children.entrySet())
 		{
 			TrieNode child = pair.getValue();
 			printAllWords(child);
@@ -55,16 +56,10 @@ class TriePattern {
 
 	protected void findAllWords(List<String> dictionary, String pattern) {
 
-		TrieNode head = null;
+		TrieNode curr = root;
 
-		for (String s: dictionary) {
-			head = insert(head, s);
-		}
-
-		TrieNode curr = head;
-		
 		for (char c: pattern.toCharArray()) {
-			curr = curr.map.get(c);
+			curr = curr.children.get(c);
 			if (curr == null) {
 				return;
 			}
@@ -76,12 +71,16 @@ class TriePattern {
 	public static void main(String[] args) {	
 		
 		TriePattern triePattern = new TriePattern();
-		
+	
 		List<String> dictionary = null;
 		dictionary = Arrays.asList("Hi", "HiTech", "HiTechCity", "Techie",
-				"TechieDelight", "Hello", "HelloWorld", "HiTechLab");
-
-		String patternString = "H";
+				"TechieDelight", "Hello", "HelloWorld", "HiTechLab", "TechDelight");
+				
+		for (String s: dictionary) {
+			triePattern.insert(s);
+		}
+		
+		String patternString = "TD";
 		triePattern.findAllWords(dictionary, patternString);
 	}
 }
