@@ -22,19 +22,14 @@ public class TriePattern {
 		
 		TrieNode currentNode = root;
 		
-		for (char c: word.toCharArray())
-		{
-
+		for (char c: word.toCharArray()){
 			if (Character.isUpperCase(c)) {
-
 				currentNode.children.putIfAbsent(c, new TrieNode());
 				currentNode = currentNode.children.get(c);
 			}
 		}
-
 		currentNode.isLeaf = true;
 		currentNode.word.add(word);
-
 	}
 
 	protected void printAllWords(TrieNode root) {
@@ -47,8 +42,7 @@ public class TriePattern {
 			System.out.println(root.word);
 		}
 
-		for (Entry<Character, TrieNode> pair: root.children.entrySet())
-		{
+		for (Entry<Character, TrieNode> pair: root.children.entrySet()) {
 			TrieNode child = pair.getValue();
 			printAllWords(child);
 		}
