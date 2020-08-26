@@ -1,6 +1,8 @@
 package array;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SlidingWindow {
 
@@ -59,6 +61,34 @@ public class SlidingWindow {
 		}
 		return minLength == Integer.MAX_VALUE ? 0 : minLength;
 	  }
+	
+	protected int findLenOfLongestSubStrWithKChar(String str, int k) {
+		
+	    if (str == null || str.length() == 0 || str.length() < k)
+	      throw new IllegalArgumentException("Invalid Input");
+	    
+	    int windowStart = 0;
+	    int maxLength = 0;
+	    Map<Character, Integer> map = new HashMap<Character, Integer>();
+	    
+	    for(int windowEnd = 0; windowEnd<str.length(); windowEnd++) {
+	    	char chRight = str.charAt(windowEnd);
+	    	map.put(chRight, map.getOrDefault(chRight, 0) +1);
+	    	
+	    	while(map.size() > k) {
+	    		char chLeft = str.charAt(windowStart);
+	    		map.put(chLeft, map.get(chLeft)-1);
+	    		
+	    		if(map.get(chLeft) ==0)
+	    			map.remove(chLeft);
+	    		
+	    		windowStart++;
+	    	}
+	    	maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
+	    
+	    }
+	    return maxLength;
+	}
 
 	public static void main(String[] args) {
 		
@@ -77,6 +107,8 @@ public class SlidingWindow {
 		int sum = 8;
 		
 		System.out.println("Smallest subarray length: " + sw.findMinSubArray(input, sum));
+		
+		System.out.println("Length of the longest substring: " + sw.findLenOfLongestSubStrWithKChar("cbbebi", 3));
 		
 	}
 
