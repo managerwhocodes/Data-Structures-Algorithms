@@ -25,7 +25,6 @@ public class SlidingWindow {
 		return result;				
 	}
 	
-	
 	protected int findMaxSumSubArray(int[] input, int k) {
 	    
 		int maxSum = Integer.MIN_VALUE;
@@ -42,6 +41,24 @@ public class SlidingWindow {
 		}
 	    return maxSum;
 	  }
+	
+	protected int findMinSubArray(int[] input, int s) {
+	    
+		int windowSum = 0;
+		int windowStart = 0;
+		int minLength = Integer.MAX_VALUE;
+		
+		for(int windowEnd = 0; windowEnd < input.length; windowEnd++){
+			windowSum += input[windowEnd];
+			
+			while(windowSum >=s) {
+				minLength = Math.min(minLength, windowEnd - windowStart + 1);
+				windowSum -= input[windowStart];
+				windowStart++;
+			}
+		}
+		return minLength == Integer.MAX_VALUE ? 0 : minLength;
+	  }
 
 	public static void main(String[] args) {
 		
@@ -55,6 +72,12 @@ public class SlidingWindow {
 		
 		System.out.println("Maximum sum of a subarray of size K: "
 		        + sw.findMaxSumSubArray(input , k));
+		
+		input = new int[] {3, 4, 1, 1, 6};
+		int sum = 8;
+		
+		System.out.println("Smallest subarray length: " + sw.findMinSubArray(input, sum));
+		
 	}
 
 }
