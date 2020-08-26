@@ -89,6 +89,26 @@ public class SlidingWindow {
 	    }
 	    return maxLength;
 	}
+	
+	protected int findLenOfLongestSubstringWithoutRep(String str) {
+	    
+	    if (str == null || str.length() == 0)
+		      throw new IllegalArgumentException("Invalid Input");
+		
+		int windowStart = 0;
+		int maxLength = 0;
+		Map<Character, Integer> map = new HashMap<Character, Integer>();
+		
+		for(int windowEnd = 0; windowEnd<str.length(); windowEnd++) {
+			char chRight = str.charAt(windowEnd);
+			if(map.containsKey(chRight)) {
+				windowStart = Math.max(windowStart, map.get(chRight)+1);
+			}
+			map.put(chRight, windowEnd);
+			maxLength = Math.max(maxLength, windowEnd - windowStart + 1); 
+		}
+		return maxLength;		
+	}
 
 	public static void main(String[] args) {
 		
@@ -109,6 +129,8 @@ public class SlidingWindow {
 		System.out.println("Smallest subarray length: " + sw.findMinSubArray(input, sum));
 		
 		System.out.println("Length of the longest substring: " + sw.findLenOfLongestSubStrWithKChar("cbbebi", 3));
+		
+		System.out.println("Length of the longest substring: " + sw.findLenOfLongestSubstringWithoutRep("aabccbb"));
 		
 	}
 
