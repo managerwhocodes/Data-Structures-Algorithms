@@ -19,7 +19,7 @@ public class BinarySearchTree {
 	
 	protected void insert(Node node) {
 		
-		if(root == null) {
+		if(isEmpty()) {
 			root = node;
 			return;
 		}
@@ -58,14 +58,45 @@ public class BinarySearchTree {
 		}
 		
 		if (node.getData() < currentNode.getData()) {
+			
 			currentNode.setLeftNode(insertRecursiveUtil(currentNode.getLeftNode(), node));
+			
 		} else if(node.getData() > currentNode.getData()) {
+			
 			currentNode.setRightNode(insertRecursiveUtil(currentNode.getRightNode(), node));
+			
 		} else {
 			return currentNode;
 		}
 
 		return currentNode;
+	}
+	
+	protected Node searchRecursive(int data) {
+		
+		if(isEmpty())
+			return null;
+		
+		return(searchRecursiveUtil(root, data));
+		
+	}
+	
+	protected Node searchRecursiveUtil(Node currentNode, int data) {
+		
+		if(currentNode == null || currentNode.getData() == data) {
+			return currentNode;
+		}
+		
+		if(currentNode.getData() > data) {
+			return searchRecursiveUtil(currentNode.getLeftNode(), data);
+		} else {
+			return searchRecursiveUtil(currentNode.getRightNode(), data);
+		}
+		
+	}
+	
+	protected boolean isEmpty() {
+		return root == null;
 	}
 	
 	protected void printTree(Node current) {
@@ -95,6 +126,13 @@ public class BinarySearchTree {
 		bst.insertRecursive(new Node(11));
 		
 		bst.printTree(bst.getRoot());
+		
+		Node temp = bst.searchRecursive(5);
+		if (temp != null) {
+			System.out.println("\nNode with data : " + temp.getData() + " found in BST");
+		}
+		else 
+			System.out.println("\nNot found in BST");
 	}
 
 }
