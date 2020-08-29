@@ -46,6 +46,28 @@ public class BinarySearchTree {
 		}
 	}
 	
+	protected void insertRecursive(Node node) {
+		
+		root = insertRecursiveUtil(this.root, node);	
+	}
+	
+	protected Node insertRecursiveUtil(Node currentNode, Node node) {
+		
+		if (currentNode == null) {
+			return node;
+		}
+		
+		if (node.getData() < currentNode.getData()) {
+			currentNode.setLeftNode(insertRecursiveUtil(currentNode.getLeftNode(), node));
+		} else if(node.getData() > currentNode.getData()) {
+			currentNode.setRightNode(insertRecursiveUtil(currentNode.getRightNode(), node));
+		} else {
+			return currentNode;
+		}
+
+		return currentNode;
+	}
+	
 	protected void printTree(Node current) {
 		
 		if (current == null) return;
@@ -69,6 +91,8 @@ public class BinarySearchTree {
 		bst.insert(new Node(12));
 		bst.insert(new Node(10));
 		bst.insert(new Node(14));
+		
+		bst.insertRecursive(new Node(11));
 		
 		bst.printTree(bst.getRoot());
 	}
