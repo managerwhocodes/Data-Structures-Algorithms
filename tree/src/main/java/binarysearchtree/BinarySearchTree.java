@@ -201,6 +201,44 @@ public class BinarySearchTree {
 		inOrderTraverse(node.getRightNode());
 	}
 	
+	static int  counter;
+	
+	protected Node findKthMax(Node node, int k) {
+		if(node==null){
+		      return null;
+		    }
+	    Node temp = findKthMax(node.getRightNode(), k);
+
+	    if(counter != k){
+	      counter++;
+	      temp = node;
+	    }
+
+	    if(counter == k){
+	      return temp;
+	    }else{
+	      return findKthMax(node.getLeftNode(), k);
+	    }
+	}
+	
+	String list = "";
+	
+	protected Node findAncestors(Node currentNode, int data) {
+		
+		if(currentNode == null || currentNode.getData() == data) {
+			//list.add(currentNode.getData());
+			return currentNode;
+		}
+		
+		if(currentNode.getData() > data) {
+			list = list + "," + currentNode.getData() ;
+			return findAncestors(currentNode.getLeftNode(), data);
+		} else {
+			list = list + "," + currentNode.getData();
+			return findAncestors(currentNode.getRightNode(), data);
+		}
+		
+	}
 		
 	protected boolean isEmpty() {
 		return root == null;
@@ -267,6 +305,12 @@ public class BinarySearchTree {
 		System.out.print("In-order traversal of tree recursive : ");
 		bst.inOrderTraverse(bst.root);
 		System.out.println("\n");
+		
+		System.out.print("Find Kth Max : " + bst.findKthMax(bst.root, 3).getData());
+		System.out.println("\n");
+		
+		bst.findAncestors(bst.root, 14);
+		System.out.println(bst.list.toString());
 		
 	}
 
