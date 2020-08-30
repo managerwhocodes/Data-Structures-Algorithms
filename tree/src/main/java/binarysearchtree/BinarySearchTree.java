@@ -1,5 +1,7 @@
 package binarysearchtree;
 
+import java.util.Arrays;
+
 public class BinarySearchTree {
 	
 	private Node root;
@@ -173,6 +175,32 @@ public class BinarySearchTree {
 		return temp;
 
 	}
+
+	protected void preOrderTraverse(Node node) {
+		if (node == null)
+			return;
+		System.out.print(node.getData() + ",");
+		preOrderTraverse(node.getLeftNode());
+		preOrderTraverse(node.getRightNode());
+	}
+	
+	protected void postOrderTraverse(Node node) {
+		if (node == null)
+			return;
+		postOrderTraverse(node.getLeftNode());
+		postOrderTraverse(node.getRightNode());
+		System.out.print(node.getData() + ",");
+	}
+
+	protected void inOrderTraverse(Node node) {
+		if (node == null) {
+			return;
+		}
+		inOrderTraverse(node.getLeftNode());
+		System.out.print(node.getData() + ",");
+		inOrderTraverse(node.getRightNode());
+	}
+	
 		
 	protected boolean isEmpty() {
 		return root == null;
@@ -226,6 +254,19 @@ public class BinarySearchTree {
 		}
 		else 
 			System.out.println("\nNot found in BST");
+		
+		
+		System.out.print("Pre-order traversal of tree recursive : ");
+		bst.preOrderTraverse(bst.root);
+		System.out.println("\n");
+		
+		System.out.print("Post-order traversal of tree recursive : ");
+		bst.postOrderTraverse(bst.root);
+		System.out.println("\n");
+		
+		System.out.print("In-order traversal of tree recursive : ");
+		bst.inOrderTraverse(bst.root);
+		System.out.println("\n");
 		
 	}
 
