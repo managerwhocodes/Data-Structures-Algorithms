@@ -2,6 +2,7 @@ package binarytree;
 
 import java.util.Queue;
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -76,6 +77,26 @@ public class BinaryTree{
             return 0; 
   
         return 1 + Math.max(height(node.getLeftNode()), height(node.getRightNode())); 
+    } 
+	
+	protected boolean isBalanced() {
+		AtomicBoolean isBalanced =  new AtomicBoolean(true);
+		isBalancedUtil(root, isBalanced);
+
+		return isBalanced.get();
+	}
+
+	protected int isBalancedUtil(Node node, AtomicBoolean isBalanced)	{ 
+        if (node == null || !isBalanced.get()) 
+            return 0; 
+  
+        int leftHeight = isBalancedUtil(node.getLeftNode(), isBalanced);
+        int rightHeight = isBalancedUtil(node.getRightNode(), isBalanced);
+        
+        if(Math.abs(leftHeight - rightHeight) > 1)
+        	isBalanced.set(false);
+        
+        return Math.max(leftHeight, rightHeight) + 1;
     } 
 	
 	protected boolean isComplete(Node node, int index, int size) {
@@ -238,7 +259,7 @@ public class BinaryTree{
 			ListNode head = null;
 			ListNode curr = null;
 			while(levelNodes>0){
-				Node n = (Node)q.remove();
+				Node n = q.remove();
 				ListNode ln = new ListNode(n.getValue());
 				if(head==null){
 					head = ln;
