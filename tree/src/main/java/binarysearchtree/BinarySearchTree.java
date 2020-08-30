@@ -1,6 +1,5 @@
 package binarysearchtree;
 
-
 public class BinarySearchTree {
 	
 	private Node root;
@@ -95,8 +94,102 @@ public class BinarySearchTree {
 		
 	}
 	
+	protected void delete(Node currentNode, int data) {
+		
+		if(isEmpty())
+			return;
+		
+		Node parentNode = null;
+		while(currentNode !=null && (currentNode.getData() != data)) {
+			parentNode = currentNode;
+			if(currentNode.getData() > data) {
+				currentNode = currentNode.getLeftNode();
+			} else {
+				currentNode = currentNode.getRightNode();
+			}
+				
+		}
+		
+		// Node not found
+		if(currentNode == null)
+			return;
+		
+		// check if it is the root node
+		if(root.getData() == currentNode.getData()) {
+			setRoot(null);
+			return;
+		}
+		
+		// Leaf Node
+		if(currentNode.getLeftNode() == null && currentNode.getRightNode() == null) {
+			
+			if(currentNode.getData() < parentNode.getData()) {
+				parentNode.setLeftNode(null);
+				return;
+			} else {
+				parentNode.setRightNode(null);
+				return;
+			}
+		} else if(currentNode.getRightNode() == null) {
+		
+			if(currentNode.getData() < parentNode.getData()){
+                parentNode.setLeftNode(currentNode.getLeftNode());
+                return;
+            }
+            else {
+                parentNode.setRightNode(currentNode.getLeftNode());
+                return;
+            }
+		} else if(currentNode.getLeftNode() == null) {
+            
+            if(currentNode.getData() < parentNode.getData()){
+            	parentNode.setLeftNode(currentNode.getRightNode());
+                return;
+            }
+            else{
+            	parentNode.setRightNode(currentNode.getRightNode());
+                return;
+            }
+
+        } else {
+        	Node leastNode = findLeastNode(currentNode.getRightNode());
+        	int temp = leastNode.getData();
+        	
+            delete(root, temp);
+            
+            currentNode.setData(temp);
+            return;
+        }
+	}
+	
+	private Node findLeastNode(Node currentNode) {
+
+		Node temp = currentNode;
+
+		while (temp.getLeftNode() != null) {
+			temp = temp.getLeftNode();
+		}
+
+		return temp;
+
+	}
+		
 	protected boolean isEmpty() {
 		return root == null;
+	}
+	
+	protected int size(Node node) {
+		if(node == null) 
+			return 0;
+		
+		return 1 + size(node.getLeftNode()) + size(node.getRightNode());
+	}
+	
+	protected int height(Node node) {
+		if(node == null)
+			return -1;
+		
+		return 1 + Math.max(height(node.getLeftNode()), height(node.getRightNode()));
 	}
 	
 	protected void printTree(Node current) {
@@ -133,6 +226,7 @@ public class BinarySearchTree {
 		}
 		else 
 			System.out.println("\nNot found in BST");
+		
 	}
 
 }
