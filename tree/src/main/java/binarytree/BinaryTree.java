@@ -80,6 +80,32 @@ public class BinaryTree{
         return 1 + Math.max(height(node.getLeftNode()), height(node.getRightNode())); 
     } 
 	
+	protected boolean checkBalanced(Node root) {
+		int result = checkBalancedUtil(root);
+		if(result > 0)
+			return true;
+		else
+			return false;
+	}
+	
+	protected int checkBalancedUtil(Node root) {		
+		if(root == null)
+			return 0;
+		
+		int leftHeight = checkBalancedUtil(root.getLeftNode());
+		if(leftHeight == -1)
+			return leftHeight;
+		
+		int rightHeight = checkBalancedUtil(root.getRightNode());
+		if(rightHeight == -1)
+			return rightHeight;
+		
+		if(Math.abs(leftHeight - rightHeight)>1)
+			return -1;
+		
+		return 1 + Math.max(leftHeight, rightHeight);
+	}
+	
 	protected boolean isBalanced() {
 		AtomicBoolean isBalanced =  new AtomicBoolean(true);
 		isBalancedUtil(root, isBalanced);
