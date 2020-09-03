@@ -331,7 +331,63 @@ public class BinaryTree{
 
 		return isBalanced;
 	}
+	
+	protected int findLevel(Node root, Node node, int index, int level) {
+		if(root == null || level != 0 )
+			return level;
 		
+		if(root.getValue() == node.getValue())
+			level = index;
+		
+		level = findLevel(root.getLeftNode(), node, index+1, level);
+		level = findLevel(root.getRightNode(), node, index+1, level);
+					
+		return level;
+	}
+	
+	// Print all cousins of a given node
+	// Cousins are node at same level with different parents
+	protected void printAllCousins(Node node) {
+		
+		int level = findLevel(root, node, 1, 0);
+		printCousins(root, node, level);
+	}
+	
+	protected void printCousins(Node root, Node node, int level) {
+		
+		if(root==null)
+			return;
+		
+		if(level == 1) {
+			System.out.println(root.getValue()+" ");
+			return;
+		}
+		
+		if(!(root.getLeftNode() != null && root.getValue() == node.getValue() 
+				|| root.getRightNode() != null && root.getValue() == node.getValue())) {
+			printCousins(root.getLeftNode(), node, level-1);
+			printCousins(root.getRightNode(), node, level-1);
+		}
+	}
+	
+	protected boolean isSibling(Node root, Node x, Node y) {
+		if(root == null)
+			return false;
+		
+		return ((root.getLeftNode() == x && root.getRightNode() == y)
+				|| (root.getLeftNode() == y && root.getRightNode() == x)
+				||	isSibling(root.getLeftNode(), x, y)
+				||	isSibling(root.getRightNode(), x, y));
+	}
+	
+	protected boolean isCousin(Node x, Node y) {
+		int levelx = findLevel(root, x, 1, 0);
+		int levely = findLevel(root, y, 1, 0);
+		
+		return ((levelx == levely) && !isSibling(root, x, y));
+	}
+	
+	
 	protected int getDiameter(Node root, AtomicInteger diameter) {
 
 		if (root == null) {
