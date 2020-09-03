@@ -3,6 +3,7 @@ package binarytree;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -330,6 +331,30 @@ public class BinaryTree{
 
 		return isBalanced;
 	}
+		
+	protected int getDiameter(Node root, AtomicInteger diameter) {
+
+		if (root == null) {
+			return 0;
+		}
+
+		int leftHeight = getDiameter(root.getLeftNode(), diameter);
+		int rightHeight = getDiameter(root.getRightNode(), diameter);
+
+		int maxDiameter = leftHeight + rightHeight + 1;
+
+		diameter.set(Math.max(diameter.get(), maxDiameter));
+
+		// important - return height of subtree rooted at current node
+		return Math.max(leftHeight, rightHeight) + 1;
+	}
+
+	protected int getDiameter(Node root){
+		AtomicInteger diameter = new AtomicInteger(0);
+		getDiameter(root, diameter);
+
+		return diameter.get();
+	}
 	
 		
 	public static void main(String args[]){
@@ -390,6 +415,30 @@ public class BinaryTree{
 		
 		System.out.println(tree.isHeightBalanced(tree.getRoot()));
 		
+		BinaryTree treeOne = new BinaryTree();
+		treeOne.setRoot(new Node(1));
+		treeOne.getRoot().setRightNode(new Node(2));
+		treeOne.getRoot().getRightNode().setLeftNode(new Node(3));
+		treeOne.getRoot().getRightNode().setRightNode(new Node(4));
+		treeOne.getRoot().getRightNode().getLeftNode().setLeftNode(new Node(5));
+		treeOne.getRoot().getRightNode().getLeftNode().setRightNode(new Node(6));
+		treeOne.getRoot().getRightNode().getRightNode().setLeftNode(new Node(7));
+		treeOne.getRoot().getRightNode().getRightNode().setRightNode(new Node(8));
 		
+		System.out.println(treeOne.getDiameter(treeOne.getRoot()));
+		
+		
+		BinaryTree treeTwo = new BinaryTree();
+		treeTwo.setRoot(new Node(1));
+		treeTwo.getRoot().setLeftNode(new Node(2));
+		treeTwo.getRoot().setRightNode(new Node(3));
+		treeTwo.getRoot().getLeftNode().setLeftNode(new Node(4));
+		treeTwo.getRoot().getLeftNode().setRightNode(new Node(5));
+		treeTwo.getRoot().getLeftNode().getRightNode().setRightNode(new Node(6));
+		//treeTwo.getRoot().getRightNode().setLeftNode(new Node(6));
+		//treeTwo.getRoot().getRightNode().setRightNode(new Node(7));
+
+		
+		System.out.println(treeTwo.getDiameter(treeTwo.getRoot()));
 	}
 }
