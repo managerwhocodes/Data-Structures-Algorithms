@@ -239,6 +239,28 @@ public class BinarySearchTree {
 		}
 		
 	}
+	
+	protected Node createBalancedBST(int []input) {
+		
+		Arrays.sort(input);
+		
+		return createBalancedBSTUtil(input,0,input.length-1,null);
+	}
+	
+	private Node createBalancedBSTUtil(int []input, int low, int high, Node root) {
+		
+		if(low > high)
+			return null;
+		
+		int mid = (low+high)/2;
+		
+		root = new Node(input[mid]);
+		root.setLeftNode(createBalancedBSTUtil(input, low, mid-1, root));
+		root.setRightNode(createBalancedBSTUtil(input, mid+1, high, root));
+		
+		return root;
+		
+	}
 		
 	protected boolean isEmpty() {
 		return root == null;
@@ -312,6 +334,11 @@ public class BinarySearchTree {
 		bst.findAncestors(bst.root, 14);
 		System.out.println(bst.list.toString());
 		
+		Node newBST = bst.createBalancedBST(new int[] {10,5,3,8,7,9,12,1,14});
+		
+		System.out.print("In-order traversal of tree recursive : ");
+		bst.inOrderTraverse(newBST);
+		System.out.println("\n");
 	}
 
 }
