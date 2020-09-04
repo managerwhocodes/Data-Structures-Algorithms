@@ -2,6 +2,7 @@ package graph;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class BFSAdjListIterative {
 
@@ -13,7 +14,7 @@ public class BFSAdjListIterative {
 		
 	private void bfs(GraphNode node) {
 		
-		LinkedList<GraphNode>queue = new LinkedList<GraphNode>();
+		Queue<GraphNode> queue = new LinkedList<GraphNode>();
 		queue.add(node);
 		
 		while(!queue.isEmpty()) {
