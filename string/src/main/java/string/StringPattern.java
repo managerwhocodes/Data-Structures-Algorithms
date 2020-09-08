@@ -134,6 +134,37 @@ public class StringPattern {
 				+ countOfPatternAsSubsequence(inputString, pattern, inputStrLength - 1, patternLength);
 	}
 	
+	protected boolean validateSentence(char[] chars) {
+		int index = 0;
+		if (Character.isLowerCase(chars[index])) {
+			return false;
+		}
+
+		while (index < chars.length) {
+			if (Character.isUpperCase(chars[index])) {
+				if (Character.isUpperCase(chars[index + 1])) {
+					return false;
+				}
+
+				if (index - 1 >= 0 && chars[index - 1] != ' ') {
+					return false;
+				}
+			}
+
+			if (chars[index] == ' ' && chars[index + 1] == ' ') {
+				return false;
+			}
+
+			index++;
+		}
+
+		if (chars[index - 2] == ' ' || chars[index - 1] != '.') {
+			return false;
+		}
+
+		return true;
+	}
+	
 	public static void main(String[] args) {
 		
 		StringPattern sp = new StringPattern();
