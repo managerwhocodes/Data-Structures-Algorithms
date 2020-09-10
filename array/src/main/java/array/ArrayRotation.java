@@ -45,6 +45,21 @@ public class ArrayRotation {
 			swap(arr, i, j);
 		}
 	}
+	
+	public int findSmallestMissingElement(int array[], int start, int end) { 
+        if (start > end) 
+            return end + 1; 
+  
+        if (start != array[start]) 
+            return start; 
+  
+        int mid = (start + end) / 2; 
+  
+        if (array[mid] == mid) 
+            return findSmallestMissingElement(array, mid+1, end); 
+  
+        return findSmallestMissingElement(array, start, mid); 
+    } 
 
 	public static void main(String[] args) {
 		
