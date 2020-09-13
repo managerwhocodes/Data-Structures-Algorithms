@@ -45,6 +45,58 @@ public class LongestBitonicSubsequence {
 			
 	}
 	
+	// Using top dowm
+	protected int findLBSLength_TD(int[] nums) {
+	    Integer[][] lds = new Integer[nums.length][nums.length+1];
+	    Integer[][] ldsRev = new Integer[nums.length][nums.length+1];
+
+	    int maxLength = 0;
+	    for(int i=0; i<nums.length; i++) {
+	      int c1 = findLDSLength_TD(lds, nums, i, -1);
+	      int c2 = findLDSLengthReverse_TD(ldsRev, nums, i, -1);
+	      maxLength = Math.max(maxLength, c1+c2-1);
+	    }
+
+	    return maxLength;
+	  }
+
+
+	private int findLDSLength_TD(Integer[][] dp, int[] nums, int currentIndex, int previousIndex) {
+	    if(currentIndex == nums.length)
+	      return 0;
+	
+	    if(dp[currentIndex][previousIndex+1] == null) {
+	
+	      int c1 = 0;
+	      if(previousIndex == -1 || nums[currentIndex] < nums[previousIndex])
+	        c1 = 1 + findLDSLength_TD(dp, nums, currentIndex+1, currentIndex);
+	
+	
+	      int c2 = findLDSLength_TD(dp, nums, currentIndex+1, previousIndex);
+	
+	      dp[currentIndex][previousIndex+1] = Math.max(c1, c2);
+	    }
+	
+	    return dp[currentIndex][previousIndex+1];
+	}
+
+	private int findLDSLengthReverse_TD(Integer[][] dp, int[] nums, int currentIndex, int previousIndex) {
+	    if(currentIndex < 0)
+	      return 0;
+	
+	    if(dp[currentIndex][previousIndex+1] == null) {
+	
+	      int c1 = 0;
+	      if(previousIndex == -1 || nums[currentIndex] < nums[previousIndex])
+	        c1 = 1 + findLDSLengthReverse_TD(dp, nums, currentIndex-1, currentIndex);
+	
+	      int c2 = findLDSLengthReverse_TD(dp, nums, currentIndex-1, previousIndex);
+	
+	      dp[currentIndex][previousIndex+1] = Math.max(c1, c2);
+	    }
+	    return dp[currentIndex][previousIndex+1];
+	}
+	
 	public static void main(String[] args) {
 		
 		LongestBitonicSubsequence lis = new LongestBitonicSubsequence();
