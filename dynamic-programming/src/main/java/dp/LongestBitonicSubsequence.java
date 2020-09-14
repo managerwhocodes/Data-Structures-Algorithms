@@ -45,7 +45,7 @@ public class LongestBitonicSubsequence {
 			
 	}
 	
-	// Using top dowm
+	// Using top down
 	protected int findLBSLength_TD(int[] nums) {
 	    Integer[][] lds = new Integer[nums.length][nums.length+1];
 	    Integer[][] ldsRev = new Integer[nums.length][nums.length+1];
@@ -96,6 +96,35 @@ public class LongestBitonicSubsequence {
 	    }
 	    return dp[currentIndex][previousIndex+1];
 	}
+	
+	// Using bottom up
+	protected int findLBSLength_BU(int[] nums) {
+	    int[] lds = new int[nums.length];
+	    int[] ldsReverse = new int[nums.length];
+
+	    for (int i = 0; i < nums.length; i++) {
+	      lds[i] = 1;
+	      for (int j = i - 1; j >= 0; j--)
+	        if (nums[j] < nums[i]) {
+	          lds[i] = Math.max(lds[i], lds[j] + 1);
+	        }
+	    }
+
+	    for (int i = nums.length - 1; i >= 0; i--) {
+	      ldsReverse[i] = 1;
+	      for (int j = i + 1; j < nums.length; j++)
+	        if (nums[j] < nums[i]) {
+	          ldsReverse[i] = Math.max(ldsReverse[i], ldsReverse[j] + 1);
+	        }
+	    }
+
+	    int maxLength = 0;
+	    for (int i = 0; i < nums.length; i++) {
+	      maxLength = Math.max(maxLength, lds[i] + ldsReverse[i] - 1);
+	    }
+
+	    return maxLength;
+	  }
 	
 	public static void main(String[] args) {
 		
