@@ -225,6 +225,28 @@ public class StringPermutation {
         return subsets;
     }
     
+    protected List<String> generateGeneralizedAbbreviation(String word) {
+		List<String> result = new ArrayList<String>();
+		generateAbbreviationRecursive(word, new StringBuilder(), 0, 0, result);
+		return result;
+    }
+
+    private void generateAbbreviationRecursive(String word, StringBuilder abWord, int start, int count, List<String> result) {
+	
+    	if (start == word.length()) {
+    		if (count != 0)
+    			abWord.append(count);
+    		result.add(abWord.toString());
+	    } else {
+
+	    	generateAbbreviationRecursive(word, new StringBuilder(abWord), start + 1, count + 1, result);
+	
+	    	if (count != 0)
+	    		abWord.append(count);
+	    	generateAbbreviationRecursive(word, new StringBuilder(abWord).append(word.charAt(start)), start + 1, 0, result);
+	    }
+    }
+    
     public static void main(String args[]) {
     	
         StringPermutation sp = new StringPermutation();
@@ -282,6 +304,8 @@ public class StringPermutation {
 		sp.groupAnagrams(words);
 		
 		System.out.println("String permutations are: " + sp.findLetterCaseStringPermutations("ab7c"));
+		
+	    System.out.println("Generalized abbreviation are: " + sp.generateGeneralizedAbbreviation("BAT"));
         
     }
 }
