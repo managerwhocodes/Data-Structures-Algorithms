@@ -38,6 +38,22 @@ public class KNumbers {
 	    return maxHeap.peek();
 	 }
 	
+	protected int minimumCostToConnectRopes(int[] ropeLengths) {
+	    PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>((n1, n2) -> n1 - n2);
+
+	    for (int i = 0; i < ropeLengths.length; i++)
+	      minHeap.add(ropeLengths[i]);
+
+	    int result = 0, temp = 0;
+	    while (minHeap.size() > 1) {
+	    	temp = minHeap.poll() + minHeap.poll();
+			result += temp;
+			minHeap.add(temp);
+	    }
+
+	    return result;
+	}
+	
 	public static void main(String[] args) {
 		
 		KNumbers kNums = new KNumbers();
@@ -51,6 +67,8 @@ public class KNumbers {
 	    int results = kNums.findKthSmallestNumber(new int[] { 1, 5, 12, 2, 11, 5 }, 3);
 	    System.out.println("Kth smallest number is: " + results);
 
+	    results = kNums.minimumCostToConnectRopes(new int[] { 1, 3, 11, 5, 2 });
+	    System.out.println("Minimum cost to connect ropes: " + result);
 
 	}
 }
