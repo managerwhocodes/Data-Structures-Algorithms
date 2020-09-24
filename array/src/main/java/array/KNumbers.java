@@ -1,7 +1,9 @@
 package array;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 
 public class KNumbers {
@@ -53,6 +55,29 @@ public class KNumbers {
 
 	    return result;
 	}
+	
+	protected List<Integer> findTopKFrequentNumbers(int[] nums, int k) {
+
+	    Map<Integer, Integer> numFrequencyMap = new HashMap<>();
+	    for (int n : nums)
+	    	numFrequencyMap.put(n, numFrequencyMap.getOrDefault(n, 0) + 1);
+
+	    PriorityQueue<Map.Entry<Integer, Integer>> minHeap = new PriorityQueue<Map.Entry<Integer, Integer>>((e1, e2) -> e1.getValue() - e2.getValue());
+ 
+	    for (Map.Entry<Integer, Integer> entry : numFrequencyMap.entrySet()) {
+	    	minHeap.add(entry);
+	    	if (minHeap.size() > k) {
+	    		minHeap.poll();
+	    	}
+	    }
+
+	    List<Integer> topNumbers = new ArrayList<>(k);
+	    while (!minHeap.isEmpty()) {
+	    	topNumbers.add(minHeap.poll().getKey());
+	    }
+	    	
+	    return topNumbers;
+	  }
 	
 	public static void main(String[] args) {
 		
