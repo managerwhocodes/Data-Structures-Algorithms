@@ -133,6 +133,23 @@ public class KNumbers {
 	    return distinctElementsCount;
 	}
 	
+	protected int findSumOfElements(int[] nums, int k1, int k2) {
+	    PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>((n1, n2) -> n1 - n2);
+
+	    for (int i = 0; i < nums.length; i++)
+	      minHeap.add(nums[i]);
+	
+	    for (int i = 0; i < k1; i++)
+	      minHeap.poll();
+	
+	    int elementSum = 0;
+
+	    for (int i = 0; i < k2 - k1 - 1; i++)
+	      elementSum += minHeap.poll();
+	
+	    return elementSum;
+	}
+	
 	public static void main(String[] args) {
 		
 		KNumbers kNums = new KNumbers();
@@ -148,6 +165,9 @@ public class KNumbers {
 
 	    results = kNums.minimumCostToConnectRopes(new int[] { 1, 3, 11, 5, 2 });
 	    System.out.println("Minimum cost to connect ropes: " + result);
+	    
+	    results = kNums.findSumOfElements(new int[] { 1, 3, 12, 5, 15, 11 }, 3, 6);
+	    System.out.println("Sum of all numbers between k1 and k2 smallest numbers: " + result);
 
 	}
 }
