@@ -133,6 +133,7 @@ public class KNumbers {
 	    return distinctElementsCount;
 	}
 	
+	/*
 	protected int findSumOfElements(int[] nums, int k1, int k2) {
 	    PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>((n1, n2) -> n1 - n2);
 
@@ -147,6 +148,26 @@ public class KNumbers {
 	    for (int i = 0; i < k2 - k1 - 1; i++)
 	      elementSum += minHeap.poll();
 	
+	    return elementSum;
+	}
+	*/
+	
+	protected int findSumOfElements(int[] nums, int k1, int k2) {
+		PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>((n1, n2) -> n2 - n1);
+
+	    for (int i = 0; i < nums.length; i++) {
+	    	if (i < k2 - 1) {
+	    		maxHeap.add(nums[i]);
+	    	} else if (nums[i] < maxHeap.peek()) {
+	    		maxHeap.poll();
+	    		maxHeap.add(nums[i]);
+	    	}
+	    }
+
+	    int elementSum = 0;
+	    for (int i = 0; i < k2 - k1 - 1; i++)
+	    	elementSum += maxHeap.poll();
+
 	    return elementSum;
 	}
 	
