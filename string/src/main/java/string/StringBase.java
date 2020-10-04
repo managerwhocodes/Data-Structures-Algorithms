@@ -21,6 +21,35 @@ public class StringBase {
 		}
 	}
 	
+	protected void findNdigitNumsWithEqualSum(String res, int n, int diff) {
+
+		if (n > 0) {
+			char ch = '0';
+
+			if (res.equals("")) {
+				ch = '1';
+			}
+
+			while (ch <= '9') {
+				int absdiff;
+
+				if ((n & 1) != 0) {
+					absdiff = diff + (ch - '0');
+				}
+				else {
+					absdiff = diff - (ch - '0');
+				}
+
+				findNdigitNums(res + ch, n - 1, absdiff);
+				ch++;
+			}
+		}
+
+		else if (n == 0 && Math.abs(diff) == 0) {
+			System.out.println(res);
+		}
+	}
+	
 	public static void main(String[] args) {
 
 		StringBase sb = new StringBase();
