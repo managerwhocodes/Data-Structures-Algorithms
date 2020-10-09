@@ -57,6 +57,31 @@ public class ArrayBase {
 		}
 	}
 	
+	protected int getCeil(int[] A, int x) {
+
+		int left = 0, right = A.length - 1;
+
+		int ceil = -1;
+
+		while (left <= right) {
+
+			int mid = (left + right) / 2;
+
+			if (A[mid] == x) {
+				return A[mid];
+			}
+			else if (x < A[mid]) {
+				ceil = A[mid];
+				right = mid - 1;
+			}
+
+			else
+				left = mid + 1;
+		}
+
+		return ceil;
+	}
+	
 	public static void main(String[] args) {
 		
 		ArrayBase arrayBase = new ArrayBase();
