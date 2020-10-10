@@ -82,6 +82,33 @@ public class ArrayBase {
 		return ceil;
 	}
 	
+	protected int getFloor(int[] A, int x) {
+		
+		int left = 0, right = A.length - 1;
+
+		int floor = -1;
+
+		while (left <= right) {
+
+			int mid = (left + right) / 2;
+
+			if (A[mid] == x) {
+				return A[mid];
+			}
+
+			else if (x < A[mid]) {
+				right = mid - 1;
+			}
+
+			else {
+				floor = A[mid];
+				left = mid + 1;
+			}
+		}
+
+		return floor;
+	}
+	
 	public static void main(String[] args) {
 		
 		ArrayBase arrayBase = new ArrayBase();
