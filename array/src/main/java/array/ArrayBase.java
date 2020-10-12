@@ -137,6 +137,35 @@ public class ArrayBase {
 
 		System.out.println("Equilibrium Index found at " + indices);
 	}
+	
+	protected int findMinDifference(int[] A, int x, int y) {
+		
+		int n = A.length;
+		int xIndex = n, yIndex = n;
+		int minDiff = Integer.MAX_VALUE;
+
+		for (int i = 0; i < n; i++) {
+
+			if (A[i] == x) {
+				xIndex = i;
+
+				if (yIndex != n) {
+					minDiff = Integer.min(minDiff,
+										   Math.abs(xIndex - yIndex));
+				}
+			}
+
+			if (A[i] == y) {
+				yIndex = i;
+
+				if (xIndex != n) {
+					minDiff = Integer.min(minDiff,
+										   Math.abs(xIndex - yIndex));
+				}
+			}
+		}
+		return minDiff;
+	}
 
 	
 	public static void main(String[] args) {
