@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class SumArray {
@@ -142,7 +143,30 @@ public class SumArray {
 									+ x + " and " + y);
 	}
 
+	protected void addArrays(int[] a, int[] b, List<Integer> result) {
+		
+		int m = a.length, n = b.length;
+		String str = "";
 
+		int i = 0;
+		while (i < m && i < n) {
+			str += (a[i] + b[i]);
+			i++;
+		}
+
+		while (i < m) {
+			str += (a[i++]);
+		}
+
+		while (i < n) {
+			str += (b[i++]);
+		}
+
+		char[] chars = str.toCharArray();
+		for (char c : chars) {
+			result.add(c - '0');
+		}
+	}
 
 	public static void main(String[] args) {
 
