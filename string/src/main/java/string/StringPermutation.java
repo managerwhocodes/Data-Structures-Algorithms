@@ -247,6 +247,22 @@ public class StringPermutation {
 	    }
     }
     
+    protected void printAllCombinations(List<List<String>> list, String res, int n) {
+
+    	if (n == list.size()) {
+    		System.out.println(res.substring(1));
+    		return;
+    	}
+	
+    	int m = list.get(n).size();
+	
+    	for (int i = 0; i < m; i++) {
+
+    		String out = res + " " + list.get(n).get(i);
+    		printAllCombinations(list, out, n + 1);
+    	}
+	}
+    
     public static void main(String args[]) {
     	
         StringPermutation sp = new StringPermutation();
@@ -306,6 +322,14 @@ public class StringPermutation {
 		System.out.println("String permutations are: " + sp.findLetterCaseStringPermutations("ab7c"));
 		
 	    System.out.println("Generalized abbreviation are: " + sp.generateGeneralizedAbbreviation("BAT"));
+	    
+	    List<List<String>> wordlist = Arrays.asList(
+				Arrays.asList("John", "Emma"),
+				Arrays.asList( "Plays", "Hates", "Watches" ),
+				Arrays.asList( "Cricket", "Soccer", "Chess" )
+			);
+
+	    sp.printAllCombinations(wordlist, "", 0);
         
     }
 }
