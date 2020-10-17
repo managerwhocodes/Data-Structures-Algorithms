@@ -50,6 +50,30 @@ public class StringBase {
 		}
 	}
 	
+	protected String removeAdjDup(String str) {
+
+		char[] chars = str.toCharArray();
+		char prev = chars[0];
+
+		int k = 0;
+		int i = 1;
+
+		while (i < chars.length) {
+
+			if (prev != chars[i]) {
+				chars[++k] = chars[i++];
+				prev = chars[k];			
+			}
+			else {
+				while (i < chars.length && prev == chars[i]) {
+					i++;
+				}
+				prev = chars[--k];
+			}
+		}
+		return new String(chars).substring(0, k + 1);
+	}
+	
 	public static void main(String[] args) {
 
 		StringBase sb = new StringBase();
