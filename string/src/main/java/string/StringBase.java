@@ -1,5 +1,7 @@
 package string;
 
+import java.util.Stack;
+
 public class StringBase {
 
 	protected void findNdigitNums(String res, int n, int sum) {
@@ -73,6 +75,37 @@ public class StringBase {
 		}
 		return new String(chars).substring(0, k + 1);
 	}
+	
+	protected int findMaxLenOfBalancedParanthesis(String str) {
+
+		Stack<Integer> stack = new Stack<>();
+
+		stack.push(-1);
+		int len = 0;
+
+		for (int i = 0; i < str.length(); i++) {
+
+			if (str.charAt(i) == '(') {
+				stack.push(i);
+			} else {
+
+				stack.pop();
+
+				if (stack.empty()) {
+					stack.push(i);
+					continue;
+				}
+
+				int curr_len = i - stack.peek();
+
+				if (len < curr_len) {
+					len = curr_len;
+				}
+			}
+		}
+		return len;
+	}
+
 	
 	public static void main(String[] args) {
 
