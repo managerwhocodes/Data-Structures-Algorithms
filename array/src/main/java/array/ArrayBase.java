@@ -198,6 +198,29 @@ public class ArrayBase {
 		}
 	}
 	
+	protected boolean canPairsWithEvenSum(int[] arr, int n) {
+
+	    if (n % 2 == 1)
+	        return false;
+	 
+	    int oddCount = 0, evenCount = 0;
+	 
+	    for(int i = 0; i < n; i++) {
+	         
+	        // Count even element
+	        if (arr[i] % 2 == 0)
+	        	evenCount++;
+	        else
+	        	oddCount++;
+	    }
+	 
+	    if (evenCount % 2 == 0 && 
+	    		oddCount % 2 == 0) {
+	        return true;
+	    }
+	    return false;
+	}
+	
 	public static void main(String[] args) {
 		
 		ArrayBase arrayBase = new ArrayBase();
