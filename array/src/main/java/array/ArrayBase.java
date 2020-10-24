@@ -221,6 +221,18 @@ public class ArrayBase {
 	    return false;
 	}
 	
+	protected int clostVal(int arr[], int N, int K)	{
+
+		int res = arr[0];
+
+		for(int i = 1; i < N; i++)  {
+			if (Math.abs(K - res) > Math.abs(K - arr[i])) {
+				res = arr[i];
+			}
+		}
+		return res;
+	}
+	
 	public static void main(String[] args) {
 		
 		ArrayBase arrayBase = new ArrayBase();
