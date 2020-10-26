@@ -245,6 +245,21 @@ public class ArrayBase {
 	    return true;
 	}
 	
+	protected void countSmallerPrimes(int ar[], int N) {
+	    
+		for(int i = 0; i < N; i++) {
+
+	        int count = 0;
+	        for(int j = i + 1; j < N; j++) 
+	        {
+	            if (ar[j] <= ar[i] && isPrime(ar[j])) {
+	                count++;
+	            }
+	        }
+	        System.out.print(count + " ");
+	    }
+	}
+	
 	public static void main(String[] args) {
 		
 		ArrayBase arrayBase = new ArrayBase();
