@@ -221,7 +221,7 @@ public class ArrayBase {
 	    return false;
 	}
 	
-	protected int closesttVal(int arr[], int N, int K)	{
+	protected int closestVal(int arr[], int N, int K)	{
 
 		int res = arr[0];
 
@@ -260,16 +260,30 @@ public class ArrayBase {
 	    }
 	}
 	
+	// Function that finds the sum of all the element of subarrays of odd length
+	protected int oddLengthSumofSubArray(int []arr) {
+	     
+	    int sum = 0;
+	    int l = arr.length;
+	 
+	    for(int i = 0; i < l; i++)  {     
+	        sum += (((i + 1) * (l - i) + 1) / 2) * arr[i];
+	    }
+	 
+	    return sum;
+	}
+	
 	public static void main(String[] args) {
 		
 		ArrayBase arrayBase = new ArrayBase();
 		
-		int[] A = { -1, 5, 4, 2, 0, 3, 1 };
+		int[] arr = { -1, 5, 4, 2, 0, 3, 1 };
 
-		if (arrayBase.checkConsecutive(A)) {
-			System.out.print("Array contains consecutive integers");
+		if (arrayBase.checkConsecutive(arr)) {
+			System.out.println("Array contains consecutive integers");
 		} else {
-			System.out.print("Array do not contain consecutive integers");
+			System.out.println("Array do not contain consecutive integers");
 		}
+		System.out.println(arrayBase.oddLengthSumofSubArray(arr));
 	}
 }
