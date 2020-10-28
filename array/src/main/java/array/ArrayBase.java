@@ -273,6 +273,24 @@ public class ArrayBase {
 	    return sum;
 	}
 	
+	protected boolean containsUniqueElement(int arr[]) {
+
+        int x = arr[0];
+        int flag = 1;
+ 
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != x) {
+                flag = 0;
+                break;
+            }
+        }
+ 
+        if (flag == 1)
+            return true;
+        else
+            return false;
+    }
+	
 	public static void main(String[] args) {
 		
 		ArrayBase arrayBase = new ArrayBase();
