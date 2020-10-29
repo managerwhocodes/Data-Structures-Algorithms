@@ -19,7 +19,7 @@ public class ArrayRotation {
 		reverse(arr, 0, arr.length - 1);
 	}
 	
-	public void rightRotate(int[] arr, int r) {
+	protected void rightRotate(int[] arr, int r) {
 		
 		if(r > arr.length || r < 0)
 			return;
@@ -33,6 +33,13 @@ public class ArrayRotation {
 		// Reverse the whole array
 		reverse(arr, 0, arr.length - 1);
 	}
+	
+	protected void splitArrayAddFirstToLast(int arr[], int k, int n) 
+	{ 
+		reverse(arr, 0, n - 1); 
+		reverse(arr, 0, n - k - 1); 
+		reverse(arr, n - k, n - 1); 
+	} 
 	
 	protected void swap(int[] arr, int i, int j) {
 		int data = arr[i];
