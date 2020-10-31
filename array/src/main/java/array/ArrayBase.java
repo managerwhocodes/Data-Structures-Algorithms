@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+import java.util.Random; 
 
 public class ArrayBase {
 
@@ -289,7 +290,21 @@ public class ArrayBase {
             return true;
         else
             return false;
-    }
+    	}
+	
+	protected void randomize(int arr[], int n) { 
+	
+		Random r = new Random(); 
+
+		for (int i = n-1; i > 0; i--) { 
+
+		    int j = r.nextInt(i+1); 
+
+		    int temp = arr[i]; 
+		    arr[i] = arr[j]; 
+		    arr[j] = temp; 
+		} 
+	} 
 	
 	public static void main(String[] args) {
 		
