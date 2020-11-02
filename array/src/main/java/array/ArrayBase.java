@@ -306,6 +306,25 @@ public class ArrayBase {
 		} 
 	} 
 	
+	protected void arrangeEvenAndOdd(int arr[], int n){ 
+       
+        	int i = -1, j = 0; 
+        	while (j != n) { 
+            		if (arr[j] % 2 == 0) 
+			{ 
+				i++; 
+				int temp = arr[i]; 
+				arr[i] = arr[j]; 
+				arr[j] = temp; 
+			} 
+            	j++; 
+        } 
+       
+        // Printing segregated array 
+        for (int k = 0; k < n; k++) 
+             System.out.print(arr[k] + " "); 
+    } 
+	
 	public static void main(String[] args) {
 		
 		ArrayBase arrayBase = new ArrayBase();
