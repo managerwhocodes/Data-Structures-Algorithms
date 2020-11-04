@@ -53,7 +53,7 @@ public class ArrayRotation {
 		}
 	}
 	
-	public int findSmallestMissingElement(int array[], int start, int end) { 
+	protected int findSmallestMissingElement(int array[], int start, int end) { 
         if (start > end) 
             return end + 1; 
   
@@ -67,6 +67,38 @@ public class ArrayRotation {
   
         return findSmallestMissingElement(array, start, mid); 
     } 
+	
+	protected int countRotationToSort(int[] arr, int low, int high) {  
+		if (low > high) {  
+		    return 0;  
+		}  
+  
+        	int mid = low + (high - low) / 2;  
+  
+		if (mid < high && arr[mid] > arr[mid + 1]) {  
+		    return mid + 1;  
+		}  
+  
+		if (mid > low && arr[mid] < arr[mid - 1]) {  
+		    return mid;  
+		}  
+   
+		if (arr[mid] > arr[low]) {  
+		    return countRotation(arr, mid + 1, high);  
+		}  
+  
+		if (arr[mid] < arr[high]) {  
+		    return countRotation(arr, low, mid - 1);  
+		}  else {  
+            		int rightIndex = countRotation(arr, mid + 1, high);  
+           		int leftIndex = countRotation(arr, low, mid - 1);  
+  
+		    if (rightIndex == 0) {  
+			return leftIndex;  
+		    }  
+            	return rightIndex;  
+        	}  
+    	}
 
 	public static void main(String[] args) {
 		
