@@ -325,6 +325,17 @@ public class ArrayBase {
              System.out.print(arr[k] + " "); 
     } 
 	
+	protected int minStepsToRearrangeToPower(int arr[], int n) { 
+
+        	Arrays.sort(arr); 
+        	int ans = 0; 
+  
+        	for (int i = 0; i < n; i++) { 
+            		ans += Math.abs(arr[i] - Math.pow(2, i)); 
+        	} 
+        	return ans; 
+    	} 
+	
 	public static void main(String[] args) {
 		
 		ArrayBase arrayBase = new ArrayBase();
