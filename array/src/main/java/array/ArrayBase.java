@@ -353,6 +353,13 @@ public class ArrayBase {
         	return duplicates;
     	}
 
+	protected void updateArrayByNextElement(int arr[], int n) { 
+
+	    for (int i = 0; i <= n - 2; i++) 
+		arr[i] = arr[i + 1]; 
+
+	    arr[n - 1] = -1;
+	} 
 
 	
 	public static void main(String[] args) {
