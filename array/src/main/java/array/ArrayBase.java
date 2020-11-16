@@ -423,6 +423,25 @@ public class ArrayBase {
 	    return result;
 	}
 	
+	// Function to find minimum index of repeating element
+	protected int findMinIndex(int[] arr)
+	{
+		int minIndex = arr.length;
+		Set<Integer> set = new HashSet<>();
+
+		for (int i = arr.length - 1; i >= 0; i--) {
+			if (set.contains(arr[i])) {
+				minIndex = i;
+			}
+			else {
+				set.add(arr[i]);
+			}
+		}
+		return minIndex;
+	}
+	
+	
+	
 	public static void main(String[] args) {
 		
 		ArrayBase arrayBase = new ArrayBase();
