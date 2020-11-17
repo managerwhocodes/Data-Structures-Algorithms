@@ -440,6 +440,7 @@ public class ArrayBase {
 		return minIndex;
 	}
 	
+	// find duplicate element in limited range array
 	protected int findDuplicate(int[] arr)
 	{
 
@@ -451,8 +452,6 @@ public class ArrayBase {
 			}
 			visited[value] = true;
 		}
-
-
 		return -1;
 	}
 	
