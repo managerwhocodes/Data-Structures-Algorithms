@@ -440,6 +440,21 @@ public class ArrayBase {
 		return minIndex;
 	}
 	
+	protected int findDuplicate(int[] arr)
+	{
+
+		boolean visited[] = new boolean[arr.length + 1];
+
+		for (int value : arr) {
+			if (visited[value]) {
+				return value;
+			}
+			visited[value] = true;
+		}
+
+
+		return -1;
+	}
 	
 	
 	public static void main(String[] args) {
