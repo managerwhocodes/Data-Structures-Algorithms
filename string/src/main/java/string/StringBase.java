@@ -106,6 +106,24 @@ public class StringBase {
 		return len;
 	}
 	
+	
+	protected boolean isConsonant(char ch) { 
+
+		ch = Character.toUpperCase(ch); 
+		return !(ch == 'A' || ch == 'E' ||  
+			ch == 'I' || ch == 'O' ||  
+			ch == 'U') && ch >= 65 && ch <= 90; 
+    	} 
+   
+    	protected int countConsonants(String str) { 
+		
+		int count = 0; 
+		for (int i = 0; i < str.length(); i++)  
+		    if (isConsonant(str.charAt(i))) 
+			++count; 
+		return count; 
+    	} 
+	
 	protected void swap(char[] c, int i, int j) {
 		char ch = c[i];
 		c[i] = c[j];
