@@ -188,6 +188,29 @@ public class StringBase {
 		} 
 		return sb.toString(); 
     	} 
+	
+	protected String reverseVowel(String str) { 
+        	
+		int j = 0; 
+
+        	char[] ch = str.toCharArray(); 
+        	String vowel = ""; 
+		
+		for (int i = 0; i < ch.length; i++) { 
+		    if (isVowel(ch[i])) { 
+			j++; 
+			vowel += ch[i]; 
+		    } 
+		} 
+  
+		for (int i = 0; i < ch.length; i++) { 
+		    if (isVowel(ch[i])) { 
+			ch[i] = vowel.charAt(--j); 
+		    } 
+		} 
+  
+        	return String.valueOf(ch); 
+    	} 
 
 	public static void main(String[] args) {
 
