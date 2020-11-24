@@ -211,6 +211,11 @@ public class StringBase {
   
         	return String.valueOf(ch); 
     	} 
+	
+	protected int countNonEmptySubstrings(String str) { 
+        	int n = str.length(); 
+        	return n * (n + 1) / 2; 
+    	} 
 
 	public static void main(String[] args) {
 
