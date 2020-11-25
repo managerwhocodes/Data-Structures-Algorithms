@@ -216,6 +216,17 @@ public class StringBase {
         	int n = str.length(); 
         	return n * (n + 1) / 2; 
     	} 
+	
+	
+	protected int countWords(String str) { 
+          
+		if (str == null || str.isEmpty()) 
+		    return 0; 
+
+		String[] words = str.split("\\s+"); 
+		
+		return words.length; 
+    	} 
 
 	public static void main(String[] args) {
 
