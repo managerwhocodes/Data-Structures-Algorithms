@@ -262,6 +262,15 @@ public class StringBase {
 			str.replace(i, i+1, Character.toLowerCase(c)+""); 
 		} 
      	} 
+	
+	
+	protected boolean isNumber(String s) {
+		for (int i = 0; i < s.length(); i++)
+		    if (Character.isDigit(s.charAt(i)) == false)
+			return false;
+
+		return true;
+    	}
 
 	public static void main(String[] args) {
 
