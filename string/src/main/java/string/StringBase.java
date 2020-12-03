@@ -284,6 +284,13 @@ public class StringBase {
 
 	    return String.valueOf(ch); 
 	} 
+	
+	protected char firstUpperCaseChar(String str) { 
+	    for (int i = 0; i < str.length(); i++) 
+		if (Character.isUpperCase(str.charAt(i))) 
+		    return str.charAt(i); 
+	    return 0; 
+	}
 
 	public static void main(String[] args) {
 
