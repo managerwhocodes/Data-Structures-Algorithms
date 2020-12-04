@@ -291,6 +291,21 @@ public class StringBase {
 		    return str.charAt(i); 
 	    return 0; 
 	}
+	
+	protected int countSubstringWithEqualEnds(String str) { 
+
+	    int result = 0; 
+	    int n = str.length(); 
+	    int[] count =  new int[26]; 
+
+	    for (int i = 0; i < n; i++) 
+		count[str.charAt(i)-'a']++; 
+
+	    for (int i = 0; i < 26; i++) 
+		result += (count[i] * (count[i] + 1) / 2); 
+
+	    return result; 
+	} 
 
 	public static void main(String[] args) {
 
