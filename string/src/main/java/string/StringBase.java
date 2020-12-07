@@ -337,7 +337,25 @@ public class StringBase {
 	    for(String word : words) { 
 		System.out.print(Character.toUpperCase(word.charAt(0)) + " "); 
 	    } 
-	} 
+	}
+	
+	protected boolean checkIfConcat(String str1, String str2) {
+
+	    int lengthStr1 = str1.length();
+	    int lengthStr2 = str2.length();
+
+	    if (lengthStr1 % lengthStr2 != 0) {
+		return false;
+	    }
+
+	    for(int i = 0; i < lengthStr1; i++) {
+		if (str1.charAt(i) != 
+		    str2.charAt(i % lengthStr2)) {
+		    return false;
+		}
+	    }
+	    return true;
+	}
 
 	public static void main(String[] args) {
 
