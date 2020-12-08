@@ -356,6 +356,21 @@ public class StringBase {
 	    }
 	    return true;
 	}
+	
+	protected String mirrorChars(String str, int n) { 
+
+	    String reverseAlphabet = "zyxwvutsrqponmlkjihgfedcba"; 
+	    int strLength = str.length(); 
+	    String answer = ""; 
+
+	    for (int i = 0; i < n; i++) 
+		answer = answer + str.charAt(i); 
+
+	    for (int i = n; i < strLength; i++) 
+		answer = answer + reverseAlphabet.charAt(str.charAt(i) - 'a'); 
+
+	    return answer; 
+	} 
 
 	public static void main(String[] args) {
 
