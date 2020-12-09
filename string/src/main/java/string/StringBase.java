@@ -370,7 +370,27 @@ public class StringBase {
 		answer = answer + reverseAlphabet.charAt(str.charAt(i) - 'a'); 
 
 	    return answer; 
-	} 
+	}
+	
+	protected ArrayList<String> generateStringUsingSpace(String str) {
+ 
+	    ArrayList<String> strList = new ArrayList<String>();
+
+	    if (str.length() == 1) {
+		strList.add(str);
+		return strList;
+	    }
+
+	    ArrayList<String> strListTemp = generateStringUsingSpace(str.substring(1, str.length()));
+
+	    for (int i = 0; i < strListTemp.size(); i++) {
+		strList.add(str.charAt(0) + strListTemp.get(i));
+		strList.add(str.charAt(0) + " " + strListTemp.get(i));
+	    }
+
+	    return strList;
+	}
+
 
 	public static void main(String[] args) {
 
