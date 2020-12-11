@@ -391,6 +391,18 @@ public class StringBase {
 	    return strList;
 	}
 
+	protected boolean isLeftOrRightShiftEqual(String str) {   
+
+	    boolean check = true;  
+
+	    for(int i = 0; i < str.length(); i++) {  
+	       if (str.charAt(i) != str.charAt((i + 2) % str.length())) {  
+		   check = false;  
+		   break;  
+	       }  
+	    }     
+	    return check;
+	}
 
 	public static void main(String[] args) {
 
