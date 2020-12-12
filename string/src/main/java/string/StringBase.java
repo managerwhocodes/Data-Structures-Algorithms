@@ -403,6 +403,20 @@ public class StringBase {
 	    }     
 	    return check;
 	}
+	
+	protected String removeCharRecursive(String str, char ch) { 
+      
+	    // Base Case 
+	    if (str.length() == 0) { 
+		return ""; 
+	    } 
+
+	    if (str.charAt(0) == ch) { 
+		return removeCharRecursive(str.substring(1), ch); 
+	    } 
+
+	    return str.charAt(0) + removeCharRecursive(str.substring(1), ch); 
+	}
 
 	public static void main(String[] args) {
 
