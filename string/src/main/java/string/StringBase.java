@@ -417,6 +417,19 @@ public class StringBase {
 
 	    return str.charAt(0) + removeCharRecursive(str.substring(1), ch); 
 	}
+	
+	protected String replaceChars(String str, char ch1, char ch2) { 
+          
+	    String resultStr = ""; 
+
+	    for (int i = 0; i < str.length(); i++) { 
+		if (str.charAt(i) == ch1)  
+		    resultStr += ch2;  
+		else
+		    resultStr += str.charAt(i);    
+	    } 
+	    return resultStr;       
+	} 
 
 	public static void main(String[] args) {
 
