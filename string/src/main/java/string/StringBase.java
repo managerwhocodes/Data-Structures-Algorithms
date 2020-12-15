@@ -430,6 +430,19 @@ public class StringBase {
 	    } 
 	    return resultStr;       
 	} 
+	
+	protected boolean isAllCharactersSame(String str) {
+
+	    Set<Character> charSet = new HashSet<Character>(); 
+
+	    for(int i = 0; i < str.length(); i++)
+		charSet.add(str.charAt(i));
+
+	    if (charSet.size() == 1)
+		return true;
+	    else
+		return false;
+	}
 
 	public static void main(String[] args) {
 
