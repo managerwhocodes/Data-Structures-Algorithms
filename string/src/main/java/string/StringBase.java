@@ -443,6 +443,21 @@ public class StringBase {
 	    else
 		return false;
 	}
+	
+	protected char findExtraCharcter(char []strA, char[] strB) { 
+
+	    int result = 0, i; 
+
+	    for (i = 0; i < strA.length(); i++) { 
+		result ^= strA.charAt(i); 
+	    } 
+
+	    for (i = 0; i < strB.length(); i++) { 
+		result ^= strB.charAt(i); 
+	    } 
+
+	    return ((char)(result)); 
+	}
 
 	public static void main(String[] args) {
 
