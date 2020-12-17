@@ -458,6 +458,23 @@ public class StringBase {
 
 	    return ((char)(result)); 
 	}
+	
+	protected char firstRepeatingChar(String str) { 
+
+	    HashSet<Character> charMap = new HashSet<>(); 
+	    char[] arr = str.toCharArray(); 
+
+	    for(int i=0; i<=arr.length-1; i++) { 
+
+		char chr = arr[i]; 
+
+		if (charMap.contains(chr)) 
+		    return chr; 
+		else
+		    charMap.add(chr); 
+	    } 
+	    return '\0'; 
+	} 
 
 	public static void main(String[] args) {
 
