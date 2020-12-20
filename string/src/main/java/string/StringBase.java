@@ -494,6 +494,25 @@ public class StringBase {
 		System.out.println(entry.getKey() + " - " + entry.getValue());
 	    }
 	}
+	
+	protected String reverseWordExceptFirstAndLast(String str)  {  
+
+	    int i = 1;  
+	    int j = str.length() - 2;  
+
+	    char[] strchar = str.toCharArray(); 
+
+	    while (i < j) {  
+		char temp = strchar[i];  
+		strchar[i] = strchar[j];  
+		strchar[j] = temp;  
+		i++;  
+		j--;  
+	    }  
+
+	    str = new String(strchar); 
+	    return str;  
+	}
 
 	public static void main(String[] args) {
 
