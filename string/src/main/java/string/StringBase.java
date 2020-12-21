@@ -513,6 +513,28 @@ public class StringBase {
 	    str = new String(strchar); 
 	    return str;  
 	}
+	
+	protected String removeFirstandLastOccurence(String str, char ch) { 
+
+	    for (int i = 0; i < str.length(); i++) { 
+
+		if (str.charAt(i) == ch) { 
+		    str = str.substring(0, i) +  
+			str.substring(i + 1); 
+		    break; 
+		} 
+	    } 
+
+	    for (int i = s.length() - 1; i > -1; i--) { 
+
+		if (s.charAt(i) == ch) { 
+		    str = str.substring(0, i) +  
+			str.substring(i + 1); 
+		    break; 
+		} 
+	    } 
+	    return str; 
+	}
 
 	public static void main(String[] args) {
 
