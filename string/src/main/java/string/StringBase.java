@@ -535,6 +535,27 @@ public class StringBase {
 	    } 
 	    return str; 
 	}
+	
+	protected char maxRepeating(String str) { 
+
+	    int count = 0; 
+	    int currentCount = 1; 
+	    char res = str.charAt(0); 
+
+	    for (int i = 0; i < str.length(); i++) { 
+
+		if (i < str.length() - 1 && str.charAt(i) == str.charAt(i + 1)) 
+		    currentCount++; 
+		else { 
+		    if (currentCount > count) { 
+			count = currentCount; 
+			res = str.charAt(i); 
+		    } 
+		    currentCount = 1; 
+		} 
+	    } 
+	    return res; 
+	} 
 
 	public static void main(String[] args) {
 
