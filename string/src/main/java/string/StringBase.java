@@ -556,6 +556,15 @@ public class StringBase {
 	    } 
 	    return res; 
 	} 
+	
+	protected int findLastIndex(String str, Character char) { 
+	    int index = -1; 
+	    for (int i = 0; i < str.length(); i++) 
+		if (str.charAt(i) == char) 
+		    index = i; 
+	    return index; 
+	} 
+
 
 	public static void main(String[] args) {
 
