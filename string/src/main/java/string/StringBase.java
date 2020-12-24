@@ -564,7 +564,17 @@ public class StringBase {
 		    index = i; 
 	    return index; 
 	} 
+	
+	protected boolean isWordPresent(String sentence, String word) { 
 
+	    String []s = sentence.split(" "); 
+
+	    for ( String temp :s) { 
+		if (temp.compareTo(word) == 0) 
+		    return true; 
+	    } 
+	    return false; 
+	}
 
 	public static void main(String[] args) {
 
