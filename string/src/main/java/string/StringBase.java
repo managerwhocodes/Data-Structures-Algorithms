@@ -586,6 +586,13 @@ public class StringBase {
 		    str.replace(i, i+1, Character.toLowerCase(c)+""); 
 	    } 
 	}
+	
+	protected long countNumberOfStrings(String str) {
+     
+	    int n = str.length() - 1;
+	    long count = (long)(Math.pow(2, n));
+	    return count;
+	}
 
 	public static void main(String[] args) {
 
