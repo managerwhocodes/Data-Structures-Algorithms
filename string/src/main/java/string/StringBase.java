@@ -593,6 +593,26 @@ public class StringBase {
 	    long count = (long)(Math.pow(2, n));
 	    return count;
 	}
+	
+	
+	
+	protected boolean makeAndCheckString(List<String> words, String str) { 
+	    int n = words.size(); 
+	    boolean first = false, second = false; 
+
+	    for (int i = 0; i < n; i++) { 
+		if (words.get(i) == str) 
+		    return true; 
+
+		if (str.charAt(0) == words.get(i).charAt(1))  
+		    first = true;          
+		if (str.charAt(1) == words.get(i).charAt(0))  
+		    second = true; 
+		if (first && second) 
+		    return true;  
+	    }     
+	    return false;  
+	} 
 
 	public static void main(String[] args) {
 
