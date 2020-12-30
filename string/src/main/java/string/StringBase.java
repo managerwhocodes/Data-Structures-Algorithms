@@ -634,6 +634,31 @@ public class StringBase {
 	    } 
 	    return res; 
 	}
+	
+	
+	protected String concatWithUncommonChars(String s1, String s2) { 
+
+	    String res = ""; 
+	    int i; 
+	    HashMap<Character, Integer> m = new HashMap<Character, Integer>(); 
+
+	    for (i = 0; i < s2.length(); i++) {
+		m.put(s2.charAt(i), 1); 
+	    }
+
+	    for (i = 0; i < s1.length(); i++) {
+		if (!m.containsKey(s1.charAt(i))) 
+		    res += s1.charAt(i); 
+		else
+		    m.put(s1.charAt(i), 2); 
+	    }
+
+	    for (i = 0; i < s2.length(); i++) {
+		if (m.get(s2.charAt(i)) == 1) 
+		    res += s2.charAt(i); 
+	    }
+	    return res; 
+	} 
 
 	public static void main(String[] args) {
 
