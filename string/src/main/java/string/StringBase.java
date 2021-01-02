@@ -658,7 +658,25 @@ public class StringBase {
 		    res += s2.charAt(i); 
 	    }
 	    return res; 
-	} 
+	}
+	
+	protected void addSpaceInSentence(String sentence) { 
+	    char[] str=sentence.toCharArray(); 
+	    String result = "";
+
+	    for (int i=0; i < str.length; i++) { 
+
+		if (str[i]>='A' && str[i]<='Z') { 
+		    str[i] = (char)(str[i]+32); 
+		    if (i != 0) 
+			result = result + " "; 
+		    result = result + str[i]; 
+		} 
+		else
+		    result = result + str[i]; 
+	    } 
+	    retuen result;
+	}
 
 	public static void main(String[] args) {
 
