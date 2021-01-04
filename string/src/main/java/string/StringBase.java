@@ -677,6 +677,15 @@ public class StringBase {
 	    } 
 	    retuen result;
 	}
+	
+	protected int vowelPairs(String str, int n) { 
+	    int count = 0; 
+	    for (int i = 0; i < n - 1; i++) { 
+		if (isVowel(s.charAt(i)) && isVowel(s.charAt(i + 1))) 
+		    count++; 
+	    } 
+	    return count; 
+	} 
 
 	public static void main(String[] args) {
 
