@@ -715,6 +715,27 @@ public class StringBase {
 		    str1.charAt(prev) == str2.charAt(curr) && 
 		    str1.charAt(curr) == str2.charAt(prev)); 
 	} 
+	
+	protected void printMinIndexChar(String str, String pattern) { 
+
+	    HashMap<Character, Integer> map = new HashMap<>(); 
+	    int minIndex = Integer.MAX_VALUE; 
+
+	    for (int i = 0; i < str.length(); i++) {
+		if(!map.containsKey(str.charAt(i))) 
+		    map.put(str.charAt(i),i); 
+	    }
+
+	    for (int i = 0; i < pattern.length(); i++) {
+		if (map.containsKey(pattern.charAt(i)) &&  
+		    map.get(pattern.charAt(i)) < minIndex) 
+		    minIndex = map.get(pattern.charAt(i)); 
+	    }
+
+	    if (minIndex != Integer.MAX_VALUE) 
+		System.out.println(str.charAt(minIndex)); 
+
+	}
 
 	public static void main(String[] args) {
 
