@@ -736,6 +736,14 @@ public class StringBase {
 		System.out.println(str.charAt(minIndex)); 
 
 	}
+	
+	protected String prefixAndSuffixOfStrings(String str1, String str2, int length) { 
+
+	    String prefix = str1.substring(0, length); 
+	    int lengthOfStr2 = str2.length(); 
+	    String suffix = str2.substring(lengthOfStr2 - length); 
+	    return (prefix + suffix); 
+	} 
 
 	public static void main(String[] args) {
 
