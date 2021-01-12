@@ -743,7 +743,17 @@ public class StringBase {
 	    int lengthOfStr2 = str2.length(); 
 	    String suffix = str2.substring(lengthOfStr2 - length); 
 	    return (prefix + suffix); 
-	} 
+	}
+	
+	protected boolean isSuffix(String s1, String s2) { 
+	    int n1 = s1.length(), n2 = s2.length(); 
+	    if (n1 > n2) 
+		return false; 
+	    for (int i=0; i<n1; i++) 
+		if (s1.charAt(n1 - i - 1) != s2.charAt(n2 - i - 1)) 
+		    return false; 
+	    return true; 
+	}
 
 	public static void main(String[] args) {
 
