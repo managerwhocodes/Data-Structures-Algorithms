@@ -754,6 +754,26 @@ public class StringBase {
 		    return false; 
 	    return true; 
 	}
+	
+	protected void splitStringAlphaNumSplChar(String str) { 
+
+	    StringBuffer alphabet = new StringBuffer(),  
+			number = new StringBuffer(), 
+			specialChars = new StringBuffer(); 
+
+	    for (int i=0; i<str.length(); i++) { 
+		if (Character.isDigit(str.charAt(i))) 
+		    number.append(str.charAt(i)); 
+		else if(Character.isAlphabetic(str.charAt(i))) 
+		    alphabet.append(str.charAt(i)); 
+		else
+		    specialChars.append(str.charAt(i)); 
+	    } 
+
+	    System.out.println(alphabet); 
+	    System.out.println(number); 
+	    System.out.println(specialChars); 
+	}
 
 	public static void main(String[] args) {
 
