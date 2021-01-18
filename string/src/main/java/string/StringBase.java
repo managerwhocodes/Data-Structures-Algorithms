@@ -774,6 +774,21 @@ public class StringBase {
 	    System.out.println(number); 
 	    System.out.println(specialChars); 
 	}
+	
+	protected String moveAllSpecialCharToEnd(String str) { 
+
+	    String regex = "[a-zA-Z0-9\\s+]"; 
+	    String res1 = "", res2 = ""; 
+
+	    for (int i = 0; i < str.length(); i++) { 
+		char ch = str.charAt(i); 
+		if (String.valueOf(ch).matches(regex))  
+		   res1 = res1 + ch; 
+		else
+		   res2 = res2 + ch; 
+	    } 
+	    return res1 + res2; 
+	}
 
 	public static void main(String[] args) {
 
