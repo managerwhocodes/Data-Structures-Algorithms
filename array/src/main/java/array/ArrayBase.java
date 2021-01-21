@@ -455,6 +455,20 @@ public class ArrayBase {
 		return -1;
 	}
 	
+	protected void splitAndMoveStartToEnd(int arr[], int length, int rotation) { 
+		
+		int tmp[length * 2] = {0}; 
+
+		for(int i = 0; i < length; i++) { 
+			tmp[i] = arr[i]; 
+			tmp[i + length] = arr[i]; 
+		} 
+
+		for(int i = rotation; i < rotation + length; i++) { 
+			arr[i - rotation] = tmp[i]; 
+		} 
+	} 
+	
 	
 	public static void main(String[] args) {
 		
