@@ -469,6 +469,18 @@ public class ArrayBase {
 		} 
 	} 
 	
+	protected void shuffle(int arr[]) { 
+    
+	    Random r = new Random(); 
+
+	    for (int i = arr.length; i > 0; i--) { 
+
+		int j = r.nextInt(i+1); 
+		int temp = arr[i]; 
+		arr[i] = arr[j]; 
+		arr[j] = temp; 
+	    } 
+	}
 	
 	public static void main(String[] args) {
 		
