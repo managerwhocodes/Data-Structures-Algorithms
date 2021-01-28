@@ -469,6 +469,27 @@ public class ArrayBase {
 		} 
 	} 
 	
+	protected int countDecreasingSubarrays(int arr[]) { 
+
+	    int count = 0;
+	    int subArrayLength = 1; 
+
+	    for (int i = 0; i < arr.length - 1; ++i) { 
+
+		if (arr[i + 1] < arr[i]) {
+		    subArrayLength++; 
+		} else { 
+		    count += (((subArrayLength - 1) * subArrayLength) / 2); 
+		    subArrayLength = 1; 
+		} 
+	    } 
+
+	    if (subArrayLength > 1) 
+		count += (((subArrayLength - 1) * subArrayLength) / 2); 
+
+	    return count; 
+	}
+	
 	protected void shuffle(int arr[]) { 
     
 	    Random r = new Random(); 
