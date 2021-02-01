@@ -503,6 +503,27 @@ public class ArrayBase {
 	    } 
 	}
 	
+	protected long removeRecurringDigits(long number) { 
+
+	    long prevDigit = number % 10; 
+	    long power = 10; 
+	    long result = prevDigit; 
+
+	    while (number > 0) { 
+
+		long currentDigit = number % 10; 
+
+		if (currentDigit != prevDigit) { 
+
+		    result += currentDigit * power; 
+		    prevDigit = currentDigit; 
+		    power *= 10; 
+		} 
+		number = number / 10; 
+	    } 
+	    return result; 
+	}
+	
 	public static void main(String[] args) {
 		
 		ArrayBase arrayBase = new ArrayBase();
